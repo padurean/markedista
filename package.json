@@ -1,0 +1,26 @@
+{
+  "name": "markedista",
+  "version": "0.0.1",
+  "description": "Static site generator based on npm and marked",
+  "main": "index.js",
+  "scripts": {
+    "render": "node scripts/render.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/padurean/markedista.git"
+  },
+  "keywords": [
+    "static site generator markdown marked npm"
+  ],
+  "author": "Ogg (Valentin Padurean)",
+  "license": "The Unlicense",
+  "bugs": {
+    "url": "https://github.com/padurean/markedista/issues"
+  },
+  "homepage": "https://github.com/padurean/markedista#readme",
+  "devDependencies": {
+    "colors": "^1.2.5",
+    "marked": "^0.3.19"
+  }
+}
