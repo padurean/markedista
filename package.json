@@ -14,7 +14,7 @@
     "static site generator markdown marked npm"
   ],
   "author": "Ogg (Valentin Padurean)",
-  "license": "The Unlicense",
+  "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/padurean/markedista/issues"
   },
