@@ -50,7 +50,7 @@ const render = async () => {
       console.info(`${mdFilesNames.length} new md files found`.info)
     else
       return console.warn('No new md files found'.warn)
-    console.info(`Reading header and footer from ${fragmentsDirPath} folder ...`.info)
+    console.info(`Reading header & footer from ${fragmentsDirPath} folder ...`.info)
     const headerHtml = await readFile(`${fragmentsDirPath}/header.html`, enc)
     const footerHtml = await readFile(`${fragmentsDirPath}/footer.html`, enc)
     mdFilesNames.forEach(async mdFileName => {
@@ -67,8 +67,7 @@ const render = async () => {
           return console.error(
             `${mdFileName} - Skipped - misses frontmatter: ${metaErrorsStr}`.error)
         }
-        const date = new Date(meta.date)//.toString()
-        const {title, description} = {...meta}
+        const {date, title, description} = {...meta}
         const mdContent = meta.__content
         console.info(`${mdFileName} - Rendering to HTML ...`.info)
         const renderedHtml = marked(mdContent)
@@ -82,11 +81,20 @@ const render = async () => {
         console.info(`${mdFileName} - Moving to ${renderedDirPath} ...`.info)
         await renameFile(mdFilePath, renderedMdFilePath)
         mdFileNameToMeta.set(mdFileName, {
-          date: date,
+          date: date, // new Date(meta.date) //.toString()
           title: title,
-          description: description
+          description: description,
+          htmlFileName: htmlFileName
         })
         if (mdFileNameToMeta.size + invalidMetaCounter === mdFilesNames.length) {
+          const postsJsonFilePath = `${htmlOutputDirPath}/posts.json`
+          console.info(`Generating ${postsJsonFilePath} ...`.info)
+          mdFileNameToMeta[Symbol.iterator] = function* () {
+            yield* [...this.entries()].sort((a, b) =>
+            new Date(b[1].date).getTime() - new Date(a[1].date).getTime());
+          }
+          const mdFileNameToMetaJson = JSON.stringify([...mdFileNameToMeta], null, 2)
+          await writeFile(postsJsonFilePath, mdFileNameToMetaJson)
           const took = process.hrtime(startedAt)
           const tookStr =
             `${took[0]>0?took[0]+'s ':''}${Math.round(took[1]/1000000)}ms`
