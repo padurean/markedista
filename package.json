@@ -21,6 +21,7 @@
   "homepage": "https://github.com/padurean/markedista#readme",
   "devDependencies": {
     "colors": "^1.2.5",
-    "marked": "^0.3.19"
+    "marked": "^0.3.19",
+    "yaml-front-matter": "^4.0.0"
   }
 }
