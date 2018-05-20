@@ -2,18 +2,29 @@ body {
   font-family: "Open Sans", Arial, sans-serif;
   font-size: 1rem;
   margin: 2rem;
+  color: #333;
 }
 a {
   text-decoration: none;
   color: orangered;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
 }
 body > header {
   margin: 0 0 3rem 0;
 }
 body > footer {
   font-size: .9rem;
-  margin: 3rem 0;
+  margin: 4rem 0;
   color: #666;
+}
+body > header .markdista-logotype {
+  font-size: 2rem;
+  letter-spacing: -.4rem;
+}
+body > header .markedista-logotext {
+  margin-left: .4rem;
 }
 body > footer .markdista-logotype {
   font-size: 1.2rem;
@@ -26,15 +37,18 @@ body > footer .markedista-logotext {
 .posts > article {
   margin: 2rem 0;
 }
-.posts > article > a > h3 {
+.post-title {
   margin: 1rem 0 .25rem 0;
-}
-.posts > article time {
-  font-size: .85rem;
-  color: grey;
 }
 .posts > article > p {
   margin: .5rem 0;
+}
+.post-date {
+  font-size: .85rem;
+  color: grey;
+}
+.page-nav {
+  margin-top: 3rem;
 }
 a.btn {
   border: solid 1px orangered;
@@ -46,4 +60,7 @@ a.btn.disabled {
   color: grey;
   border-color: grey;
   cursor: not-allowed;
+}
+.post-title {
+  color: orangered;
 }

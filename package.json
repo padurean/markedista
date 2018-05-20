@@ -1,8 +1,8 @@
 {
   "name": "markedista",
   "version": "0.0.1",
-  "description": "Static site generator based on npm and marked",
-  "main": "index.js",
+  "description": "Static site generator based on npm, marked, jsdom and yaml-front-matter",
+  "main": "scripts/render.js",
   "scripts": {
     "render": "node scripts/render.js"
   },
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/padurean/markedista#readme",
   "devDependencies": {
     "colors": "^1.2.5",
+    "jsdom": "^11.10.0",
     "marked": "^0.3.19",
     "yaml-front-matter": "^4.0.0"
   }

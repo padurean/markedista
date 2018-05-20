@@ -1,0 +1,55 @@
+    </section>
+  </article>
+  <section id="page-nav" class="page-nav">
+    <a id="btn-older-post" class="btn disabled" href="#">&lt; Older</a>
+    <a id="btn-newer-post" class="btn disabled" href="#">Newer &gt;</a>
+  </section>
+  <footer>
+    <span id="year-placeholder">2018</span> made with
+    <a href="https://github.com/padurean/markedista">
+      <span class="markdista-logotype">&lambda;&lambda;</span><span class="markedista-logotext">arkedista</span>
+    </a>
+  </footer>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  var postDateJqElem = $('#post-date');
+  var postDateISOStr = postDateJqElem.attr('datetime');
+  postDateJqElem.text(new Date(postDateISOStr).toLocaleString());
+  $('#year-placeholder').text(new Date().getFullYear());
+  var pathPiecesArr = window.location.pathname.split('/');
+  var htmlFileName = pathPiecesArr[pathPiecesArr.length-1];
+  $.get('/posts/posts.json', function(posts) {
+    if (posts.length <= 1)
+      return;
+    var currPostIndex = -1;
+    if (posts.findIndex) {
+      currPostIndex = posts.findIndex(function(elem) {
+        return elem[1].htmlFileName === htmlFileName;
+      });
+    } else {
+      for (var i = 0; i < posts.length; i++) {
+        var post = state.posts[i];
+        if (post[1].htmlFileName === htmlFileName) {
+          currPostIndex = i;
+          break;
+        }
+      }
+    }
+    if (currPostIndex < 0)
+      return;
+    if (currPostIndex > 0) {
+      var btnNewerPost = $('#btn-newer-post');
+      btnNewerPost.attr('href', '/posts/' + posts[currPostIndex-1][1].htmlFileName);
+      btnNewerPost.removeClass('disabled');
+    }
+    if (currPostIndex < posts.length-1) {
+      var btnOlderPost = $('#btn-older-post');
+      btnOlderPost.attr('href', '/posts/' + posts[currPostIndex+1][1].htmlFileName);
+      btnOlderPost.removeClass('disabled');
+    }
+  });
+});
+</script>
+</html>

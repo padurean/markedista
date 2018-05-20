@@ -19,8 +19,8 @@ function renderPostsList() {
     var postPath = '/posts/' + post.htmlFileName;
     var postHtml =
       '\t<article>\n' +
-      '\t\t<a href="' + postPath + '"><h3>' + post.title + '</h3></a>\n' +
-      '\t\t<time datetime="' + post.date + '">' + date + '</time>\n' +
+      '\t\t<a href="' + postPath + '"><h3 id="post-title" class="post-title">' + post.title + '</h3></a>\n' +
+      '\t\t<time id="post-date" class="post-date" datetime="' + post.date + '">' + date + '</time>\n' +
       '\t\t<p>' + post.description + '</p>\n' +
       '\t</article>\n';
     postsHtmlArr.push(postHtml);
@@ -74,15 +74,17 @@ $(function(){
     if (state.nbPages > 1) {
       var queryParamsArr = location.search.replace('?', '').split('=');
       if (queryParamsArr.length >= 2) {
-        var indexOfPage = queryParamsArr.indexOf('page');
-        if (indexOfPage >= 0 && indexOfPage < queryParamsArr.length-1) {
+        var indexOfPage = queryParamsArr.indexOf ?
+          queryParamsArr.indexOf('page') :
+          $.inArray('page', queryParamsArr);
+        if (indexOfPage >= 0 && indexOfPage < queryParamsArr.length-1)
           state.currPage = parseInt(queryParamsArr[indexOfPage + 1]);
-        }
       }
     }
     state.btnOlderJqElem.on('click', goToNextPageClb);
     state.btnNewerJqElem.on('click', goToPrevPageClb);
     toggleNextPrevPageBtns();
     renderPostsList();
+    $('#year-placeholder').text(new Date().getFullYear());
   });
 });
