@@ -4,6 +4,7 @@
     <title>Markedista - Static Blog Generator based on npm and marked</title>
   <meta name="description" content="Markedista - Static Blog Generator based on npm and marked">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/highlight/styles/github.css">
   <link rel="stylesheet" href="/main.css">
 </head>
 <body>
@@ -13,7 +14,186 @@
       <h3 id="post-title" class="post-title">Second Post Title</h3>
       <time id="post-date" class="post-date" datetime="2018-05-16T09:23:06.000Z">2018-5-16 12:23:06</time>
     </header>
-    <section id="post-body" class="post-body"><h1 id="2nd-post-hello-world-of-mark-down-">2nd POST <strong>hello world</strong> of mark down!</h1>
+    <section id="post-body" class="post-body"><h1 id="gfm-example">GFM-Example</h1>
+<p>GitHub Flavored Markdown Example</p>
+<h2 id="index">Index</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code> This is head1
+ =============
+
+ This is head 2
+ --------------
+</code></pre><ul>
+<li>result</li>
+</ul>
+<h1 id="this-is-head1">This is head1</h1>
+<h2 id="this-is-head-2">This is head 2</h2>
+<h2 id="table-php-markdown-style-">table (PHP-Markdown style)</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+</code></pre><ul>
+<li>result</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>| Item      | Value |
+| --------- | -----:|
+| Computer  | $1600 |
+| Phone     |   $12 |
+| Pipe      |    $1 |
+</code></pre><ul>
+<li>result</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th style="text-align:right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computer</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>Phone</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>Pipe</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="code">code</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>```
+this is code block
+```
+</code></pre><ul>
+<li>result</li>
+</ul>
+<pre><code>this is code block
+</code></pre><ul>
+<li>source</li>
+</ul>
+<pre><code>```ruby
+get '/' do
+  "Hello world "
+end
+```
+</code></pre><ul>
+<li>result</li>
+</ul>
+<pre><code class="lang-ruby">get '/' do
+  "Hello world "
+end
+</code></pre>
+<ul>
+<li>some javascript example:</li>
+</ul>
+<pre><code class="lang-javascript">const {date, title, description} = {...meta}
+postTitleElem.textContent = title
+// NOTE: date elem textContent will be overwritten on client side
+if (typeof date === 'string') { // when frontmatter is JSON
+  postDateElem.setAttribute('datetime', date)
+  postDateElem.textContent = new Date(date).toLocaleString()
+} else /*if (typeof date === 'object')*/ { // when frontmatter is YAML
+  postDateElem.setAttribute('datetime', date.toISOString())
+  postDateElem.textContent = date.toLocaleString()
+}
+</code></pre>
+<h2 id="autolink">autolink</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>http://mukaer.com
+</code></pre><ul>
+<li>result</li>
+</ul>
+<p><a href="http://mukaer.com">http://mukaer.com</a></p>
+<h2 id="strikethrough">strikethrough</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>this is ~~good~~ bad
+</code></pre><ul>
+<li>result</li>
+</ul>
+<p>this is <del>good</del> bad</p>
+<h2 id="task-lists">Task Lists</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+</code></pre><ul>
+<li><p>result</p>
+</li>
+<li><p>[x] @mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</p>
+</li>
+<li>[x] list syntax required (any unordered or ordered list supported)</li>
+<li>[x] this is a complete item</li>
+<li>[ ] this is an incomplete item</li>
+</ul>
+<h2 id="superscript">superscript</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>this is the 2^(nd) time
+</code></pre><ul>
+<li>result</li>
+</ul>
+<p>this is the 2^(nd) time</p>
+<h2 id="underline">underline</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>This is _underlined_ but this is still *italic*
+</code></pre><ul>
+<li>result</li>
+</ul>
+<p>This is <em>underlined</em> but this is still <em>italic</em></p>
+<h2 id="highlight">highlight</h2>
+<ul>
+<li>source</li>
+</ul>
+<pre><code>This is ==highlighted==
+</code></pre><ul>
+<li>result</li>
+</ul>
+<p>This is ==highlighted==</p>
 </section>
   </article>
   <section id="page-nav" class="page-nav">
@@ -68,4 +248,6 @@ $(function(){
   });
 });
 </script>
+<script type="text/javascript" src="/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body></html>

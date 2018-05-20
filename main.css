@@ -64,3 +64,7 @@ a.btn.disabled {
 .post-title {
   color: orangered;
 }
+.hljs {
+  border-radius: 6px;
+  padding: .75em 1em;
+}
