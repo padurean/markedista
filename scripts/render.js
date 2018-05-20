@@ -81,7 +81,7 @@ const render = async () => {
         console.info(`${mdFileName} - Moving to ${renderedDirPath} ...`.info)
         await renameFile(mdFilePath, renderedMdFilePath)
         mdFileNameToMeta.set(mdFileName, {
-          date: date, // new Date(meta.date) //.toString()
+          date: date,
           title: title,
           description: description,
           htmlFileName: htmlFileName
