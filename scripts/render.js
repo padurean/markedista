@@ -77,7 +77,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
     'datetime',
     typeof meta.date === 'string' ? meta.date : meta.date.toISOString()
   )
-  console.info(`${logPrefix} - Rendering markdown and injecting ...`.info)
+  console.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
 }
 
@@ -112,7 +112,7 @@ const state = {
   },
   done: function() {
     const nbProcessed = this.mdFileNameToMeta.size + this.invalidMetaCounter
-    const nbTotal = state.mdFilesNames.length + state.mdFilesNamesRendered.length
+    const nbTotal = this.mdFilesNames.length + this.mdFilesNamesRendered.length
     return nbProcessed === nbTotal
   }
 }
@@ -171,7 +171,21 @@ async function updateStateMetaFromRenderedFile(mdFileNameRendered) {
 async function finish(startedAt) {
   await writePostsJson(state.mdFileNameToMeta)
   const took = computeAndLogTotalDuration(startedAt)
-  console.info(`DONE in ${took}`.info)
+  
+  const nbMeta = state.mdFileNameToMeta.size
+  const nbInvalidMeta = state.invalidMetaCounter
+  const nbToRender = state.mdFilesNames.length
+  const nbAlreadyRendered = state.mdFilesNamesRendered.length
+  const nbTotal = nbToRender + nbAlreadyRendered
+  console.info(
+    '===> Summary:\n'.info +
+    `${nbTotal} files found in total (= ${nbToRender} to render + `.info +
+    `${nbAlreadyRendered} already rendered) of which:\n`.info +
+    `${nbMeta} files successfully processed\n`.info +
+    (nbInvalidMeta > 0 ? `${nbInvalidMeta} skipped: missing frontmatter\n`.error : '') +
+    '<===\n'.info +
+    `DONE in ${took}`.info
+  )
 }
 
 const render = async () => {
@@ -220,5 +234,5 @@ async function createBenchmarkMds(sourceMdFilePath, nbCopies) {
   }
 }
 
-// createBenchmarkMds('posts-src/rendered/second-post.md', 1000)
+// createBenchmarkMds('posts-src/rendered/second-post.md', 3000)
 render()
