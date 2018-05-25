@@ -8,53 +8,64 @@ a {
   text-decoration: none;
   color: orangered;
 }
+code, code.hljs {
+  font-size: 1.1em;
+}
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
+h1,
+article h1, aside h1, nav h1, section h1
+{
+  font-size: 1.75em;
+}
 body > header {
-  margin: 0 0 3rem 0;
+  margin: 0 0 3em 0;
 }
 body > footer {
-  font-size: .9rem;
-  margin: 4rem 0;
+  font-size: .9em;
+  margin: 4em 0;
   color: #666;
 }
 body > header .markdista-logotype {
-  font-size: 2rem;
-  letter-spacing: -.4rem;
+  font-size: 1.5em;
+  letter-spacing: -.15em;
 }
 body > header .markedista-logotext {
-  margin-left: .4rem;
+  margin-left: .25em;
 }
 body > footer .markdista-logotype {
-  font-size: 1.2rem;
-  letter-spacing: -.2rem;
+  font-size: 1.5em;
+  letter-spacing: -.15em;
 }
 body > footer .markedista-logotext {
-  font-size: 1rem;
-  margin-left: .2rem;
+  font-size: 1.1em;
+  margin-left: .225em;
 }
 .posts > article {
-  margin: 2rem 0;
+  margin: 2em 0;
 }
 .post-title {
-  margin: 1rem 0 .25rem 0;
+  margin: 1em 0 .15em 0;
 }
 .posts > article > p {
-  margin: .5rem 0;
+  margin: .75em 0;
 }
 .post-date {
-  font-size: .85rem;
+  font-size: .85em;
   color: grey;
 }
+.full-post {
+  margin-bottom: 5em;
+}
 .page-nav {
-  margin-top: 3rem;
+  margin-top: 3em;
 }
 a.btn {
   border: solid 1px orangered;
   border-radius: 3px;
-  padding: .25rem .75rem;
-  margin-right: 1rem;
+  padding: .25em .75em;
+  margin-right: 1em;
 }
 a.btn.disabled {
   color: grey;
@@ -66,5 +77,22 @@ a.btn.disabled {
 }
 .hljs {
   border-radius: 6px;
-  padding: .75em 1em;
+  padding: .75em;
+}
+/* for block of line numbers */
+.hljs-ln td.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  text-align: left;
+  color: silver;
+  vertical-align: middle;
+}
+/* for block of code */
+.hljs-ln td.hljs-ln-code {
+  padding-left: 1em;
 }

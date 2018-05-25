@@ -1,122 +1,122 @@
-<!DOCTYPE html><html><head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Markedista - Static Blog Generator based on npm and marked">
-  <title>Markedista - Static Blog Generator based on npm and marked</title>
-  <link rel="stylesheet" href="/highlight/styles/atom-one-light.css">
-  <link rel="stylesheet" href="/main.css">
-</head>
-<body>
-  <header><a href="/"><h1><span class="markdista-logotype">λλ</span><span class="markedista-logotext"></span>arkedista Blog</h1></a></header>
-  <article class="full-post">
-    <header class="post-header">
-      <h2 id="post-title" class="post-title">Second Post Title</h2>
-      <time id="post-date" class="post-date" datetime="2018-05-16T09:23:06.000Z">&nbsp;</time>
-    </header>
-    <section id="post-body" class="post-body"><h1 id="gfm-example">GFM-Example</h1>
-<p>GitHub Flavored Markdown Example</p>
-<h2 id="index">Index</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code> This is head1
+---
+date: 2018-05-16T12:23:06+03:00
+title: Second Post Title
+description: This is the 2nd post description
+---
+GFM-Example
+===========
+
+GitHub Flavored Markdown Example
+
+
+Index
+---
+* source
+
+~~~
+ This is head1
  =============
 
  This is head 2
- --------------</code></pre><ul>
-<li>result</li>
-</ul>
-<h1 id="this-is-head1">This is head1</h1>
-<h2 id="this-is-head-2">This is head 2</h2>
-<h2 id="table-php-markdown-style-">table (PHP-Markdown style)</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>First Header  | Second Header
+ --------------
+~~~
+
+* result
+
+This is head1
+=============
+
+This is head 2
+--------------
+
+table (PHP-Markdown style)
+---
+
+* source
+
+~~~
+First Header  | Second Header
 ------------- | -------------
 Content Cell  | Content Cell
-Content Cell  | Content Cell</code></pre><ul>
-<li>result</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>First Header</th>
-<th>Second Header</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Content Cell</td>
-<td>Content Cell</td>
-</tr>
-<tr>
-<td>Content Cell</td>
-<td>Content Cell</td>
-</tr>
-</tbody></table>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>| Item      | Value |
+Content Cell  | Content Cell
+~~~
+
+* result
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+
+* source
+
+~~~
+| Item      | Value |
 | --------- | -----:|
 | Computer  | $1600 |
 | Phone     |   $12 |
-| Pipe      |    $1 |</code></pre><ul>
-<li>result</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th align="right">Value</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Computer</td>
-<td align="right">$1600</td>
-</tr>
-<tr>
-<td>Phone</td>
-<td align="right">$12</td>
-</tr>
-<tr>
-<td>Pipe</td>
-<td align="right">$1</td>
-</tr>
-</tbody></table>
-<h2 id="code">code</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>```
+| Pipe      |    $1 |
+~~~
+
+* result
+
+| Item      | Value |
+| --------- | -----:|
+| Computer  | $1600 |
+| Phone     |   $12 |
+| Pipe      |    $1 |
+
+
+code
+---
+
+* source
+
+
+    ```
+    this is code block
+    ```
+
+
+* result
+
+```
 this is code block
-```</code></pre><ul>
-<li>result</li>
-</ul>
-<pre><code>this is code block</code></pre><ul>
-<li>source</li>
-</ul>
-<pre><code>```ruby
+```
+
+
+* source
+
+
+    ```ruby
+    get '/' do
+      "Hello world "
+    end
+    ```
+
+
+* result
+
+```ruby
 get '/' do
   "Hello world "
 end
-```</code></pre><ul>
-<li>result</li>
-</ul>
-<pre><code class="language-ruby">get '/' do
+```
+
+* other ruby example
+
+```ruby
+get '/' do
   "Hello world "
-end</code></pre>
-<ul>
-<li>other ruby example</li>
-</ul>
-<pre><code class="language-ruby">get '/' do
-  "Hello world "
-end</code></pre>
-<ul>
-<li>some scala example:</li>
-</ul>
-<pre><code class="language-scala">trait TSDBWriter
+end
+```
+
+* some scala example:
+
+
+```scala
+trait TSDBWriter
   protected implicit val scheduler: Scheduler
   protected val metrics = Metrics.openTSDBMetrics
 
@@ -130,16 +130,19 @@ end</code></pre>
       metric = metric,
       timestamp = now.getMillis,
       value = if (status.isMaster) 1 else 0,
-      tags = Map("host" -&gt; s"${status.hostname}/${status.address}")
+      tags = Map("host" -> s"${status.hostname}/${status.address}")
     )
 
     publishMessages(List(dp))
 
-  case class SomeCaseClass(attr1: String, attr2: Double)</code></pre>
-<ul>
-<li>some javascript examples:</li>
-</ul>
-<pre><code class="language-javascript">const fs = require('fs')
+  case class SomeCaseClass(attr1: String, attr2: Double)
+```
+
+
+* some javascript examples:
+
+```javascript
+const fs = require('fs')
 const {promisify} = require('util')
 const marked = require('marked')
 const frontmatter = require('yaml-front-matter')
@@ -187,7 +190,7 @@ function validateMeta(meta) {
 async function writePostsJson(metaFileNameToMeta) {
   console.info(`Generating ${postsJsonFilePath} ...`.info)
   metaFileNameToMeta[Symbol.iterator] = function* () {
-    yield* [...this.entries()].sort((a, b) =&gt;
+    yield* [...this.entries()].sort((a, b) =>
     new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
   }
   const mdFileNameToMetaJson = JSON.stringify([...metaFileNameToMeta]/*, null, 2*/)
@@ -197,22 +200,22 @@ async function writePostsJson(metaFileNameToMeta) {
 function computeAndLogTotalDuration(startedAt) {
   const took = process.hrtime(startedAt)
   const tookMs = Math.round(took[1]/1000000)
-  const tookStr = `${took[0]&gt;0?took[0]+'s ':''}${tookMs}ms`
+  const tookStr = `${took[0]>0?took[0]+'s ':''}${tookMs}ms`
   console.info(`DONE in ${tookStr}`.info)
 }
 
-const render = async () =&gt; {
+const render = async () => {
   try {
     const startedAt = process.hrtime()
     const mdFileNameToMeta = new Map()
     let invalidMetaCounter = 0
     console.info(`Scanning ${toRenderDirPath} for md files to render ...`.info)
-    const mdFilesNames = (await readDir(toRenderDirPath)).filter(f =&gt; ignoreFiles.indexOf(f) &lt; 0)
-    if (mdFilesNames.length &gt; 0) {
+    const mdFilesNames = (await readDir(toRenderDirPath)).filter(f => ignoreFiles.indexOf(f) < 0)
+    if (mdFilesNames.length > 0) {
       console.info(`${mdFilesNames.length} new md files found`.info)
     } else
       return console.warn('No new md files found'.warn)
-    console.info(`Reading header &amp; footer from ${fragmentsDirPath} folder ...`.info)
+    console.info(`Reading header & footer from ${fragmentsDirPath} folder ...`.info)
     const headerHtml = await readFile(`${fragmentsDirPath}/header.html`, enc)
     const footerHtml = await readFile(`${fragmentsDirPath}/footer.html`, enc)
     const documentDom = new JSDOM(headerHtml+footerHtml)
@@ -220,7 +223,7 @@ const render = async () =&gt; {
     const postTitleElem = document.querySelector("#post-title")
     const postDateElem = document.querySelector('#post-date')
     const postBodyElem = document.querySelector('#post-body')
-    mdFilesNames.forEach(async mdFileName =&gt; {
+    mdFilesNames.forEach(async mdFileName => {
       try {
         console.info(`${mdFileName} - Reading file ...`.info)
         const mdFilePath = `${toRenderDirPath}/${mdFileName}`
@@ -228,7 +231,7 @@ const render = async () =&gt; {
         console.info(`${mdFileName} - Parsing frontmatter ...`.info)
         const meta = frontmatter.loadFront(mdContentAndMeta)
         const metaErrors = validateMeta(meta)
-        if (metaErrors.length &gt; 0) {
+        if (metaErrors.length > 0) {
           invalidMetaCounter++
           const metaErrorsStr = metaErrors.join(', ')
           return console.error(
@@ -266,19 +269,19 @@ const render = async () =&gt; {
         })
         if (mdFileNameToMeta.size + invalidMetaCounter === mdFilesNames.length) {
           console.info(`Scanning ${renderedDirPath} for previously rendered md files ...`.info)
-          const mdFilesNamesRendered = (await readDir(renderedDirPath)).filter(f =&gt; {
-            return ignoreFiles.indexOf(f) &lt; 0 &amp;&amp; !mdFileNameToMeta.has(f)
+          const mdFilesNamesRendered = (await readDir(renderedDirPath)).filter(f => {
+            return ignoreFiles.indexOf(f) < 0 && !mdFileNameToMeta.has(f)
           })
-          if (mdFilesNamesRendered.length &gt; 0) {
+          if (mdFilesNamesRendered.length > 0) {
             console.info(`${mdFilesNamesRendered.length} previously rendered md files found`.info)
-            mdFilesNamesRendered.forEach(async mdFileNameRendered =&gt; {
+            mdFilesNamesRendered.forEach(async mdFileNameRendered => {
               try {
                 const mdFilePathRendered = `${renderedDirPath}/${mdFileNameRendered}`
                 const mdMeta = await readFile(mdFilePathRendered, enc)
                 console.info(`${mdFileNameRendered} - Parsing frontmatter from rendered file ...`.info)
                 const metaParsed = frontmatter.loadFront(mdMeta)
                 const metaParsedErrors = validateMeta(metaParsed)
-                if (metaParsedErrors.length &gt; 0) {
+                if (metaParsedErrors.length > 0) {
                   invalidMetaCounter++
                   const metaParsedErrorsStr = metaParsedErrors.join(', ')
                   return console.error(
@@ -302,7 +305,7 @@ const render = async () =&gt; {
             })
           } else {
             console.warn(
-              `No rendered md files found =&gt; ${postsJsonFilePath} content will probably `.warn +
+              `No rendered md files found => ${postsJsonFilePath} content will probably `.warn +
               `be incomplete (unless there were no previously rendered files before this run)`.warn)
             await writePostsJson(mdFileNameToMeta)
             computeAndLogTotalDuration(startedAt)
@@ -316,78 +319,97 @@ const render = async () =&gt; {
     console.error(`FAILED!\t${e}`.error)
   }
 }
-render()</code></pre>
-<h2 id="autolink">autolink</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>http://mukaer.com</code></pre><ul>
-<li>result</li>
-</ul>
-<p><a href="http://mukaer.com">http://mukaer.com</a></p>
-<h2 id="strikethrough">strikethrough</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>this is ~~good~~ bad</code></pre><ul>
-<li>result</li>
-</ul>
-<p>this is <del>good</del> bad</p>
-<h2 id="task-lists">Task Lists</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
+render()
+```
+
+
+autolink
+--------
+
+* source
+
+```
+http://mukaer.com
+```
+
+* result
+
+http://mukaer.com
+
+
+
+strikethrough
+-------------
+
+* source
+
+```
+this is ~~good~~ bad
+```
+
+* result
+
+this is ~~good~~ bad
+
+
+Task Lists
+---------
+
+* source
+
+```
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
-- [ ] this is an incomplete item</code></pre><ul>
-<li><p>result</p>
-</li>
-<li><p>@mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</p>
-</li>
-<li><input checked="" disabled="" type="checkbox"> list syntax required (any unordered or ordered list supported)</li>
-<li><input checked="" disabled="" type="checkbox"> this is a complete item</li>
-<li><input disabled="" type="checkbox"> this is an incomplete item</li>
-</ul>
-<h2 id="superscript">superscript</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>this is the 2^(nd) time</code></pre><ul>
-<li>result</li>
-</ul>
-<p>this is the 2^(nd) time</p>
-<h2 id="underline">underline</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>This is _underlined_ but this is still *italic*</code></pre><ul>
-<li>result</li>
-</ul>
-<p>This is <em>underlined</em> but this is still <em>italic</em></p>
-<h2 id="highlight">highlight</h2>
-<ul>
-<li>source</li>
-</ul>
-<pre><code>This is ==highlighted==</code></pre><ul>
-<li>result</li>
-</ul>
-<p>This is ==highlighted==</p>
-</section>
-  </article>
-  <section id="page-nav" class="page-nav">
-    <a id="btn-older-post" class="btn disabled" href="#">&lt; Older</a>
-    <a id="btn-newer-post" class="btn disabled" href="#">Newer &gt;</a>
-  </section>
-  <footer>
-    <span id="year-placeholder">2018</span> made with
-    <a href="https://github.com/padurean/markedista">
-      <span class="markdista-logotype">λλ</span><span class="markedista-logotext">arkedista</span>
-    </a>
-  </footer>
+- [ ] this is an incomplete item
+```
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/highlight/highlight.pack.js"></script>
-<script type="text/javascript" src="/highlight/highlightjs-line-numbers.2.3.0.min.js"></script>
-<script type="text/javascript" src="/main-post.js"></script>
-</body></html>
+* result
+
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+
+
+
+superscript
+----------
+
+* source
+
+```
+this is the 2^(nd) time
+```
+
+* result
+
+
+this is the 2^(nd) time
+
+
+underline
+---------
+* source
+
+```
+This is _underlined_ but this is still *italic*
+```
+
+* result
+
+This is _underlined_ but this is still *italic*
+
+
+highlight
+--------
+
+* source
+
+```
+This is ==highlighted==
+```
+
+* result
+
+This is ==highlighted==

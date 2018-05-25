@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/padurean/markedista#readme",
   "devDependencies": {
-    "colors": "^1.2.5",
-    "jsdom": "^11.10.0",
-    "marked": "^0.3.19",
+    "colors": "^1.3.0",
+    "jsdom": "^11.11.0",
+    "marked": "^0.4.0",
     "yaml-front-matter": "^4.0.0"
   }
 }

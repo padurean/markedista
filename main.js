@@ -1,4 +1,6 @@
 var state = {
+  postsPath: '/posts/',
+  postsJsonPath: '/posts/posts.json',
   pageSize: 2,
   currPage: 1,
   posts: [],
@@ -16,10 +18,10 @@ function renderPostsList() {
   ) {
     var post = state.posts[i][1];
     var date = new Date(post.date).toLocaleString();
-    var postPath = '/posts/' + post.htmlFileName;
+    var postPath = state.postsPath + post.htmlFileName;
     var postHtml =
-      '\t<article>\n' +
-      '\t\t<a href="' + postPath + '"><h3 id="post-title" class="post-title">' + post.title + '</h3></a>\n' +
+      '\t<article class="post-summary">\n' +
+      '\t\t<a href="' + postPath + '"><h2 id="post-title" class="post-title">' + post.title + '</h2></a>\n' +
       '\t\t<time id="post-date" class="post-date" datetime="' + post.date + '">' + date + '</time>\n' +
       '\t\t<p>' + post.description + '</p>\n' +
       '\t</article>\n';
@@ -65,7 +67,7 @@ function goToPrevPageClb(e) {
   }
 }
 $(function(){
-  $.get('/posts/posts.json', function(posts) {
+  $.get(state.postsJsonPath, function(posts) {
     state.posts = posts;
     state.nbPages = Math.ceil(state.posts.length / state.pageSize);
     state.postsJqElem = $('#posts');
