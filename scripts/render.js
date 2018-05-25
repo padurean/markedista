@@ -209,4 +209,16 @@ const render = async () => {
   }
 }
 
+async function createBenchmarkMds(sourceMdFilePath, nbCopies) {
+  const sourceMdFilePathArr = sourceMdFilePath.split('/')
+  const sourceMdFileName = sourceMdFilePathArr[sourceMdFilePathArr.length-1]
+  const lastIndexOfDot = sourceMdFileName.lastIndexOf('.')
+  const sourceMdFileNameNoExt = sourceMdFileName.substr(0, lastIndexOfDot)
+  for (var i = 0; i < nbCopies; i++) {
+    const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${i+1}.md`
+    fs.createReadStream(sourceMdFilePath).pipe(fs.createWriteStream(newSourceMdFilePath))
+  }
+}
+
+// createBenchmarkMds('posts-src/rendered/second-post.md', 1000)
 render()
