@@ -53,15 +53,15 @@ function validateMeta(meta, errorPrefix) {
 
 async function scanDir(path, logMsg, skip) {
   console.info(`Scanning ${path} for ${logMsg} ...`.info)
-  const mdFilesNames = (await readDir(path)).filter(
+  const filesNames = (await readDir(path)).filter(
     f => config.ignoreFiles.indexOf(f) < 0 &&
     (skip ? !skip.has(f) : true)
   )
-  if (mdFilesNames.length > 0) {
-    console.info(`${mdFilesNames.length} ${logMsg} found`.info)
+  if (filesNames.length > 0) {
+    console.info(`${filesNames.length} ${logMsg} found`.info)
   } else
     console.warn(`No ${logMsg} found`.warn)
-  return mdFilesNames  
+  return filesNames  
 }
 
 function withHtmlExtension(fileName) {
@@ -100,9 +100,8 @@ function computeAndLogTotalDuration(startedAt) {
 const state = {
   mdFileNameToMeta: new Map(),
   invalidMetaCounter: 0,
-  totalCounter: function() { 
-    return this.mdFileNameToMeta.size + this.invalidMetaCounter
-  },
+  mdFilesNames: [],
+  mdFilesNamesRendered: [],
   updateMeta: function(mdFileName, meta) {
     this.mdFileNameToMeta.set(mdFileName, {
       title: meta.title,
@@ -110,6 +109,11 @@ const state = {
       description: meta.description,
       htmlFileName: meta.htmlFileName
     })
+  },
+  done: function() {
+    const nbProcessed = this.mdFileNameToMeta.size + this.invalidMetaCounter
+    const nbTotal = state.mdFilesNames.length + state.mdFilesNamesRendered.length
+    return nbProcessed === nbTotal
   }
 }
 
@@ -173,21 +177,21 @@ async function finish(startedAt) {
 const render = async () => {
   try {
     const startedAt = process.hrtime()
-    const mdFilesNames = await scanDir(config.toRenderDirPath, 'md file(s) to render')
-    if (mdFilesNames.length === 0)
+    state.mdFilesNames = await scanDir(config.toRenderDirPath, 'md file(s) to render')
+    if (state.mdFilesNames.length === 0)
       return
     const { documentDom, elements } = await prepareDom()
-    mdFilesNames.forEach(async mdFileName => {
+    state.mdFilesNames.forEach(async mdFileName => {
       try {
         await renderFile(mdFileName, elements, documentDom)
-        if (state.totalCounter() === mdFilesNames.length) {
-          const mdFilesNamesRendered = await scanDir(
+        if (state.done()) {
+          state.mdFilesNamesRendered = await scanDir(
             config.renderedDirPath, 'previously rendered md file(s)', state.mdFileNameToMeta)
-          if (mdFilesNamesRendered.length > 0) {
-            mdFilesNamesRendered.forEach(async mdFileNameRendered => {
+          if (state.mdFilesNamesRendered.length > 0) {
+            state.mdFilesNamesRendered.forEach(async mdFileNameRendered => {
               try {
                 await updateStateMetaFromRenderedFile(mdFileNameRendered)
-                if (state.totalCounter() === mdFilesNames.length + mdFilesNamesRendered.length)
+                if (state.done())
                   await finish(startedAt)
               } catch (e) {
                 console.error(`${mdFileNameRendered} - FAILED to read!`.error, e)
@@ -204,4 +208,5 @@ const render = async () => {
     console.error(`FAILED!`.error, e)
   }
 }
+
 render()
