@@ -30,6 +30,7 @@ $ ~/w/g/markedista (master)> npm --version
 ```
 - to run the benchmark on your machine:
   - uncomment the penultimate line in `scripts/render.js`:
+  
   `createBenchmarkMds('posts-src/rendered/second-post.md', 3000)`
     - this will make x copies of the md file you specify in the folder to render:
       - replace the value of the 1st arg with the path to the md file you wish
