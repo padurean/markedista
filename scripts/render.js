@@ -164,6 +164,12 @@ async function updateStateMetaFromRenderedFile(mdFileNameRendered) {
   }
 }
 
+async function finish(startedAt) {
+  await writePostsJson(state.mdFileNameToMeta)
+  const took = computeAndLogTotalDuration(startedAt)
+  console.info(`DONE in ${took}`.info)
+}
+
 const render = async () => {
   try {
     const startedAt = process.hrtime()
@@ -181,20 +187,14 @@ const render = async () => {
             mdFilesNamesRendered.forEach(async mdFileNameRendered => {
               try {
                 await updateStateMetaFromRenderedFile(mdFileNameRendered)
-                if (state.totalCounter() === mdFilesNames.length + mdFilesNamesRendered.length) {
-                  await writePostsJson(state.mdFileNameToMeta)
-                  const took = computeAndLogTotalDuration(startedAt)
-                  console.info(`DONE in ${took}`.info)
-                }
+                if (state.totalCounter() === mdFilesNames.length + mdFilesNamesRendered.length)
+                  await finish(startedAt)
               } catch (e) {
                 console.error(`${mdFileNameRendered} - FAILED to read!`.error, e)
               }
             })
-          } else {
-            await writePostsJson(state.mdFileNameToMeta)
-            const took = computeAndLogTotalDuration(startedAt)
-            console.info(`DONE in ${took}`.info)
-          }
+          } else
+            await finish(startedAt)
         }
       } catch (e) {
         console.error(`${mdFileName} FAILED!`.error, e)
