@@ -4,6 +4,9 @@ Static site generator based on [npm](https://www.npmjs.com/),
 [marked](https://marked.js.org/#/README.md#README.md) and
 [jsdom](https://github.com/jsdom/jsdom)
 
+## demo
+https://padurean.github.io/markedista
+
 ## usage
 - add some markdown post(s) in the *posts-src/to-render* folder
 - edit *header.html* and *footer.html* in the *posts-src/fragments* folder

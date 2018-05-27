@@ -49,7 +49,7 @@ function renderPostsForTag(tag) {
   state.postsJqElem.html(postsHtmlArr.join('\n'));
 }
 function goToCurrentPage() {
-  var newUrl = state.currPage > 1 ? '?page='+state.currPage : '/';
+  var newUrl = state.currPage > 1 ? './?page='+state.currPage : './';
   if (history.pushState) {
     window.history.pushState('', '', newUrl)
     renderPostsPage();
