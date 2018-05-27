@@ -42,6 +42,8 @@ function validateMeta(meta, errorPrefix) {
     errors.push('title')
   if (typeof meta.description === 'undefined' || meta.description.length === 0)
     errors.push('description')
+  if (typeof meta.tags === 'undefined' || meta.tags.length === 0)
+    errors.push('description')
   if (errors.length > 0) {
     const errorsStr = errors.join(', ')
     console.error(
@@ -71,6 +73,9 @@ function withHtmlExtension(fileName) {
 
 function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   console.info(`${logPrefix} - Injecting metadata ...`.info)
+  elements.metaDescriptionElem.setAttribute('content', meta.description)
+  elements.metaKeywordsElem.setAttribute('content', meta.tags.join(', '))
+  elements.pageTitleElem.textContent = meta.title
   elements.titleElem.textContent = meta.title
   // for JSON frontmatter, date is parsed as string, for YAML, it is parsed as object
   elements.dateElem.setAttribute(
@@ -107,6 +112,7 @@ const state = {
       title: meta.title,
       date: meta.date,
       description: meta.description,
+      tags: meta.tags,
       htmlFileName: meta.htmlFileName
     })
   },
@@ -126,6 +132,9 @@ async function prepareDom() {
   return { 
     documentDom: documentDom,
     elements: {
+      metaDescriptionElem: document.querySelector("meta[name='description']"),
+      metaKeywordsElem: document.querySelector("meta[name='keywords']"),
+      pageTitleElem: document.querySelector("title"),
       titleElem: document.querySelector("#post-title"),
       dateElem: document.querySelector('#post-date'),
       bodyElem: document.querySelector('#post-body')
