@@ -83,7 +83,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
     typeof meta.date === 'string' ? meta.date : meta.date.toISOString()
   )
   const tagsLinksArr = meta.tags.map(tag =>
-    `<a href="/?tag=${encodeURIComponent(tag)}">${tag}</a>`)
+    `<a href="../?tag=${encodeURIComponent(tag)}">${tag}</a>`)
   elements.tagsElem.innerHTML = `\n${tagsLinksArr.join(' |\n')}\n`
   console.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
