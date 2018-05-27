@@ -75,6 +75,10 @@ a.btn.disabled {
 .post-title {
   color: orangered;
 }
+.tags-container {
+  color: silver;
+  margin-top: .75em;
+}
 .hljs {
   border-radius: 6px;
   padding: .75em;

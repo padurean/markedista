@@ -82,6 +82,9 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
     'datetime',
     typeof meta.date === 'string' ? meta.date : meta.date.toISOString()
   )
+  const tagsLinksArr = meta.tags.map(tag =>
+    `<a href="/?tag=${encodeURIComponent(tag)}">${tag}</a>`)
+  elements.tagsElem.innerHTML = `\n${tagsLinksArr.join(' |\n')}\n`
   console.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
 }
@@ -137,7 +140,8 @@ async function prepareDom() {
       pageTitleElem: document.querySelector("title"),
       titleElem: document.querySelector("#post-title"),
       dateElem: document.querySelector('#post-date'),
-      bodyElem: document.querySelector('#post-body')
+      bodyElem: document.querySelector('#post-body'),
+      tagsElem: document.querySelector('#tags-container')
     }
   }
 }
