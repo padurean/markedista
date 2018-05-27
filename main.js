@@ -1,6 +1,6 @@
 var state = {
-  postsPath: 'posts/',
-  postsJsonPath: 'posts/posts.json',
+  postsPath: './posts/',
+  postsJsonPath: './posts/posts.json',
   pageSize: 2,
   currPage: 1,
   posts: [],
