@@ -1,6 +1,6 @@
 var state = {
-  postsPath: '/posts/',
-  postsJsonPath: '/posts/posts.json'
+  postsPath: './',
+  postsJsonPath: './posts.json'
 }
 
 function renderPostDate() {
