@@ -72,6 +72,10 @@ a.btn.disabled {
   border-color: grey;
   cursor: not-allowed;
 }
+.btn-arrow-icon {
+  font-size: 1.25em;
+  line-height: 1em;
+}
 .post-title {
   color: orangered;
 }
