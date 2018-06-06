@@ -527,5 +527,5 @@ async function createBenchmarkMds(sourceMdFilePath, nbCopies) {
   }
 }
 
-// createBenchmarkMds('_src/_posts/_rendered/second-post.md', 3000)
+// createBenchmarkMds('_src/_posts/_rendered/2-second-post.md', 2500)
 render()

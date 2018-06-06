@@ -125,9 +125,9 @@ function renderFilteredPosts() {
   if (state.filteredPosts.length === 0) {
     state.postsSectionElem.html('');
     state.postsCountElem.text('No Posts');
-    state.postsCountElem.removeClass('invisible');
     return;
   }
+  state.postsCountElem.text('Rendering ' + state.filteredPosts.length + ' posts ...');
   var postSummaryBluePrint = state.postSummaryTemplateSectionElem.find('.post-summary');
   var postsSummariesElements = [];
   for (var i = 0; i < state.filteredPosts.length; i++) {
@@ -161,10 +161,12 @@ function renderFilteredPosts() {
     (nbPosts > 1 ? nbPosts + ' Posts:' : '1 Post:') :
     'No Posts';
   state.postsCountElem.text(nbPostsInfo);
-  state.postsCountElem.removeClass('invisible');
 }
 
 function fetchAndRenderPostsForTags() {
+  state.postsCountElem.text('Loading posts ...');
+  state.postsCountElem.removeClass('invisible');
+
   var ajaxRequestsForTags = [];
   for (var i = 0; i < state.tags.length; i++) {
     var postMetasForCurrTagUrl = '../posts/tags/'+state.tags[i]+'.json';
