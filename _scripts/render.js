@@ -110,6 +110,10 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.tagsElem.innerHTML = tagsLinksArr.join(' ')
   log.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
+  const siteUrl = elements.fbCommentsElem.getAttribute('data-href')
+  const slash = siteUrl.endsWith('/') ? '' : '/'
+  elements.fbCommentsElem.setAttribute(
+    'data-href', `${siteUrl}${slash}${config.htmlOutputDirPath}/${meta.name}/`)
 }
 
 function disableBtn(btnElem) {
@@ -218,10 +222,10 @@ async function writePostsNavInfoJson() {
   for (var i = 0; i < metaArr.length; i++) {
     const postNavInfo = {
       'olderPost': (i < metaArr.length-1 ?
-        `../${metaArr[i+1].name}` :
+        `${metaArr[i+1].name}` :
         null),
       'newerPost': (i > 0 ? 
-        `../${metaArr[i-1].name}` :
+        `${metaArr[i-1].name}` :
         null)
     }
     const postNavFilePath =
@@ -396,7 +400,8 @@ async function prepareDom() {
       titleElem: documentPostPage.querySelector("#post-title"),
       dateElem: documentPostPage.querySelector('#post-date'),
       bodyElem: documentPostPage.querySelector('#post-body'),
-      tagsElem: documentPostPage.querySelector('#tags-container')
+      tagsElem: documentPostPage.querySelector('#tags-container'),
+      fbCommentsElem: documentPostPage.querySelector('.fb-comments')
     }
   }
 }

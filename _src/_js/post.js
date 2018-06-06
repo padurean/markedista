@@ -1,6 +1,7 @@
 var state = {
   btnNewerPost: null,
-  btnOlderPost: null
+  btnOlderPost: null,
+  locationPathNormalized: null
 }
 
 function renderPostDate() {
@@ -17,12 +18,15 @@ function highlightCodeBlocks() {
 }
 
 function enableOlderNewerBtns(navInfo) {
+  var pathPrefixArr = state.locationPathNormalized.split('/');
+  pathPrefixArr = pathPrefixArr.slice(0, pathPrefixArr.length-2);
+  var pathPrefix = pathPrefixArr.join('/') + '/';
   if (navInfo.newerPost) {
-    state.btnNewerPost.attr('href', navInfo.newerPost);
+    state.btnNewerPost.attr('href', pathPrefix + navInfo.newerPost);
     state.btnNewerPost.removeClass('disabled');
   }
   if (navInfo.olderPost) {
-    state.btnOlderPost.attr('href', navInfo.olderPost);
+    state.btnOlderPost.attr('href', pathPrefix + navInfo.olderPost);
     state.btnOlderPost.removeClass('disabled');
   }
 }
@@ -33,8 +37,11 @@ $(function(){
   $('#year-placeholder').text(new Date().getFullYear());
   state.btnNewerPost = $('#btn-newer-post');
   state.btnOlderPost = $('#btn-older-post');
+  var locPath = location.pathname;
+  state.locationPathNormalized =
+    locPath + (locPath.charAt(locPath.length - 1) === '/' ? '' : '/');
   var navJsonRequestSettings = {
-    url: './nav.json'//,
+    url: state.locationPathNormalized + 'nav.json'//,
     // cache: false
   }
   $.get(navJsonRequestSettings)

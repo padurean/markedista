@@ -194,3 +194,7 @@ a.hide, a.btn.hide {
 .hljs-ln td.hljs-ln-code {
   padding-left: 1em;
 }
+.fb-comments-section > .fb-comments {
+  margin-left: -8px;
+  margin-top: 3em;
+}
