@@ -213,8 +213,8 @@ async function renderPages() {
 
 async function writePostsNavInfoJson() {
   log.info(`Generating ${config.postNavJsonFileName} in each post folder ...`.info)
-  const metaArr = [...state.mdFileNameToMeta.values()]//.sort((a, b) =>
-    // new Date(b.date).getTime() - new Date(a.date).getTime())
+  const metaArr = [...state.mdFileNameToMeta.values()].sort((a, b) =>
+    new Date(b.date).getTime() - new Date(a.date).getTime())
   for (var i = 0; i < metaArr.length; i++) {
     const postNavInfo = {
       'olderPost': (i < metaArr.length-1 ?
