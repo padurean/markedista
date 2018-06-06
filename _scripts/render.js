@@ -110,10 +110,8 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.tagsElem.innerHTML = tagsLinksArr.join(' ')
   log.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
-  const siteUrl = elements.fbCommentsElem.getAttribute('data-href')
-  const slash = siteUrl.endsWith('/') ? '' : '/'
   elements.fbCommentsElem.setAttribute(
-    'data-href', `${siteUrl}${slash}${config.htmlOutputDirPath}/${meta.name}/`)
+    'data-href', `${state.dom.siteUrlForFbComments}${config.htmlOutputDirPath}/${meta.name}/`)
 }
 
 function disableBtn(btnElem) {
@@ -373,6 +371,9 @@ async function prepareDom() {
     '../../bundle-post.min.css',
     '../../bundle-post.min.js')
   const documentPostPage = documentDomPostPage.window.document
+  const fbCommentsElem = documentPostPage.querySelector('.fb-comments')
+  let siteUrlForFbComments = fbCommentsElem.getAttribute('data-href')
+  siteUrlForFbComments += (siteUrlForFbComments.endsWith('/') ? '' : '/')
   
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
@@ -393,6 +394,7 @@ async function prepareDom() {
     },
     postSummaryHtml: postSummaryHtml,
     documentDomPostPage: documentDomPostPage,
+    siteUrlForFbComments: siteUrlForFbComments,
     elementsPostPage: {
       metaDescriptionElem: documentPostPage.querySelector("meta[name='description']"),
       metaKeywordsElem: documentPostPage.querySelector("meta[name='keywords']"),
@@ -401,7 +403,7 @@ async function prepareDom() {
       dateElem: documentPostPage.querySelector('#post-date'),
       bodyElem: documentPostPage.querySelector('#post-body'),
       tagsElem: documentPostPage.querySelector('#tags-container'),
-      fbCommentsElem: documentPostPage.querySelector('.fb-comments')
+      fbCommentsElem: fbCommentsElem
     }
   }
 }
@@ -415,9 +417,9 @@ async function renderPost(mdFileName) {
   if (!validateFrontmatter(meta, `${mdFileName} - Skipped`)) {
     state.invalidMetaCounter++
   } else {
+    meta.name = mdFileName.substr(0, mdFileName.lastIndexOf('.'))
     renderMarkdownAndUpdateDom(mdFileName, meta, state.dom.elementsPostPage)
     const htmlContent = minify(state.dom.documentDomPostPage.serialize(), config.minifyHtmlOpts)
-    meta.name = mdFileName.substr(0, mdFileName.lastIndexOf('.'))
 
     const postOutputDirPath = `${config.htmlOutputDirPath}/${meta.name}`
     if (!fs.existsSync(postOutputDirPath))
