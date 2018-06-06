@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="This is the 2nd post description"><meta name="keywords" content="tag2, tag3"><meta name="author" content="Valentin Padurean (Ogg)"><title>Second Post Title</title><link rel="stylesheet" href="../../bundle-post.min.css"></head><body><header><a href="../.." class="btn-go-home"><h1><span class="markdista-logotype">λλ</span><span class="markedista-logotext"></span>arkedista Blog</h1></a></header><article class="full-post"><header class="post-header"><h2 id="post-title" class="post-title">Second Post Title</h2><time id="post-date" class="post-date" datetime="2018-05-16T09:23:06.000Z">2018-05-16T09:23:06.000Z</time></header><section id="post-body" class="post-body"><h1 id="gfm-example">GFM-Example</h1><p>GitHub Flavored Markdown Example</p><h2 id="index">Index</h2><ul><li>source</li></ul><pre><code> This is head1
+ =============
+
+ This is head 2
+ --------------</code></pre><ul><li>result</li></ul><h1 id="this-is-head1">This is head1</h1><h2 id="this-is-head-2">This is head 2</h2><h2 id="table-php-markdown-style-">table (PHP-Markdown style)</h2><ul><li>source</li></ul><pre><code>First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell</code></pre><ul><li>result</li></ul><table><thead><tr><th>First Header</th><th>Second Header</th></tr></thead><tbody><tr><td>Content Cell</td><td>Content Cell</td></tr><tr><td>Content Cell</td><td>Content Cell</td></tr></tbody></table><ul><li>source</li></ul><pre><code>| Item      | Value |
+| --------- | -----:|
+| Computer  | $1600 |
+| Phone     |   $12 |
+| Pipe      |    $1 |</code></pre><ul><li>result</li></ul><table><thead><tr><th>Item</th><th align="right">Value</th></tr></thead><tbody><tr><td>Computer</td><td align="right">$1600</td></tr><tr><td>Phone</td><td align="right">$12</td></tr><tr><td>Pipe</td><td align="right">$1</td></tr></tbody></table><h2 id="code">code</h2><ul><li>source</li></ul><pre><code>```
+this is code block
+```</code></pre><ul><li>result</li></ul><pre><code>this is code block</code></pre><ul><li>source</li></ul><pre><code>```ruby
+get '/' do
+  "Hello world "
+end
+```</code></pre><ul><li>result</li></ul><pre><code class="language-ruby">get '/' do
+  "Hello world "
+end</code></pre><ul><li>other ruby example</li></ul><pre><code class="language-ruby">get '/' do
+  "Hello world "
+end</code></pre><ul><li>some scala example:</li></ul><pre><code class="language-scala">trait TSDBWriter
+  protected implicit val scheduler: Scheduler
+  protected val metrics = Metrics.openTSDBMetrics
+
+  def config: TSDBConfig
+
+  def publishMessages(tsDataPoints: List[TSDataPoint]): Task[Continue]
+
+  def persistLeadershipValue(status: LeadershipStatus, now: DateTime): Task[Continue] =
+    val metric = "assetEngine.leadershipState"
+    val dp = TSDataPoint(
+      metric = metric,
+      timestamp = now.getMillis,
+      value = if (status.isMaster) 1 else 0,
+      tags = Map("host" -&gt; s"${status.hostname}/${status.address}")
+    )
+
+    publishMessages(List(dp))
+
+  case class SomeCaseClass(attr1: String, attr2: Double)</code></pre><ul><li>some javascript examples:</li></ul><pre><code class="language-javascript">const fs = require('fs')
+const {promisify} = require('util')
+const marked = require('marked')
+const frontmatter = require('yaml-front-matter')
+const jsdom = require('jsdom')
+const { JSDOM } = jsdom
+const colors = require('colors')
+
+colors.setTheme({
+  silly: 'rainbow',
+  input: 'grey',
+  verbose: 'cyan',
+  prompt: 'grey',
+  info: 'green',
+  data: 'grey',
+  help: 'cyan',
+  warn: 'yellow',
+  debug: 'blue',
+  error: 'red'
+})</code></pre><h2 id="autolink">autolink</h2><ul><li>source</li></ul><pre><code>http://mukaer.com</code></pre><ul><li>result</li></ul><p><a href="http://mukaer.com">http://mukaer.com</a></p><h2 id="strikethrough">strikethrough</h2><ul><li>source</li></ul><pre><code>this is ~~good~~ bad</code></pre><ul><li>result</li></ul><p>this is <del>good</del> bad</p><h2 id="task-lists">Task Lists</h2><ul><li>source</li></ul><pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item</code></pre><ul><li><p>result</p></li><li><p>@mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</p></li><li><input checked="" disabled="" type="checkbox"> list syntax required (any unordered or ordered list supported)</li><li><input checked="" disabled="" type="checkbox"> this is a complete item</li><li><input disabled="" type="checkbox"> this is an incomplete item</li></ul><h2 id="superscript">superscript</h2><ul><li>source</li></ul><pre><code>this is the 2^(nd) time</code></pre><ul><li>result</li></ul><p>this is the 2^(nd) time</p><h2 id="underline">underline</h2><ul><li>source</li></ul><pre><code>This is _underlined_ but this is still *italic*</code></pre><ul><li>result</li></ul><p>This is <em>underlined</em> but this is still <em>italic</em></p><h2 id="highlight">highlight</h2><ul><li>source</li></ul><pre><code>This is ==highlighted==</code></pre><ul><li>result</li></ul><p>This is ==highlighted==</p></section></article><section id="tags-section" class="tags-section"><span>Tags:</span><div id="tags-container" class="tags-container"><a href="../../tags/?tags=tag2"><span class="grey-text">#</span>tag2</a> <a href="../../tags/?tags=tag3"><span class="grey-text">#</span>tag3</a></div></section><section id="page-nav" class="page-nav"><a id="btn-older-post" class="btn disabled" href="#"><span class="btn-arrow-icon">«</span> Older</a> <a id="btn-newer-post" class="btn disabled" href="#">Newer <span class="btn-arrow-icon">»</span></a></section><footer><span id="year-placeholder">2018</span> made with <a href="https://github.com/padurean/markedista"><span class="markdista-logotype">λλ</span><span class="markedista-logotext">arkedista</span></a></footer><script type="text/javascript" src="../../bundle-post.min.js"></script></body></html>
