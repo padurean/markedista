@@ -34,8 +34,8 @@ $(function(){
   state.btnNewerPost = $('#btn-newer-post');
   state.btnOlderPost = $('#btn-older-post');
   var navJsonRequestSettings = {
-    url: './nav.json'//,
-    // cache: false
+    url: './nav.json',
+    cache: false
   }
   $.get(navJsonRequestSettings)
     .done(enableOlderNewerBtns)
@@ -45,11 +45,3 @@ $(function(){
       }, 3000);
     });
 });
-
-//--> workaround for iOS:
-//    without this, when page is loaded from cache, onload is not called anymore :(
-$(window).bind("pageshow", function(event) {
-  if (event.originalEvent.persisted)
-    location.reload();
-});
-//<--
