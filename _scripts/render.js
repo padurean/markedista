@@ -190,7 +190,9 @@ async function renderPages() {
       if (currPage === nbPages)
         disableBtn(elements.btnOlderElem)
       else
-        enableBtn(elements.btnOlderElem, `../../${config.pagesDirPath}/${currPage + 1}`)
+        enableBtn(
+          elements.btnOlderElem,
+          `${currPage > 1 ? '../../' : ''}${config.pagesDirPath}/${currPage + 1}`)
       
       let currPagePath = 'index.html'
       if (currPage > 1) {
