@@ -34,8 +34,8 @@ $(function(){
   state.btnNewerPost = $('#btn-newer-post');
   state.btnOlderPost = $('#btn-older-post');
   var navJsonRequestSettings = {
-    url: './nav.json',
-    cache: false
+    url: './nav.json'//,
+    // cache: false
   }
   $.get(navJsonRequestSettings)
     .done(enableOlderNewerBtns)
