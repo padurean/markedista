@@ -194,7 +194,16 @@ a.hide, a.btn.hide {
 .hljs-ln td.hljs-ln-code {
   padding-left: 1em;
 }
-.fb-comments-section > .fb-comments {
-  margin-left: -8px;
+.fb-comments-section {
+  display: inline-block;
   margin-top: 3em;
+  background-color: aliceblue;
+  border-radius: 6px;
+  padding: .25em .5em;
+}
+/* custom css for "touch targets": */
+@media (hover:none), (hover:on-demand) { 
+  .fb-comments-section {
+    display: block;
+  }
 }
