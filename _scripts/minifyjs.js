@@ -27,7 +27,6 @@ const inputFilesForTagsPage = [
 const inputFilesForPostPage = [
   '_src/_js/_vendor/jquery-3.3.1.min.js',
   '_src/_js/_vendor/highlight/highlight.pack.js',
-  '_src/_js/_vendor/highlight/highlightjs-line-numbers.2.3.0.min.js',
   '_src/_js/post.js'
 ]
 
@@ -50,8 +49,7 @@ const config = {
     input: {
       'file1.js': fs.readFileSync(inputFilesForPostPage[0], enc),
       'file2.js': fs.readFileSync(inputFilesForPostPage[1], enc),
-      'file3.js': fs.readFileSync(inputFilesForPostPage[2], enc),
-      'file4.js': fs.readFileSync(inputFilesForPostPage[3], enc)
+      'file3.js': fs.readFileSync(inputFilesForPostPage[2], enc)
     },
     output: 'bundle-post.min.js'
   }

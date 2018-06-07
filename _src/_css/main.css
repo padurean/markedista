@@ -14,6 +14,10 @@ a > h2 {
 code, code.hljs {
   font-size: 1.1em;
 }
+.hljs {
+  border-radius: 6px;
+  padding: .75em;
+}
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
@@ -172,27 +176,6 @@ a.hide, a.btn.hide {
   background-position: left center;
   background-size: 1em;
   padding-left: 1.25em;
-}
-.hljs {
-  border-radius: 6px;
-  padding: .75em;
-}
-/* for block of line numbers */
-.hljs-ln td.hljs-ln-numbers {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  text-align: left;
-  color: silver;
-  vertical-align: middle;
-}
-/* for block of code */
-.hljs-ln td.hljs-ln-code {
-  padding-left: 1em;
 }
 .fb-comments-section {
   display: inline-block;
