@@ -1,6 +1,7 @@
 var state = {
-  btnNewerPost: null,
-  btnOlderPost: null,
+  pageNavSectionElem: null,
+  btnNewerPostElem: null,
+  btnOlderPostElem: null,
   locationPathNormalized: null
 }
 
@@ -21,21 +22,23 @@ function enableOlderNewerBtns(navInfo) {
   pathPrefixArr = pathPrefixArr.slice(0, pathPrefixArr.length-2);
   var pathPrefix = pathPrefixArr.join('/') + '/';
   if (navInfo.newerPost) {
-    state.btnNewerPost.attr('href', pathPrefix + navInfo.newerPost);
-    state.btnNewerPost.removeClass('disabled');
+    state.btnNewerPostElem.attr('href', pathPrefix + navInfo.newerPost);
+    state.btnNewerPostElem.removeClass('disabled');
   }
   if (navInfo.olderPost) {
-    state.btnOlderPost.attr('href', pathPrefix + navInfo.olderPost);
-    state.btnOlderPost.removeClass('disabled');
+    state.btnOlderPostElem.attr('href', pathPrefix + navInfo.olderPost);
+    state.btnOlderPostElem.removeClass('disabled');
   }
+  state.pageNavSectionElem.removeClass('invisible');
 }
 
 $(function(){
   renderPostDate();
   setTimeout(highlightCodeBlocks, 0);
   $('#year-placeholder').text(new Date().getFullYear());
-  state.btnNewerPost = $('#btn-newer-post');
-  state.btnOlderPost = $('#btn-older-post');
+  state.pageNavSectionElem = $('#page-nav');
+  state.btnNewerPostElem = $('#btn-newer-post');
+  state.btnOlderPostElem = $('#btn-older-post');
   var locPath = location.pathname;
   state.locationPathNormalized =
     locPath + (locPath.charAt(locPath.length - 1) === '/' ? '' : '/');
@@ -47,7 +50,11 @@ $(function(){
     .done(enableOlderNewerBtns)
     .fail(function() { // retry
       setTimeout(function() {
-        $.get(navJsonRequestSettings).done(enableOlderNewerBtns);
+        $.get(navJsonRequestSettings)
+          .done(enableOlderNewerBtns)
+          .fail(function() {
+            state.pageNavSectionElem.addClass('hidden');
+          });
       }, 3000);
     });
 });
