@@ -71,6 +71,11 @@ body > footer .markedista-logotext {
 .full-post {
   margin-bottom: 3em;
 }
+.full-post .post-body img {
+  max-width: 100%;
+  /* percent relative to viewport height */
+  max-height: 80vh;
+}
 .page-nav {
   margin-top: 3em;
 }
@@ -192,7 +197,7 @@ a.hide, a.btn.hide {
   padding: .25em .5em;
 }
 /* custom css for "touch targets": */
-@media (hover:none), (hover:on-demand) { 
+@media (hover:none), (hover:on-demand) {
   .fb-comments-section {
     display: block;
   }

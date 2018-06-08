@@ -139,6 +139,7 @@ trait TSDBWriter
   case class SomeCaseClass(attr1: String, attr2: Double)
 ```
 
+![To the Black Lodge](../../photos/to-the-black-lodge.jpg "To the Black Lodge")
 
 * some javascript examples:
 
@@ -179,7 +180,7 @@ http://mukaer.com
 
 http://mukaer.com
 
-
+![Factory Clouds](../../photos/factory-and-clouds.jpg "Factory Clouds")
 
 strikethrough
 -------------
