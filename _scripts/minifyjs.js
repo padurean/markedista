@@ -29,6 +29,15 @@ const inputFilesForPostPage = [
   '_src/_js/_vendor/highlight/highlight.pack.js',
   '_src/_js/post.js'
 ]
+const inputFilesForPostPageWithGallery = [
+  '_src/_js/_vendor/jquery-3.3.1.min.js',
+  '_src/_js/_vendor/jquery.mobile-events-2.0.0.min.js',
+  '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.min.js',
+  '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.gallery.min.js',
+  '_src/_js/_vendor/highlight/highlight.pack.js',
+  '_src/_js/post.js',
+  '_src/_js/post-gallery-init.js'
+]
 
 const config = {
   forIndexPage: {
@@ -52,6 +61,18 @@ const config = {
       'file3.js': fs.readFileSync(inputFilesForPostPage[2], enc)
     },
     output: 'bundle-post.min.js'
+  },
+  forPostPageWithGallery: {
+    input: {
+      'file1.js': fs.readFileSync(inputFilesForPostPageWithGallery[0], enc),
+      'file2.js': fs.readFileSync(inputFilesForPostPageWithGallery[1], enc),
+      'file3.js': fs.readFileSync(inputFilesForPostPageWithGallery[2], enc),
+      'file4.js': fs.readFileSync(inputFilesForPostPageWithGallery[3], enc),
+      'file5.js': fs.readFileSync(inputFilesForPostPageWithGallery[4], enc),
+      'file6.js': fs.readFileSync(inputFilesForPostPageWithGallery[5], enc),
+      'file7.js': fs.readFileSync(inputFilesForPostPageWithGallery[6], enc)
+    },
+    output: 'bundle-post-with-gallery.min.js'
   }
 }
 
@@ -75,5 +96,10 @@ console.info(
   '\nMinifying JS files for post page:\n  %s'.info,
   inputFilesForPostPage.join('\n  '))
 minifyToFile(config.forPostPage.input, config.forPostPage.output)
+
+console.info(
+  '\nMinifying JS files for post page with gallery:\n  %s'.info,
+  inputFilesForPostPageWithGallery.join('\n  '))
+minifyToFile(config.forPostPageWithGallery.input, config.forPostPageWithGallery.output)
   
 console.info('\nDONE.'.info)

@@ -31,14 +31,6 @@ const config = {
   postNavJsonFileName: `nav.json`,
   tagsJsonsDirPath: 'posts/tags',
   tagsPageDirPath: 'tags',
-  cssFiles: {
-    forIndexPage: 'bundle-main.min.css',
-    forPostPage: 'bundle-post.min.css'
-  },
-  jsFiles: {
-    forIndexPage: 'bundle-main.min.js',
-    forPostPage: 'bundle-post.min.js'
-  },
   enc: 'utf8',
   ignoreFiles: [ '.gitkeep' ],
   postsPerPage: 2,
@@ -110,8 +102,11 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.tagsElem.innerHTML = tagsLinksArr.join(' ')
   log.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
+  const siteUrlForFbComments = !meta.gallery ?
+    state.dom.siteUrlForFbComments :
+    state.dom.siteUrlForFbCommentsPostPageWithGallery
   elements.fbCommentsElem.setAttribute(
-    'data-href', `${state.dom.siteUrlForFbComments}${config.htmlOutputDirPath}/${meta.name}/`)
+    'data-href', `${siteUrlForFbComments}${config.htmlOutputDirPath}/${meta.name}/`)
 }
 
 function disableBtn(btnElem) {
@@ -374,6 +369,18 @@ async function prepareDom() {
   const fbCommentsElem = documentPostPage.querySelector('.fb-comments')
   let siteUrlForFbComments = fbCommentsElem.getAttribute('data-href')
   siteUrlForFbComments += (siteUrlForFbComments.endsWith('/') ? '' : '/')
+
+  const documentDomPostPageWithGallery = prepareJsdom(
+    commonHeadHtml,
+    commonFooterHtml,
+    layoutPostPageHtml,
+    '../..',
+    '../../bundle-post-with-gallery.min.css',
+    '../../bundle-post-with-gallery.min.js')
+  const documentPostPageWithGallery = documentDomPostPageWithGallery.window.document
+  const fbCommentsElemPostPageWithGallery = documentPostPageWithGallery.querySelector('.fb-comments')
+  let siteUrlForFbCommentsPostPageWithGallery = fbCommentsElemPostPageWithGallery.getAttribute('data-href')
+  siteUrlForFbCommentsPostPageWithGallery += (siteUrlForFbCommentsPostPageWithGallery.endsWith('/') ? '' : '/')
   
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
@@ -382,17 +389,21 @@ async function prepareDom() {
       btnOlderElem: documentMainPage.querySelector("#btn-older"),
       btnNewerElem: documentMainPage.querySelector("#btn-newer")
     },
+
     documentDomSecondaryPage: documentDomSecondaryPage,
     elementsSecondaryPage: {
       postsSectionElem: documentSecondaryPage.querySelector("#posts"),
       btnOlderElem: documentSecondaryPage.querySelector("#btn-older"),
       btnNewerElem: documentSecondaryPage.querySelector("#btn-newer")
     },
+
     documentDomTagsPage: documentDomTagsPage,
     elementsTagsPage: {
       postsSummaryTemplateSectionElem: documentTagsPage.querySelector("#post-summary-template-section"),
     },
+
     postSummaryHtml: postSummaryHtml,
+    
     documentDomPostPage: documentDomPostPage,
     siteUrlForFbComments: siteUrlForFbComments,
     elementsPostPage: {
@@ -404,6 +415,19 @@ async function prepareDom() {
       bodyElem: documentPostPage.querySelector('#post-body'),
       tagsElem: documentPostPage.querySelector('#tags-container'),
       fbCommentsElem: fbCommentsElem
+    },
+
+    documentDomPostPageWithGallery: documentDomPostPageWithGallery,
+    siteUrlForFbCommentsPostPageWithGallery: siteUrlForFbCommentsPostPageWithGallery,
+    elementsPostPageWithGallery: {
+      metaDescriptionElem: documentPostPageWithGallery.querySelector("meta[name='description']"),
+      metaKeywordsElem: documentPostPageWithGallery.querySelector("meta[name='keywords']"),
+      pageTitleElem: documentPostPageWithGallery.querySelector("title"),
+      titleElem: documentPostPageWithGallery.querySelector("#post-title"),
+      dateElem: documentPostPageWithGallery.querySelector('#post-date'),
+      bodyElem: documentPostPageWithGallery.querySelector('#post-body'),
+      tagsElem: documentPostPageWithGallery.querySelector('#tags-container'),
+      fbCommentsElem: fbCommentsElemPostPageWithGallery
     }
   }
 }
@@ -418,8 +442,19 @@ async function renderPost(mdFileName) {
     state.invalidMetaCounter++
   } else {
     meta.name = mdFileName.substr(0, mdFileName.lastIndexOf('.'))
-    renderMarkdownAndUpdateDom(mdFileName, meta, state.dom.elementsPostPage)
-    const htmlContent = minify(state.dom.documentDomPostPage.serialize(), config.minifyHtmlOpts)
+    renderMarkdownAndUpdateDom(
+      mdFileName,
+      meta,
+      !meta.gallery ?
+        state.dom.elementsPostPage :
+        state.dom.elementsPostPageWithGallery
+    )
+    const htmlContent = minify(
+      !meta.gallery ?
+        state.dom.documentDomPostPage.serialize() :
+        state.dom.documentDomPostPageWithGallery.serialize(),
+      config.minifyHtmlOpts
+    )
 
     const postOutputDirPath = `${config.htmlOutputDirPath}/${meta.name}`
     if (!fs.existsSync(postOutputDirPath))

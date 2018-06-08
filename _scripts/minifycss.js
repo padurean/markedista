@@ -29,6 +29,15 @@ const config = {
       '_src/_css/main.css'
     ],
     output: 'bundle-post.min.css'
+  },
+  forPostPageWithGallery: {
+    input: [
+      '_src/_js/_vendor/highlight/styles/atom-one-light.css',
+      '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.min.css',
+      '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.gallery.min.css',
+      '_src/_css/main.css'
+    ],
+    output: 'bundle-post-with-gallery.min.css'
   }
 }
 
@@ -49,5 +58,10 @@ console.info(
   '\nMinifying CSS files for post page:\n  %s'.info,
   config.forPostPage.input.join('\n  '))
 minifyToFile(config.forPostPage.input, config.forPostPage.output)
+
+console.info(
+  '\nMinifying CSS files for post page with gallery:\n  %s'.info,
+  config.forPostPageWithGallery.input.join('\n  '))
+minifyToFile(config.forPostPageWithGallery.input, config.forPostPageWithGallery.output)
 
 console.info('\nDONE.'.info)
