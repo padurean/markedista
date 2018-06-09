@@ -1,5 +1,4 @@
 const fs = require('fs')
-const {promisify} = require('util')
 const log = require('loglevel')
 log.setLevel(log.levels.WARN/*DEBUG*/)
 const marked = require('marked')
@@ -40,11 +39,6 @@ const config = {
   }
 }
 
-const readDir = promisify(fs.readdir)
-const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
-const renameFile = promisify(fs.rename)
-
 function validateFrontmatter(meta, errorPrefix) {
   const errors = []
   if (typeof meta.date === 'undefined' || meta.date.length === 0)
@@ -73,9 +67,9 @@ function validateFrontmatter(meta, errorPrefix) {
   return invalidTags.length === 0
 }
 
-async function scanDir(path, logMsg, skip) {
+function scanDir(path, logMsg, skip) {
   log.info(`Scanning ${path} for ${logMsg} ...`.info)
-  const filesNames = (await readDir(path)).filter(
+  const filesNames = fs.readdirSync(path).filter(
     f => config.ignoreFiles.indexOf(f) < 0 &&
     (skip ? !skip.has(f) : true)
   )
@@ -137,7 +131,7 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
   return postSummaryFrag
 }
 
-async function renderPages() {
+function renderPages() {
   if (state.mdFileNameToMeta.size === 0)
     return
   
@@ -198,7 +192,7 @@ async function renderPages() {
         currPagePath = `${currPageDir}/${currPagePath}`
       }
       log.info(`Writing page ${currPage} to ${currPagePath} ...`.info)
-      await writeFile(currPagePath, minify(documentDom.serialize(), config.minifyHtmlOpts))
+      fs.writeFileSync(currPagePath, minify(documentDom.serialize(), config.minifyHtmlOpts))
       elements.postsSectionElem.textContent = ''
       postIndexInPage = 0
     } else {
@@ -208,7 +202,7 @@ async function renderPages() {
   }
 }
 
-async function writePostsNavInfoJson() {
+function writePostsNavInfoJson() {
   log.info(`Generating ${config.postNavJsonFileName} in each post folder ...`.info)
   const metaArr = [...state.mdFileNameToMeta.values()].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -224,11 +218,11 @@ async function writePostsNavInfoJson() {
     const postNavFilePath =
     `${config.htmlOutputDirPath}/${metaArr[i].name}/${config.postNavJsonFileName}`
     log.info(`Writing ${postNavFilePath} ...`.info)
-    await writeFile(postNavFilePath, JSON.stringify(postNavInfo/*, null, 2*/))
+    fs.writeFileSync(postNavFilePath, JSON.stringify(postNavInfo/*, null, 2*/))
   }
 }
 
-async function writePostsTagsJson() {
+function writePostsTagsJson() {
   log.info(`Generating tags json files in ${config.tagsJsonsDirPath} ...`.info)
   del.sync([config.tagsJsonsDirPath])
   fs.mkdirSync(config.tagsJsonsDirPath)
@@ -247,14 +241,14 @@ async function writePostsTagsJson() {
   for (const [tag, postMetasArr] of postMetasPerTag) {
     const tagJsonFileName = `${config.tagsJsonsDirPath}/${tag}.json`
     log.info(`Writing ${tagJsonFileName} ...`.info)
-    await writeFile(tagJsonFileName, JSON.stringify(postMetasArr/*, null, 2*/))
+    fs.writeFileSync(tagJsonFileName, JSON.stringify(postMetasArr/*, null, 2*/))
 
     postsTagsAndCountersArr.push([tag, postMetasArr.length])
   }
   postsTagsAndCountersArr.sort((a, b) => b[1] - a[1])
   const allTagsJsonFileName = `${config.tagsJsonsDirPath}/all-tags.json`
   log.info(`Writing ${allTagsJsonFileName} ...`.info)
-  await writeFile(allTagsJsonFileName, JSON.stringify(postsTagsAndCountersArr/*, null, 2*/))
+  fs.writeFileSync(allTagsJsonFileName, JSON.stringify(postsTagsAndCountersArr/*, null, 2*/))
 
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
   const postSummaryTemplateElem = postSummaryFrag.querySelector('.post-summary')
@@ -264,7 +258,7 @@ async function writePostsTagsJson() {
   fs.mkdirSync(config.tagsPageDirPath)
   const tagsPageFileName = `${config.tagsPageDirPath}/index.html`
   log.info(`Writing ${tagsPageFileName} ...`.info)
-  writeFile(tagsPageFileName, minify(state.dom.documentDomTagsPage.serialize(), config.minifyHtmlOpts))
+  fs.writeFileSync(tagsPageFileName, minify(state.dom.documentDomTagsPage.serialize(), config.minifyHtmlOpts))
 }
 
 function computeAndLogTotalDuration(startedAt) {
@@ -320,16 +314,16 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   return documentDom
 }
 
-async function prepareDom() {
+function prepareDom() {
   log.info(`Reading header and footer from ${config.templatesDirPath} folder ...`.info)
   
-  const commonHeadHtml = await readFile(`${config.templatesDirPath}/common-head.tpl.html`, config.enc)
-  const commonFooterHtml = await readFile(`${config.templatesDirPath}/common-footer.tpl.html`, config.enc)
-  const postSummaryHtml = await readFile(`${config.templatesDirPath}/post-summary.tpl.html`, config.enc)
+  const commonHeadHtml = fs.readFileSync(`${config.templatesDirPath}/common-head.tpl.html`, config.enc)
+  const commonFooterHtml = fs.readFileSync(`${config.templatesDirPath}/common-footer.tpl.html`, config.enc)
+  const postSummaryHtml = fs.readFileSync(`${config.templatesDirPath}/post-summary.tpl.html`, config.enc)
   
-  const layoutMainPageHtml = await readFile(`${config.templatesDirPath}/layout-main-page.tpl.html`, config.enc)
-  const layoutTagsPageHtml = await readFile(`${config.templatesDirPath}/layout-tags-page.tpl.html`, config.enc)
-  const layoutPostPageHtml = await readFile(`${config.templatesDirPath}/layout-post-page.tpl.html`, config.enc)
+  const layoutMainPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-main-page.tpl.html`, config.enc)
+  const layoutTagsPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-tags-page.tpl.html`, config.enc)
+  const layoutPostPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-post-page.tpl.html`, config.enc)
   
   const documentDomMainPage = prepareJsdom(
     commonHeadHtml,
@@ -432,10 +426,10 @@ async function prepareDom() {
   }
 }
 
-async function renderPost(mdFileName) {
+function renderPost(mdFileName) {
   log.info(`${mdFileName} - Reading file ...`.info)
   const mdFilePath = `${config.toRenderDirPath}/${mdFileName}`
-  const mdContentAndMeta = await readFile(mdFilePath, config.enc)
+  const mdContentAndMeta = fs.readFileSync(mdFilePath, config.enc)
   log.info(`${mdFileName} - Parsing frontmatter ...`.info)
   const meta = frontmatter.loadFront(mdContentAndMeta)
   if (!validateFrontmatter(meta, `${mdFileName} - Skipped`)) {
@@ -461,17 +455,17 @@ async function renderPost(mdFileName) {
       fs.mkdirSync(postOutputDirPath)
     const postOutputFilePath = `${postOutputDirPath}/index.html`
     log.info(`${mdFileName} - Writing to ${postOutputFilePath} ...`.info)
-    await writeFile(postOutputFilePath, htmlContent)
+    fs.writeFileSync(postOutputFilePath, htmlContent)
     const renderedMdFilePath = `${config.renderedDirPath}/${mdFileName}`
     log.info(`${mdFileName} - Moving to ${config.renderedDirPath} ...`.info)
-    await renameFile(mdFilePath, renderedMdFilePath)
+    fs.renameSync(mdFilePath, renderedMdFilePath)
     state.updateMeta(mdFileName, meta)
   }
 }
 
-async function updateStateMetaFromRenderedFile(mdFileNameRendered) {
+function updateStateMetaFromRenderedFile(mdFileNameRendered) {
   const mdFilePathRendered = `${config.renderedDirPath}/${mdFileNameRendered}`
-  const mdContentAndMetaRendered = await readFile(mdFilePathRendered, config.enc)
+  const mdContentAndMetaRendered = fs.readFileSync(mdFilePathRendered, config.enc)
   log.info(`${mdFileNameRendered} - Parsing frontmatter ...`.info)
   const metaRendered = frontmatter.loadFront(mdContentAndMetaRendered)
   if (!validateFrontmatter(metaRendered, `${mdFileNameRendered} - Skipped`)) {
@@ -482,7 +476,7 @@ async function updateStateMetaFromRenderedFile(mdFileNameRendered) {
   }
 }
 
-async function scanForUnlinkedPosts() {
+function scanForUnlinkedPosts() {
   const postsNames = new Map(
     [...state.mdFileNameToMeta].map(([mdFileName, v]) => 
       [mdFileName.substr(0, mdFileName.lastIndexOf('.')), 0])
@@ -491,7 +485,7 @@ async function scanForUnlinkedPosts() {
   tagsJsonsDirName = tagsJsonsDirName[tagsJsonsDirName.length - 1]
   postsNames.set(tagsJsonsDirName, 1)
   const unlinkedHtmlFiles =
-    await scanDir(config.htmlOutputDirPath, 'unlinked post(s)', postsNames)
+    scanDir(config.htmlOutputDirPath, 'unlinked post(s)', postsNames)
   if (unlinkedHtmlFiles.length > 0)
     log.warn(
       `Unlinked post(s) in ${config.htmlOutputDirPath} folder:\n%s\n`.warn +
@@ -499,11 +493,11 @@ async function scanForUnlinkedPosts() {
       JSON.stringify(unlinkedHtmlFiles, null, 2))
 }
 
-async function finish(startedAt) {
-  await renderPages()
-  await writePostsNavInfoJson()
-  await writePostsTagsJson()
-  await scanForUnlinkedPosts()
+function finish(startedAt) {
+  renderPages()
+  writePostsNavInfoJson()
+  writePostsTagsJson()
+  scanForUnlinkedPosts()
   const took = computeAndLogTotalDuration(startedAt)
   
   const nbMeta = state.mdFileNameToMeta.size
@@ -523,31 +517,31 @@ async function finish(startedAt) {
   )
 }
 
-const render = async () => {
+const render = () => {
   try {
     const startedAt = process.hrtime()
-    state.mdFilesNames = await scanDir(config.toRenderDirPath, 'md file(s) to render')
+    state.mdFilesNames = scanDir(config.toRenderDirPath, 'md file(s) to render')
     if (state.mdFilesNames.length === 0)
       return
-    await prepareDom()
-    state.mdFilesNames.forEach(async mdFileName => {
+    prepareDom()
+    state.mdFilesNames.forEach(mdFileName => {
       try {
-        await renderPost(mdFileName)
+        renderPost(mdFileName)
         if (state.done()) {
-          state.mdFilesNamesRendered = await scanDir(
+          state.mdFilesNamesRendered = scanDir(
             config.renderedDirPath, 'previously rendered md file(s)', state.mdFileNameToMeta)
           if (state.mdFilesNamesRendered.length > 0) {
-            state.mdFilesNamesRendered.forEach(async mdFileNameRendered => {
+            state.mdFilesNamesRendered.forEach(mdFileNameRendered => {
               try {
-                await updateStateMetaFromRenderedFile(mdFileNameRendered)
+                updateStateMetaFromRenderedFile(mdFileNameRendered)
                 if (state.done())
-                  await finish(startedAt)
+                  finish(startedAt)
               } catch (e) {
                 log.error(`${mdFileNameRendered} - FAILED to read!`.error, e)
               }
             })
           } else
-            await finish(startedAt)
+            finish(startedAt)
         }
       } catch (e) {
         log.error(`${mdFileName} FAILED!`.error, e)
@@ -558,16 +552,21 @@ const render = async () => {
   }
 }
 
-async function createBenchmarkMds(sourceMdFilePath, nbCopies) {
+function createBenchmarkMds(sourceMdFilePath, nbCopies) {
   const sourceMdFilePathArr = sourceMdFilePath.split('/')
   const sourceMdFileName = sourceMdFilePathArr[sourceMdFilePathArr.length-1]
   const lastIndexOfDot = sourceMdFileName.lastIndexOf('.')
   const sourceMdFileNameNoExt = sourceMdFileName.substr(0, lastIndexOfDot)
-  for (var i = 0; i < nbCopies; i++) {
-    const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${i+1}.md`
-    fs.createReadStream(sourceMdFilePath).pipe(fs.createWriteStream(newSourceMdFilePath))
+  const chunkSize = 3
+  const chunks = nbCopies > chunkSize ? Math.ceil(nbCopies / chunkSize) : nbCopies
+  const sourceMd = fs.readFileSync(sourceMdFilePath, config.enc)
+  for (let i = 0; i < chunks; i++) {
+    for (let j = i * chunkSize; j < (i+1)*chunkSize && j < nbCopies; j++) {
+      const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${j+1}.md`
+      fs.writeFileSync(newSourceMdFilePath, sourceMd)
+    }
   }
 }
 
-// createBenchmarkMds('_src/_posts/_rendered/2-second-post.md', 2500)
+// createBenchmarkMds('_src/_posts/_rendered/2-second-post.md', 5000)
 render()
