@@ -268,6 +268,7 @@ function writePostsTagsJson() {
 }
 
 function writeRssFeed() {
+  log.info(`Generating feed in ${config.rssFeedDirPath} ...`.info)
   const now = new Date()
   const author = {
     name: 'Valentin Padurean',
@@ -305,7 +306,9 @@ function writeRssFeed() {
   }
   if (!fs.existsSync(config.rssFeedDirPath))
     fs.mkdirSync(config.rssFeedDirPath)
-  fs.writeFileSync(`${config.rssFeedDirPath}/${config.rssFileName}`, feed.rss2())
+  const feedFilePath = `${config.rssFeedDirPath}/${config.rssFileName}`
+  log.info(`Writing ${feedFilePath} ...`.info)
+  fs.writeFileSync(feedFilePath, feed.rss2())
 }
 
 function computeAndLogTotalDuration(startedAt) {
