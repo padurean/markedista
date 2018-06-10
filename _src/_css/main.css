@@ -212,7 +212,7 @@ a.hide, a.btn.hide {
 /* fix close icon positioning for featherlight gallery on mobile devices */
 @media only screen and (max-width: 1024px) {
   body {
-    margin: 1rem;
+    margin: 1.25rem;
   }
   .featherlight .featherlight-close-icon {
     top: 9px;
