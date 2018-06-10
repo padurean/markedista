@@ -1,4 +1,4 @@
-<img src="markedista.svg" height="32">
+<img src="images/markedista-logo.svg" height="32">
 
 Static site generator based on [npm](https://www.npmjs.com/),
 [marked](https://marked.js.org/#/README.md#README.md) and
