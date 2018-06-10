@@ -7,6 +7,7 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const minify = require('html-minifier').minify
 const del = require('del')
+const Feed = require('feed')
 const colors = require('colors')
 colors.setTheme({
   silly: 'rainbow',
@@ -30,13 +31,18 @@ const config = {
   postNavJsonFileName: `nav.json`,
   tagsJsonsDirPath: 'posts/tags',
   tagsPageDirPath: 'tags',
+  rssFeedDirPath: 'feed',
+  rssFileName: 'rss.xml',
+  imagesDirPath: 'images',
   enc: 'utf8',
   ignoreFiles: [ '.gitkeep' ],
   postsPerPage: 2,
   minifyHtmlOpts: {
     removeComments: true,
     collapseWhitespace: true
-  }
+  },
+  // !make sure it has the trailing slash /
+  baseUrl: 'https://padurean.github.io/markedista/'
 }
 
 function validateFrontmatter(meta, errorPrefix) {
@@ -261,6 +267,47 @@ function writePostsTagsJson() {
   fs.writeFileSync(tagsPageFileName, minify(state.dom.documentDomTagsPage.serialize(), config.minifyHtmlOpts))
 }
 
+function writeRssFeed() {
+  const now = new Date()
+  const author = {
+    name: 'Valentin Padurean',
+    email: 'padureanvalentin@yahoo.com',
+    link: 'https://github.com/padurean'
+  }
+  const feed = new Feed({
+    title: 'Markedista',
+    description: 'Static Blog Generator based on npm, marked and jsdom',
+    id: config.baseUrl,
+    link: config.baseUrl,
+    image: `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.svg`,
+    favicon: `${config.baseUrl}favicon.ico`,
+    copyright: `${now.getFullYear()}, Valentin Padurean`,
+    updated: now, // optional, default = today
+    generator: 'Markedista', // optional, default = 'Feed for Node.js'
+    feedLinks: {
+      atom: `${config.baseUrl}${config.rssFeedDirPath}/${config.rssFileName}`,
+    },
+    author: author
+  })
+  feed.addCategory('Static Blog Generator')
+  feed.addCategory('Markdown')
+  for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
+    feed.addItem({
+      title: postMeta.title,
+      id: postMeta.name,
+      link: `${config.baseUrl}${config.htmlOutputDirPath}/${postMeta.name}/`,
+      description: postMeta.description,
+      content: postMeta.description,
+      date: new Date(postMeta.date),
+      // image: postMeta.image,
+      author: [author]
+    })
+  }
+  if (!fs.existsSync(config.rssFeedDirPath))
+    fs.mkdirSync(config.rssFeedDirPath)
+  fs.writeFileSync(`${config.rssFeedDirPath}/${config.rssFileName}`, feed.rss2())
+}
+
 function computeAndLogTotalDuration(startedAt) {
   const took = process.hrtime(startedAt)
   const tookMs = Math.round(took[1]/1000000)
@@ -301,6 +348,13 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
 
   btnGoHomeElems.setAttribute('href', homePath)
   
+  const feedUrl = `${config.baseUrl}${config.rssFeedDirPath}/${config.rssFileName}`
+  const rssLinkElem = document.createElement('link')
+  rssLinkElem.setAttribute('rel', 'alternate')
+  rssLinkElem.setAttribute('type', 'application/rss+xml')
+  rssLinkElem.setAttribute('href', feedUrl)
+  headElem.append(rssLinkElem)
+
   const cssLinkElem = document.createElement('link')
   cssLinkElem.setAttribute('rel', 'stylesheet')
   cssLinkElem.setAttribute('href', cssPath)
@@ -310,6 +364,21 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   jsLinkElem.setAttribute('type', 'text/javascript')
   jsLinkElem.setAttribute('src', jsPath)
   bodyElem.append(jsLinkElem)
+
+  const subscribeViaRss = 'Subscribe via RSS'
+  const rssAnchorImgElem = document.createElement('img')
+  rssAnchorImgElem.setAttribute('src', `${homePath}/${config.imagesDirPath}/rss.svg`)
+  rssAnchorImgElem.setAttribute('alt', subscribeViaRss)
+  const rssAnchorElem = document.createElement('a')
+  rssAnchorElem.setAttribute('rel', 'alternate')
+  rssAnchorElem.setAttribute('type', 'application/rss+xml')
+  rssAnchorElem.setAttribute('href', feedUrl)
+  rssAnchorElem.setAttribute('class', 'subscribe-via-rss')
+  rssAnchorElem.setAttribute('title', subscribeViaRss)
+  rssAnchorElem.append(rssAnchorImgElem)
+  rssAnchorElem.append(document.createTextNode(' Subscribe'))
+  const footerElem = document.querySelector('footer')
+  footerElem.append(rssAnchorElem)
 
   return documentDom
 }
@@ -497,6 +566,7 @@ function finish(startedAt) {
   renderPages()
   writePostsNavInfoJson()
   writePostsTagsJson()
+  writeRssFeed()
   scanForUnlinkedPosts()
   const took = computeAndLogTotalDuration(startedAt)
   

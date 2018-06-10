@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Markedista</title>
+        <link>https://padurean.github.io/markedista/</link>
+        <description>Static Blog Generator based on npm, marked and jsdom</description>
+        <lastBuildDate>Sun, 10 Jun 2018 12:03:57 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Markedista</generator>
+        <image>
+            <title>Markedista</title>
+            <url>https://padurean.github.io/markedista/images/markedista-logotype.svg</url>
+            <link>https://padurean.github.io/markedista/</link>
+        </image>
+        <copyright>2018, Valentin Padurean</copyright>
+        <category>Static Blog Generator</category>
+        <category>Markdown</category>
+        <atom:link href="https://padurean.github.io/markedista/feed/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[Sixth Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/6-sixth-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/6-sixth-post/</guid>
+            <pubDate>Tue, 29 May 2018 14:00:00 GMT</pubDate>
+            <description><![CDATA[This is the 6th post description]]></description>
+            <content:encoded><![CDATA[This is the 6th post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+        <item>
+            <title><![CDATA[Fifth Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/5-fifth-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/5-fifth-post/</guid>
+            <pubDate>Tue, 29 May 2018 13:00:00 GMT</pubDate>
+            <description><![CDATA[This is the 5th post description]]></description>
+            <content:encoded><![CDATA[This is the 5th post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+        <item>
+            <title><![CDATA[Fourth Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/4-fourth-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/4-fourth-post/</guid>
+            <pubDate>Tue, 29 May 2018 12:00:00 GMT</pubDate>
+            <description><![CDATA[This is the 4th post description]]></description>
+            <content:encoded><![CDATA[This is the 4th post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+        <item>
+            <title><![CDATA[Third Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/3-third-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/3-third-post/</guid>
+            <pubDate>Thu, 17 May 2018 14:03:51 GMT</pubDate>
+            <description><![CDATA[This is the 3rd post description]]></description>
+            <content:encoded><![CDATA[This is the 3rd post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+        <item>
+            <title><![CDATA[Second Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/2-second-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/2-second-post/</guid>
+            <pubDate>Wed, 16 May 2018 09:23:06 GMT</pubDate>
+            <description><![CDATA[This is the 2nd post description]]></description>
+            <content:encoded><![CDATA[This is the 2nd post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+        <item>
+            <title><![CDATA[First Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/1-first-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/1-first-post/</guid>
+            <pubDate>Wed, 16 May 2018 08:21:48 GMT</pubDate>
+            <description><![CDATA[This is the 1st post description]]></description>
+            <content:encoded><![CDATA[This is the 1st post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
+    </channel>
+</rss>

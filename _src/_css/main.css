@@ -41,6 +41,9 @@ body > header .markdista-logotype {
 body > header .markedista-logotext {
   margin-left: .25em;
 }
+body > footer > a {
+  margin-right: 2em;
+}
 body > footer .markdista-logotype {
   font-size: 1.5em;
   letter-spacing: -.15em;
@@ -195,6 +198,10 @@ a.hide, a.btn.hide {
   background-color: aliceblue;
   border-radius: 6px;
   padding: .25em .5em;
+}
+.subscribe-via-rss > img {
+  width: 1em;
+  height: 1em;
 }
 /* custom css for "touch targets": */
 @media (hover:none), (hover:on-demand) {
