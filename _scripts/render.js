@@ -376,7 +376,6 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   rssAnchorElem.setAttribute('class', 'subscribe-via-rss')
   rssAnchorElem.setAttribute('title', subscribeViaRss)
   rssAnchorElem.append(rssAnchorImgElem)
-  rssAnchorElem.append(document.createTextNode(' Subscribe'))
   const footerElem = document.querySelector('footer')
   footerElem.append(rssAnchorElem)
 
