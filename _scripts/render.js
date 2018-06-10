@@ -626,16 +626,12 @@ function createBenchmarkMds(sourceMdFilePath, nbCopies) {
   const sourceMdFileName = sourceMdFilePathArr[sourceMdFilePathArr.length-1]
   const lastIndexOfDot = sourceMdFileName.lastIndexOf('.')
   const sourceMdFileNameNoExt = sourceMdFileName.substr(0, lastIndexOfDot)
-  const chunkSize = 3
-  const chunks = nbCopies > chunkSize ? Math.ceil(nbCopies / chunkSize) : nbCopies
   const sourceMd = fs.readFileSync(sourceMdFilePath, config.enc)
-  for (let i = 0; i < chunks; i++) {
-    for (let j = i * chunkSize; j < (i+1)*chunkSize && j < nbCopies; j++) {
-      const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${j+1}.md`
-      fs.writeFileSync(newSourceMdFilePath, sourceMd)
-    }
+  for (let i = 0; i < nbCopies; i++) {
+    const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${i+1}.md`
+    fs.writeFileSync(newSourceMdFilePath, sourceMd)
   }
 }
 
-// createBenchmarkMds('_src/_posts/_rendered/2-second-post.md', 5000)
+// createBenchmarkMds('_src/_posts/_to-render/seed-post.md', 4999)
 render()
