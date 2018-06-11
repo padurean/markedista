@@ -208,7 +208,7 @@ function renderPages() {
   }
 }
 
-function writePostsNavInfoJson() {
+function generatePostsNavInfoJson() {
   log.info(`Generating ${config.postNavJsonFileName} in each post folder ...`.info)
   const metaArr = [...state.mdFileNameToMeta.values()].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -228,7 +228,7 @@ function writePostsNavInfoJson() {
   }
 }
 
-function writePostsTagsJson() {
+function generatePostsTagsJson() {
   log.info(`Generating tags json files in ${config.tagsJsonsDirPath} ...`.info)
   del.sync([config.tagsJsonsDirPath])
   fs.mkdirSync(config.tagsJsonsDirPath)
@@ -267,7 +267,7 @@ function writePostsTagsJson() {
   fs.writeFileSync(tagsPageFileName, minify(state.dom.documentDomTagsPage.serialize(), config.minifyHtmlOpts))
 }
 
-function writeRssFeed() {
+function generateRssFeed() {
   log.info(`Generating feed in ${config.rssFeedDirPath} ...`.info)
   const now = new Date()
   const author = {
@@ -547,7 +547,7 @@ function updateStateMetaFromRenderedFile(mdFileNameRendered) {
   }
 }
 
-function scanForUnlinkedPosts() {
+function scanAndLogUnlinkedPosts() {
   const postsNames = new Map(
     [...state.mdFileNameToMeta].map(([mdFileName, v]) => 
       [mdFileName.substr(0, mdFileName.lastIndexOf('.')), 0])
@@ -566,10 +566,10 @@ function scanForUnlinkedPosts() {
 
 function finish(startedAt) {
   renderPages()
-  writePostsNavInfoJson()
-  writePostsTagsJson()
-  writeRssFeed()
-  scanForUnlinkedPosts()
+  generatePostsNavInfoJson()
+  generatePostsTagsJson()
+  generateRssFeed()
+  scanAndLogUnlinkedPosts()
   const took = computeAndLogTotalDuration(startedAt)
   
   const nbMeta = state.mdFileNameToMeta.size
