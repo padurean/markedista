@@ -46,6 +46,13 @@ $(function(){
     url: state.locationPathNormalized + 'nav.json'//,
     // cache: false
   }
+  //==> TODO OGG: remove
+  $.ajaxSetup({
+    error: function(xhr, status, error) {
+      alert('An AJAX error occured for request '+this.type+' ' +this.url+ '\nError: ' + error);
+    }
+  });
+  //<==
   $.get(navJsonRequestSettings)
     .done(enableOlderNewerBtns)
     .fail(function() { // retry
@@ -55,6 +62,6 @@ $(function(){
           .fail(function() {
             state.pageNavSectionElem.addClass('hidden');
           });
-      }, 3000);
+      }, 1000);
     });
 });
