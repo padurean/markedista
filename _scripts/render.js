@@ -280,7 +280,7 @@ function generateRssFeed() {
     description: 'Static Blog Generator based on npm, marked and jsdom',
     id: config.baseUrl,
     link: config.baseUrl,
-    image: `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.svg`,
+    image: `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`,
     favicon: `${config.baseUrl}favicon.ico`,
     copyright: `${now.getFullYear()}, Valentin Padurean`,
     updated: now, // optional, default = today
