@@ -350,7 +350,12 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   bodyElem.append(JSDOM.fragment(footerHtml))
 
   btnGoHomeElems.setAttribute('href', homePath)
-  
+
+  const faviconLinkElem = document.createElement('link')
+  faviconLinkElem.setAttribute('rel', 'shortcut icon')
+  faviconLinkElem.setAttribute('href', `${homePath}/favicon.ico`)
+  headElem.append(faviconLinkElem)
+
   const feedUrl = `${config.baseUrl}${config.rssFeedDirPath}/${config.rssFileName}`
   const rssLinkElem = document.createElement('link')
   rssLinkElem.setAttribute('rel', 'alternate')
