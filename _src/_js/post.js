@@ -44,6 +44,7 @@ $(function(){
     locPath + (locPath.charAt(locPath.length - 1) === '/' ? '' : '/');
   var navJsonRequestSettings = {
     url: state.locationPathNormalized + 'nav.json',
+    dataType: "json",
     //--> Otherwise subsequent post page loads on iOS will result in GET nav.json failing :(
     //    See: http://chadschroeder.blogspot.com/2013/01/jquery-ajax-and-aggressive-ios-caching.html
     cache: false,
