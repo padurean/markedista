@@ -44,20 +44,10 @@ $(function(){
     locPath + (locPath.charAt(locPath.length - 1) === '/' ? '' : '/');
   var navJsonRequestSettings = {
     url: state.locationPathNormalized + 'nav.json',
-    dataType: "json",
-    //--> Otherwise subsequent post page loads on iOS will result in GET nav.json failing :(
-    //    See: http://chadschroeder.blogspot.com/2013/01/jquery-ajax-and-aggressive-ios-caching.html
-    cache: false,
-    headers: { "cache-control": "no-cache" }
-    //<--
+    dataType: "json" // ,
+    // cache: false,
+    // headers: { "cache-control": "no-cache" }
   }
-  //==> TODO OGG: remove
-  $.ajaxSetup({
-    error: function(xhr, status, error) {
-      alert('An AJAX error occured for request '+this.type+' ' +this.url+ '\nError: ' + error);
-    }
-  });
-  //<==
   $.get(navJsonRequestSettings)
     .done(enableOlderNewerBtns)
     .fail(function() { // retry
