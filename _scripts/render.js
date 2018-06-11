@@ -360,6 +360,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const rssLinkElem = document.createElement('link')
   rssLinkElem.setAttribute('rel', 'alternate')
   rssLinkElem.setAttribute('type', 'application/rss+xml')
+  rssLinkElem.setAttribute('title', document.querySelector('title').textContent)
   rssLinkElem.setAttribute('href', feedUrl)
   headElem.append(rssLinkElem)
 
