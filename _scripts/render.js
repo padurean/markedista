@@ -373,7 +373,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const btnGoHomeElems = document.querySelector('.btn-go-home')
 
   const ogTitleElem = document.createElement('meta')
-  ogTitleElem.setAttribute('name', 'og:title')
+  ogTitleElem.setAttribute('property', 'og:title')
   ogTitleElem.setAttribute('content', title)
   headElem.append(ogTitleElem)
   const twitterTitleElem = document.createElement('meta')
@@ -382,7 +382,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   headElem.append(twitterTitleElem)
 
   const ogDescriptionElem = document.createElement('meta')
-  ogDescriptionElem.setAttribute('name', 'og:description')
+  ogDescriptionElem.setAttribute('property', 'og:description')
   ogDescriptionElem.setAttribute('content', description)
   headElem.append(ogDescriptionElem)
   const twitterDescriptionElem = document.createElement('meta')
@@ -393,11 +393,11 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const logotypeImageUrl =
     `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`
   const ogImageElem = document.createElement('meta')
-  ogImageElem.setAttribute('name', 'og:image')
+  ogImageElem.setAttribute('property', 'og:image')
   ogImageElem.setAttribute('content', logotypeImageUrl)
   headElem.append(ogImageElem)
   const ogImageElemSecureUrl = document.createElement('meta')
-  ogImageElemSecureUrl.setAttribute('name', 'og:image:secure_url')
+  ogImageElemSecureUrl.setAttribute('property', 'og:image:secure_url')
   ogImageElemSecureUrl.setAttribute('content', logotypeImageUrl)
   headElem.append(ogImageElemSecureUrl)
   const twitterImageElem = document.createElement('meta')
@@ -537,12 +537,12 @@ function prepareDom() {
       metaDescriptionElem: documentPostPage.querySelector('meta[name="description"]'),
       metaKeywordsElem: documentPostPage.querySelector('meta[name="keywords"]'),
       socialMeta: {
-        ogTitleElem: documentPostPage.querySelector('meta[name="og:title"]'),
+        ogTitleElem: documentPostPage.querySelector('meta[property="og:title"]'),
         twitterTitleElem: documentPostPage.querySelector('meta[name="twitter:title"]'),
-        ogDescriptionElem: documentPostPage.querySelector('meta[name="og:description"]'),
+        ogDescriptionElem: documentPostPage.querySelector('meta[property="og:description"]'),
         twitterDescriptionElem: documentPostPage.querySelector('meta[name="twitter:description"]'),
-        ogImageElem: documentPostPage.querySelector('meta[name="og:image"]'),
-        ogImageSecureUrlElem: documentPostPage.querySelector('meta[name="og:image:secure_url"]'),
+        ogImageElem: documentPostPage.querySelector('meta[property="og:image"]'),
+        ogImageSecureUrlElem: documentPostPage.querySelector('meta[property="og:image:secure_url"]'),
         twitterImageElem: documentPostPage.querySelector('meta[name="twitter:image"]')
       },
       pageTitleElem: documentPostPage.querySelector('title'),
@@ -559,12 +559,12 @@ function prepareDom() {
       metaDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="description"]'),
       metaKeywordsElem: documentPostPageWithGallery.querySelector('meta[name="keywords"]'),
       socialMeta: {
-        ogTitleElem: documentPostPageWithGallery.querySelector('meta[name="og:title"]'),
+        ogTitleElem: documentPostPageWithGallery.querySelector('meta[property="og:title"]'),
         twitterTitleElem: documentPostPageWithGallery.querySelector('meta[name="twitter:title"]'),
-        ogDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="og:description"]'),
+        ogDescriptionElem: documentPostPageWithGallery.querySelector('meta[property="og:description"]'),
         twitterDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="twitter:description"]'),
-        ogImageElem: documentPostPageWithGallery.querySelector('meta[name="og:image"]'),
-        ogImageSecureUrlElem: documentPostPageWithGallery.querySelector('meta[name="og:image:secure_url"]'),
+        ogImageElem: documentPostPageWithGallery.querySelector('meta[property="og:image"]'),
+        ogImageSecureUrlElem: documentPostPageWithGallery.querySelector('meta[property="og:image:secure_url"]'),
         twitterImageElem: documentPostPageWithGallery.querySelector('meta[name="twitter:image"]')
       },
       pageTitleElem: documentPostPageWithGallery.querySelector('title'),
