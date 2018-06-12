@@ -90,6 +90,19 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   log.info(`${logPrefix} - Injecting metadata ...`.info)
   elements.metaDescriptionElem.setAttribute('content', meta.description)
   elements.metaKeywordsElem.setAttribute('content', meta.tags.join(', '))
+
+  elements.socialMeta.ogTitleElem.setAttribute('content', meta.title)
+  elements.socialMeta.twitterTitleElem.setAttribute('content', meta.title)
+  elements.socialMeta.ogDescriptionElem.setAttribute('content', meta.description)
+  elements.socialMeta.twitterDescriptionElem.setAttribute('content', meta.description)
+
+  const thumbnailUrl = meta.thumbnail ?
+    `${config.baseUrl}${meta.thumbnail}` :
+    `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`
+  elements.socialMeta.ogImageElem.setAttribute('content', thumbnailUrl)
+  elements.socialMeta.ogImageSecureUrlElem.setAttribute('content', thumbnailUrl)
+  elements.socialMeta.twitterImageElem.setAttribute('content', thumbnailUrl)
+
   elements.pageTitleElem.textContent = meta.title
   elements.titleElem.textContent = meta.title
   const postDateStr = typeof meta.date === 'string' ?
@@ -293,7 +306,7 @@ function generateRssFeed() {
   feed.addCategory('Static Blog Generator')
   feed.addCategory('Markdown')
   for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
-    feed.addItem({
+    const feedItem = {
       title: postMeta.title,
       id: postMeta.name,
       link: `${config.baseUrl}${config.htmlOutputDirPath}/${postMeta.name}/`,
@@ -302,7 +315,10 @@ function generateRssFeed() {
       date: new Date(postMeta.date),
       // image: postMeta.image,
       author: [author]
-    })
+    }
+    if (postMeta.thumbnail)
+      feedItem.image = `${config.baseUrl}${postMeta.thumbnail}`
+    feed.addItem(feedItem)
   }
   if (!fs.existsSync(config.rssFeedDirPath))
     fs.mkdirSync(config.rssFeedDirPath)
@@ -329,7 +345,9 @@ const state = {
       date: meta.date,
       description: meta.description,
       tags: meta.tags,
-      name: meta.name
+      name: meta.name,
+      gallery: meta.gallery,
+      thumbnail: meta.thumbnail
     })
   },
   done: function() {
@@ -342,14 +360,50 @@ const state = {
 function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath) {
   const documentDom = new JSDOM(layoutHtml)
   const document = documentDom.window.document
+
   const headElem = document.querySelector('head')
   const bodyElem = document.querySelector('body')
-  const btnGoHomeElems = document.querySelector('.btn-go-home')
-  
   headElem.append(JSDOM.fragment(headHtml))
   bodyElem.append(JSDOM.fragment(footerHtml))
 
-  btnGoHomeElems.setAttribute('href', homePath)
+  const titleElem = document.querySelector('title')
+  const title = titleElem.textContent
+  const descriptionElem = document.querySelector('meta[name="description"]')
+  const description = descriptionElem.getAttribute('content')
+  const btnGoHomeElems = document.querySelector('.btn-go-home')
+
+  const ogTitleElem = document.createElement('meta')
+  ogTitleElem.setAttribute('name', 'og:title')
+  ogTitleElem.setAttribute('content', title)
+  headElem.append(ogTitleElem)
+  const twitterTitleElem = document.createElement('meta')
+  twitterTitleElem.setAttribute('name', 'twitter:title')
+  twitterTitleElem.setAttribute('content', title)
+  headElem.append(twitterTitleElem)
+
+  const ogDescriptionElem = document.createElement('meta')
+  ogDescriptionElem.setAttribute('name', 'og:description')
+  ogDescriptionElem.setAttribute('content', description)
+  headElem.append(ogDescriptionElem)
+  const twitterDescriptionElem = document.createElement('meta')
+  twitterDescriptionElem.setAttribute('name', 'twitter:description')
+  twitterDescriptionElem.setAttribute('content', description)
+  headElem.append(twitterDescriptionElem)
+
+  const logotypeImageUrl =
+    `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`
+  const ogImageElem = document.createElement('meta')
+  ogImageElem.setAttribute('name', 'og:image')
+  ogImageElem.setAttribute('content', logotypeImageUrl)
+  headElem.append(ogImageElem)
+  const ogImageElemSecureUrl = document.createElement('meta')
+  ogImageElemSecureUrl.setAttribute('name', 'og:image:secure_url')
+  ogImageElemSecureUrl.setAttribute('content', logotypeImageUrl)
+  headElem.append(ogImageElemSecureUrl)
+  const twitterImageElem = document.createElement('meta')
+  twitterImageElem.setAttribute('name', 'twitter:image')
+  twitterImageElem.setAttribute('content', logotypeImageUrl)
+  headElem.append(twitterImageElem)
 
   const faviconLinkElem = document.createElement('link')
   faviconLinkElem.setAttribute('rel', 'shortcut icon')
@@ -360,7 +414,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const rssLinkElem = document.createElement('link')
   rssLinkElem.setAttribute('rel', 'alternate')
   rssLinkElem.setAttribute('type', 'application/rss+xml')
-  rssLinkElem.setAttribute('title', document.querySelector('title').textContent)
+  rssLinkElem.setAttribute('title', title)
   rssLinkElem.setAttribute('href', feedUrl)
   headElem.append(rssLinkElem)
 
@@ -373,6 +427,8 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   jsLinkElem.setAttribute('type', 'text/javascript')
   jsLinkElem.setAttribute('src', jsPath)
   bodyElem.append(jsLinkElem)
+
+  btnGoHomeElems.setAttribute('href', homePath)
 
   const subscribeViaRss = 'Subscribe via RSS'
   const rssAnchorImgElem = document.createElement('img')
@@ -456,21 +512,21 @@ function prepareDom() {
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
     elementsMainPage: {
-      postsSectionElem: documentMainPage.querySelector("#posts"),
-      btnOlderElem: documentMainPage.querySelector("#btn-older"),
-      btnNewerElem: documentMainPage.querySelector("#btn-newer")
+      postsSectionElem: documentMainPage.querySelector('#posts'),
+      btnOlderElem: documentMainPage.querySelector('#btn-older'),
+      btnNewerElem: documentMainPage.querySelector('#btn-newer')
     },
 
     documentDomSecondaryPage: documentDomSecondaryPage,
     elementsSecondaryPage: {
-      postsSectionElem: documentSecondaryPage.querySelector("#posts"),
-      btnOlderElem: documentSecondaryPage.querySelector("#btn-older"),
-      btnNewerElem: documentSecondaryPage.querySelector("#btn-newer")
+      postsSectionElem: documentSecondaryPage.querySelector('#posts'),
+      btnOlderElem: documentSecondaryPage.querySelector('#btn-older'),
+      btnNewerElem: documentSecondaryPage.querySelector('#btn-newer')
     },
 
     documentDomTagsPage: documentDomTagsPage,
     elementsTagsPage: {
-      postsSummaryTemplateSectionElem: documentTagsPage.querySelector("#post-summary-template-section"),
+      postsSummaryTemplateSectionElem: documentTagsPage.querySelector('#post-summary-template-section'),
     },
 
     postSummaryHtml: postSummaryHtml,
@@ -478,10 +534,19 @@ function prepareDom() {
     documentDomPostPage: documentDomPostPage,
     siteUrlForFbComments: siteUrlForFbComments,
     elementsPostPage: {
-      metaDescriptionElem: documentPostPage.querySelector("meta[name='description']"),
-      metaKeywordsElem: documentPostPage.querySelector("meta[name='keywords']"),
-      pageTitleElem: documentPostPage.querySelector("title"),
-      titleElem: documentPostPage.querySelector("#post-title"),
+      metaDescriptionElem: documentPostPage.querySelector('meta[name="description"]'),
+      metaKeywordsElem: documentPostPage.querySelector('meta[name="keywords"]'),
+      socialMeta: {
+        ogTitleElem: documentPostPage.querySelector('meta[name="og:title"]'),
+        twitterTitleElem: documentPostPage.querySelector('meta[name="twitter:title"]'),
+        ogDescriptionElem: documentPostPage.querySelector('meta[name="og:description"]'),
+        twitterDescriptionElem: documentPostPage.querySelector('meta[name="twitter:description"]'),
+        ogImageElem: documentPostPage.querySelector('meta[name="og:image"]'),
+        ogImageSecureUrlElem: documentPostPage.querySelector('meta[name="og:image:secure_url"]'),
+        twitterImageElem: documentPostPage.querySelector('meta[name="twitter:image"]')
+      },
+      pageTitleElem: documentPostPage.querySelector('title'),
+      titleElem: documentPostPage.querySelector('#post-title'),
       dateElem: documentPostPage.querySelector('#post-date'),
       bodyElem: documentPostPage.querySelector('#post-body'),
       tagsElem: documentPostPage.querySelector('#tags-container'),
@@ -491,10 +556,19 @@ function prepareDom() {
     documentDomPostPageWithGallery: documentDomPostPageWithGallery,
     siteUrlForFbCommentsPostPageWithGallery: siteUrlForFbCommentsPostPageWithGallery,
     elementsPostPageWithGallery: {
-      metaDescriptionElem: documentPostPageWithGallery.querySelector("meta[name='description']"),
-      metaKeywordsElem: documentPostPageWithGallery.querySelector("meta[name='keywords']"),
-      pageTitleElem: documentPostPageWithGallery.querySelector("title"),
-      titleElem: documentPostPageWithGallery.querySelector("#post-title"),
+      metaDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="description"]'),
+      metaKeywordsElem: documentPostPageWithGallery.querySelector('meta[name="keywords"]'),
+      socialMeta: {
+        ogTitleElem: documentPostPageWithGallery.querySelector('meta[name="og:title"]'),
+        twitterTitleElem: documentPostPageWithGallery.querySelector('meta[name="twitter:title"]'),
+        ogDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="og:description"]'),
+        twitterDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="twitter:description"]'),
+        ogImageElem: documentPostPageWithGallery.querySelector('meta[name="og:image"]'),
+        ogImageSecureUrlElem: documentPostPageWithGallery.querySelector('meta[name="og:image:secure_url"]'),
+        twitterImageElem: documentPostPageWithGallery.querySelector('meta[name="twitter:image"]')
+      },
+      pageTitleElem: documentPostPageWithGallery.querySelector('title'),
+      titleElem: documentPostPageWithGallery.querySelector('#post-title'),
       dateElem: documentPostPageWithGallery.querySelector('#post-date'),
       bodyElem: documentPostPageWithGallery.querySelector('#post-body'),
       tagsElem: documentPostPageWithGallery.querySelector('#tags-container'),
