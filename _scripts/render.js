@@ -372,6 +372,11 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const description = descriptionElem.getAttribute('content')
   const btnGoHomeElems = document.querySelector('.btn-go-home')
 
+  const twitterCardElem = document.createElement('meta')
+  twitterCardElem.setAttribute('name', 'twitter:card')
+  twitterCardElem.setAttribute('content', 'summary')
+  headElem.append(twitterCardElem)
+
   const ogTitleElem = document.createElement('meta')
   ogTitleElem.setAttribute('property', 'og:title')
   ogTitleElem.setAttribute('content', title)
