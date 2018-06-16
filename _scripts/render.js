@@ -150,7 +150,7 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
   return postSummaryFrag
 }
 
-function renderPages() {
+function generatePages() {
   if (state.mdFileNameToMeta.size === 0)
     return
   
@@ -241,7 +241,7 @@ function generatePostsNavInfoJson() {
   }
 }
 
-function generatePostsTagsJson() {
+function generateTagsPageAndJson() {
   log.info(`Generating tags json files in ${config.tagsJsonsDirPath} ...`.info)
   del.sync([config.tagsJsonsDirPath])
   fs.mkdirSync(config.tagsJsonsDirPath)
@@ -650,9 +650,9 @@ function scanAndLogUnlinkedPosts() {
 }
 
 function finish(startedAt) {
-  renderPages()
+  generatePages()
   generatePostsNavInfoJson()
-  generatePostsTagsJson()
+  generateTagsPageAndJson()
   generateRssFeed()
   scanAndLogUnlinkedPosts()
   const took = computeAndLogTotalDuration(startedAt)
