@@ -22,11 +22,11 @@ function enableOlderNewerBtns(navInfo) {
   pathPrefixArr = pathPrefixArr.slice(0, pathPrefixArr.length-2);
   var pathPrefix = pathPrefixArr.join('/') + '/';
   if (navInfo.newerPost) {
-    state.btnNewerPostElem.attr('href', pathPrefix + navInfo.newerPost);
+    state.btnNewerPostElem.attr('href', pathPrefix + navInfo.newerPost + '/');
     state.btnNewerPostElem.removeClass('disabled');
   }
   if (navInfo.olderPost) {
-    state.btnOlderPostElem.attr('href', pathPrefix + navInfo.olderPost);
+    state.btnOlderPostElem.attr('href', pathPrefix + navInfo.olderPost + '/');
     state.btnOlderPostElem.removeClass('disabled');
   }
   state.pageNavSectionElem.removeClass('invisible');

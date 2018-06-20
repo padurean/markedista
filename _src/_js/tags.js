@@ -133,7 +133,7 @@ function renderFilteredPosts() {
   for (var i = 0; i < state.filteredPosts.length; i++) {
     var post = state.filteredPosts[i];
     var postSummaryElem = postSummaryBluePrint.clone();
-    postSummaryElem.find('.post-link').attr('href', config.htmlOutputDirPath + post.name);
+    postSummaryElem.find('.post-link').attr('href', config.htmlOutputDirPath + post.name + '/');
     postSummaryElem.find('.post-title').text(post.title);
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');

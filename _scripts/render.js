@@ -174,13 +174,13 @@ function generatePages() {
       {
         elements: state.dom.elementsMainPage,
         documentDom: state.dom.documentDomMainPage,
-        postPath: `${config.htmlOutputDirPath}/${postMeta.name}`,
+        postPath: `${config.htmlOutputDirPath}/${postMeta.name}/`,
         tagsPagePath: `${config.tagsPageDirPath}`
       } :
       {
         elements: state.dom.elementsSecondaryPage,
         documentDom: state.dom.documentDomSecondaryPage,
-        postPath: `../../${config.htmlOutputDirPath}/${postMeta.name}`,
+        postPath: `../../${config.htmlOutputDirPath}/${postMeta.name}/`,
         tagsPagePath: `../../${config.tagsPageDirPath}`
       }
 
@@ -195,14 +195,14 @@ function generatePages() {
       else
         enableBtn(
           elements.btnNewerElem,
-          currPage === 2 ? '../../' : `../../${config.pagesDirPath}/${currPage - 1}`)
+          currPage === 2 ? '../../' : `../../${config.pagesDirPath}/${currPage - 1}/`)
       
       if (currPage === nbPages)
         disableBtn(elements.btnOlderElem)
       else
         enableBtn(
           elements.btnOlderElem,
-          `${currPage > 1 ? '../../' : ''}${config.pagesDirPath}/${currPage + 1}`)
+          `${currPage > 1 ? '../../' : ''}${config.pagesDirPath}/${currPage + 1}/`)
       
       let currPagePath = 'index.html'
       if (currPage > 1) {
@@ -433,7 +433,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   jsLinkElem.setAttribute('src', jsPath)
   bodyElem.append(jsLinkElem)
 
-  btnGoHomeElems.setAttribute('href', homePath)
+  btnGoHomeElems.setAttribute('href', homePath+'/')
 
   const subscribeViaRss = 'Subscribe via RSS'
   const rssAnchorImgElem = document.createElement('img')
