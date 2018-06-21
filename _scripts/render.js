@@ -33,6 +33,8 @@ const config = {
   tagsPageDirPath: 'tags',
   rssFeedDirPath: 'feed',
   rssFileName: 'rss.xml',
+  // channel categories used when generating the site feed xml
+  siteCategories: [ 'Tech', 'Static Blog Generator', 'Markdown' ],
   imagesDirPath: 'images',
   enc: 'utf8',
   ignoreFiles: [ '.gitkeep' ],
@@ -303,8 +305,9 @@ function generateRssFeed() {
     },
     author: author
   })
-  feed.addCategory('Static Blog Generator')
-  feed.addCategory('Markdown')
+  for (const category of config.siteCategories) {
+    feed.addCategory(category)
+  }
   for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
     const feedItem = {
       title: postMeta.title,
