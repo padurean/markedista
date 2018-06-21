@@ -30,7 +30,7 @@
     "jsdom": "^11.11.0",
     "loglevel": "^1.6.1",
     "marked": "^0.4.0",
-    "uglify-js": "^3.4.0",
+    "uglify-js": "^3.4.1",
     "yaml-front-matter": "^4.0.0"
   }
 }
