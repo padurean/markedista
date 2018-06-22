@@ -331,7 +331,7 @@ function generateRssFeed() {
   fs.writeFileSync(feedFilePath, feed.rss2())
 }
 
-function computeAndLogTotalDuration(startedAt) {
+function computeTotalDuration(startedAt) {
   const took = process.hrtime(startedAt)
   const tookMs = Math.round(took[1]/1000000)
   return `${took[0]>0?took[0]+'s ':''}${tookMs}ms`
@@ -649,7 +649,7 @@ function finish(startedAt) {
   generateTagsPageAndJson()
   generateRssFeed()
   scanAndLogUnlinkedPosts()
-  const took = computeAndLogTotalDuration(startedAt)
+  const took = computeTotalDuration(startedAt)
   
   const nbMeta = state.mdFileNameToMeta.size
   const nbInvalidMeta = state.invalidMetaCounter
