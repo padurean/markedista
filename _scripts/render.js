@@ -7,7 +7,7 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const minify = require('html-minifier').minify
 const del = require('del')
-const Feed = require('feed')
+const Feed = require('pfeed')
 const colors = require('colors')
 colors.setTheme({
   silly: 'rainbow',
