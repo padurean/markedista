@@ -460,6 +460,28 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   return documentDom
 }
 
+function selectElementsForPostPage(document, fbCommentsElem) {
+  return {
+    metaDescriptionElem: document.querySelector('meta[name="description"]'),
+    metaKeywordsElem: document.querySelector('meta[name="keywords"]'),
+    socialMeta: {
+      ogTitleElem: document.querySelector('meta[property="og:title"]'),
+      twitterTitleElem: document.querySelector('meta[name="twitter:title"]'),
+      ogDescriptionElem: document.querySelector('meta[property="og:description"]'),
+      twitterDescriptionElem: document.querySelector('meta[name="twitter:description"]'),
+      ogImageElem: document.querySelector('meta[property="og:image"]'),
+      ogImageSecureUrlElem: document.querySelector('meta[property="og:image:secure_url"]'),
+      twitterImageElem: document.querySelector('meta[name="twitter:image"]')
+    },
+    pageTitleElem: document.querySelector('title'),
+    titleElem: document.querySelector('#post-title'),
+    dateElem: document.querySelector('#post-date'),
+    bodyElem: document.querySelector('#post-body'),
+    tagsElem: document.querySelector('#tags-container'),
+    fbCommentsElem: fbCommentsElem
+  }
+}
+
 function prepareDom() {
   log.info(`Reading header and footer from ${config.templatesDirPath} folder ...`.info)
   
@@ -546,47 +568,11 @@ function prepareDom() {
     
     documentDomPostPage: documentDomPostPage,
     siteUrlForFbComments: siteUrlForFbComments,
-    elementsPostPage: {
-      metaDescriptionElem: documentPostPage.querySelector('meta[name="description"]'),
-      metaKeywordsElem: documentPostPage.querySelector('meta[name="keywords"]'),
-      socialMeta: {
-        ogTitleElem: documentPostPage.querySelector('meta[property="og:title"]'),
-        twitterTitleElem: documentPostPage.querySelector('meta[name="twitter:title"]'),
-        ogDescriptionElem: documentPostPage.querySelector('meta[property="og:description"]'),
-        twitterDescriptionElem: documentPostPage.querySelector('meta[name="twitter:description"]'),
-        ogImageElem: documentPostPage.querySelector('meta[property="og:image"]'),
-        ogImageSecureUrlElem: documentPostPage.querySelector('meta[property="og:image:secure_url"]'),
-        twitterImageElem: documentPostPage.querySelector('meta[name="twitter:image"]')
-      },
-      pageTitleElem: documentPostPage.querySelector('title'),
-      titleElem: documentPostPage.querySelector('#post-title'),
-      dateElem: documentPostPage.querySelector('#post-date'),
-      bodyElem: documentPostPage.querySelector('#post-body'),
-      tagsElem: documentPostPage.querySelector('#tags-container'),
-      fbCommentsElem: fbCommentsElem
-    },
+    elementsPostPage: selectElementsForPostPage(documentPostPage, fbCommentsElem),
 
     documentDomPostPageWithGallery: documentDomPostPageWithGallery,
     siteUrlForFbCommentsPostPageWithGallery: siteUrlForFbCommentsPostPageWithGallery,
-    elementsPostPageWithGallery: {
-      metaDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="description"]'),
-      metaKeywordsElem: documentPostPageWithGallery.querySelector('meta[name="keywords"]'),
-      socialMeta: {
-        ogTitleElem: documentPostPageWithGallery.querySelector('meta[property="og:title"]'),
-        twitterTitleElem: documentPostPageWithGallery.querySelector('meta[name="twitter:title"]'),
-        ogDescriptionElem: documentPostPageWithGallery.querySelector('meta[property="og:description"]'),
-        twitterDescriptionElem: documentPostPageWithGallery.querySelector('meta[name="twitter:description"]'),
-        ogImageElem: documentPostPageWithGallery.querySelector('meta[property="og:image"]'),
-        ogImageSecureUrlElem: documentPostPageWithGallery.querySelector('meta[property="og:image:secure_url"]'),
-        twitterImageElem: documentPostPageWithGallery.querySelector('meta[name="twitter:image"]')
-      },
-      pageTitleElem: documentPostPageWithGallery.querySelector('title'),
-      titleElem: documentPostPageWithGallery.querySelector('#post-title'),
-      dateElem: documentPostPageWithGallery.querySelector('#post-date'),
-      bodyElem: documentPostPageWithGallery.querySelector('#post-body'),
-      tagsElem: documentPostPageWithGallery.querySelector('#tags-container'),
-      fbCommentsElem: fbCommentsElemPostPageWithGallery
-    }
+    elementsPostPageWithGallery: selectElementsForPostPage(documentPostPageWithGallery, fbCommentsElemPostPageWithGallery)
   }
 }
 
