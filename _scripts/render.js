@@ -360,21 +360,7 @@ const state = {
   }
 }
 
-function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath) {
-  const documentDom = new JSDOM(layoutHtml)
-  const document = documentDom.window.document
-
-  const headElem = document.querySelector('head')
-  const bodyElem = document.querySelector('body')
-  headElem.append(JSDOM.fragment(headHtml))
-  bodyElem.append(JSDOM.fragment(footerHtml))
-
-  const titleElem = document.querySelector('title')
-  const title = titleElem.textContent
-  const descriptionElem = document.querySelector('meta[name="description"]')
-  const description = descriptionElem.getAttribute('content')
-  const btnGoHomeElems = document.querySelector('.btn-go-home')
-
+function prepareSocialMetaElems(document, headElem, title, description) {
   const twitterCardElem = document.createElement('meta')
   twitterCardElem.setAttribute('name', 'twitter:card')
   twitterCardElem.setAttribute('content', 'summary')
@@ -412,6 +398,24 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   twitterImageElem.setAttribute('name', 'twitter:image')
   twitterImageElem.setAttribute('content', logotypeImageUrl)
   headElem.append(twitterImageElem)
+}
+
+function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath) {
+  const documentDom = new JSDOM(layoutHtml)
+  const document = documentDom.window.document
+
+  const headElem = document.querySelector('head')
+  const bodyElem = document.querySelector('body')
+  headElem.append(JSDOM.fragment(headHtml))
+  bodyElem.append(JSDOM.fragment(footerHtml))
+
+  const titleElem = document.querySelector('title')
+  const title = titleElem.textContent
+  const descriptionElem = document.querySelector('meta[name="description"]')
+  const description = descriptionElem.getAttribute('content')
+  const btnGoHomeElems = document.querySelector('.btn-go-home')
+
+  prepareSocialMetaElems(document, headElem, title, description)
 
   const faviconLinkElem = document.createElement('link')
   faviconLinkElem.setAttribute('rel', 'shortcut icon')
