@@ -36,6 +36,7 @@ const config = {
   // channel categories used when generating the site feed xml
   siteCategories: [ 'Tech', 'Static Blog Generator', 'Markdown' ],
   imagesDirPath: 'images',
+  logoImgFileName: 'markedista-logotype.png',
   enc: 'utf8',
   ignoreFiles: [ '.gitkeep' ],
   postsPerPage: 2,
@@ -100,7 +101,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
 
   const thumbnailUrl = meta.thumbnail ?
     `${config.baseUrl}${meta.thumbnail}` :
-    `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`
+    `${config.baseUrl}${config.imagesDirPath}/${config.logoImgFileName}`
   elements.socialMeta.ogImageElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.ogImageSecureUrlElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.twitterImageElem.setAttribute('content', thumbnailUrl)
@@ -295,7 +296,7 @@ function generateRssFeed() {
     description: 'Static Blog Generator based on npm, marked and jsdom',
     id: config.baseUrl,
     link: config.baseUrl,
-    image: `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`,
+    image: `${config.baseUrl}${config.imagesDirPath}/${config.logoImgFileName}`,
     favicon: `${config.baseUrl}favicon.ico`,
     copyright: `${now.getFullYear()}, Valentin Padurean`,
     updated: now, // optional, default = today
@@ -385,7 +386,7 @@ function prepareSocialMetaElems(document, headElem, title, description) {
   headElem.append(twitterDescriptionElem)
 
   const logotypeImageUrl =
-    `${config.baseUrl}${config.imagesDirPath}/markedista-logotype.png`
+    `${config.baseUrl}${config.imagesDirPath}/${config.logoImgFileName}`
   const ogImageElem = document.createElement('meta')
   ogImageElem.setAttribute('property', 'og:image')
   ogImageElem.setAttribute('content', logotypeImageUrl)
