@@ -45,7 +45,13 @@ const config = {
     collapseWhitespace: true
   },
   // !make sure it has the trailing slash /
-  baseUrl: 'https://padurean.github.io/markedista/'
+  baseUrl: 'https://padurean.github.io/markedista/',
+  social: {
+    twitter: 'vpadure',
+    facebook: 'vpadurean',
+    github: 'padurean',
+    linkedin: 'vpadure'
+  }
 }
 
 function validateFrontmatter(meta, errorPrefix) {
@@ -361,11 +367,21 @@ const state = {
   }
 }
 
-function prepareSocialMetaElems(document, headElem, title, description) {
+function prepareSocialMetaElems(document, headElem, title, description, isArticle) {
   const twitterCardElem = document.createElement('meta')
   twitterCardElem.setAttribute('name', 'twitter:card')
   twitterCardElem.setAttribute('content', 'summary')
   headElem.append(twitterCardElem)
+
+  const twitterSiteElem = document.createElement('meta')
+  twitterSiteElem.setAttribute('name', 'twitter:site')
+  twitterSiteElem.setAttribute('content', `@${config.social.twitter}`)
+  headElem.append(twitterSiteElem)
+
+  const ogTypeElem = document.createElement('meta')
+  ogTypeElem.setAttribute('property', 'og:type')
+  ogTypeElem.setAttribute('content', isArticle ? 'article' : 'website')
+  headElem.append(ogTypeElem)
 
   const ogTitleElem = document.createElement('meta')
   ogTitleElem.setAttribute('property', 'og:title')
@@ -401,7 +417,7 @@ function prepareSocialMetaElems(document, headElem, title, description) {
   headElem.append(twitterImageElem)
 }
 
-function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath) {
+function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath, isArticle) {
   const documentDom = new JSDOM(layoutHtml)
   const document = documentDom.window.document
 
@@ -416,7 +432,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   const description = descriptionElem.getAttribute('content')
   const btnGoHomeElems = document.querySelector('.btn-go-home')
 
-  prepareSocialMetaElems(document, headElem, title, description)
+  prepareSocialMetaElems(document, headElem, title, description, isArticle)
 
   const faviconLinkElem = document.createElement('link')
   faviconLinkElem.setAttribute('rel', 'shortcut icon')
@@ -499,7 +515,8 @@ function prepareDom() {
     layoutMainPageHtml,
     '.',
     'bundle-main.min.css',
-    'bundle-main.min.js')
+    'bundle-main.min.js',
+    false)
   const documentMainPage = documentDomMainPage.window.document
 
   const documentDomSecondaryPage = prepareJsdom(
@@ -508,7 +525,8 @@ function prepareDom() {
     layoutMainPageHtml,
     '../..',
     '../../bundle-main.min.css',
-    '../../bundle-main.min.js')
+    '../../bundle-main.min.js',
+    false)
   const documentSecondaryPage = documentDomSecondaryPage.window.document
 
   const documentDomTagsPage = prepareJsdom(
@@ -517,7 +535,8 @@ function prepareDom() {
     layoutTagsPageHtml,
     '..',
     '../bundle-main.min.css',
-    '../bundle-tags.min.js')
+    '../bundle-tags.min.js',
+    false)
   const documentTagsPage = documentDomTagsPage.window.document
   
   const documentDomPostPage = prepareJsdom(
@@ -526,7 +545,8 @@ function prepareDom() {
     layoutPostPageHtml,
     '../..',
     '../../bundle-post.min.css',
-    '../../bundle-post.min.js')
+    '../../bundle-post.min.js',
+    true)
   const documentPostPage = documentDomPostPage.window.document
   const fbCommentsElem = documentPostPage.querySelector('.fb-comments')
   let siteUrlForFbComments = fbCommentsElem.getAttribute('data-href')
@@ -538,7 +558,8 @@ function prepareDom() {
     layoutPostPageHtml,
     '../..',
     '../../bundle-post-with-gallery.min.css',
-    '../../bundle-post-with-gallery.min.js')
+    '../../bundle-post-with-gallery.min.js',
+    true)
   const documentPostPageWithGallery = documentDomPostPageWithGallery.window.document
   const fbCommentsElemPostPageWithGallery = documentPostPageWithGallery.querySelector('.fb-comments')
   let siteUrlForFbCommentsPostPageWithGallery = fbCommentsElemPostPageWithGallery.getAttribute('data-href')
