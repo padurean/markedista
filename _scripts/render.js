@@ -39,7 +39,7 @@ const config = {
   logoImgFileName: 'markedista-logotype.png',
   enc: 'utf8',
   ignoreFiles: [ '.gitkeep' ],
-  postsPerPage: 2,
+  postsPerPage: 3,
   minifyHtmlOpts: {
     removeComments: true,
     collapseWhitespace: true
@@ -147,7 +147,20 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
     postMeta.date : // for JSON frontmatter date is just a string
     postMeta.date.toISOString() // for YAML date is parsed as Date object
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
-  postSummaryFrag.querySelector('.post-link').setAttribute('href', postHtmlFilePath)
+
+  const postLinkElem = postSummaryFrag.querySelector('.post-link')
+  postLinkElem.setAttribute('href', postHtmlFilePath)
+  postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
+
+  const postThumbnailElem = postSummaryFrag.querySelector('.post-thumbnail')
+  if (postMeta.thumbnail) {
+    postThumbnailElem.setAttribute('src', `${config.baseUrl}${postMeta.thumbnail}`)
+    postLinkElem.classList.add("with-thumbnail")
+  } else {
+    postThumbnailElem.parentNode.removeChild(postThumbnailElem)
+    postLinkElem.classList.remove("with-thumbnail")
+  }
+
   postSummaryFrag.querySelector('.post-title').textContent = postMeta.title
   const postDateElem = postSummaryFrag.querySelector('.post-date')
   postDateElem.setAttribute('datetime', postDateStr)

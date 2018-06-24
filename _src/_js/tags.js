@@ -1,5 +1,6 @@
 var config = {
-  htmlOutputDirPath: '../posts/'
+  htmlOutputDirPath: '../posts/',
+  homePath: '../'
 };
 var state = {
   tags: [],
@@ -133,7 +134,18 @@ function renderFilteredPosts() {
   for (var i = 0; i < state.filteredPosts.length; i++) {
     var post = state.filteredPosts[i];
     var postSummaryElem = postSummaryBluePrint.clone();
-    postSummaryElem.find('.post-link').attr('href', config.htmlOutputDirPath + post.name + '/');
+    var postLinkElem = postSummaryElem.find('.post-link');
+    var postLinkHrefValue = config.htmlOutputDirPath + post.name + '/';
+    postLinkElem.attr('href', postLinkHrefValue);
+    postSummaryElem.find('.post-read-more').attr('href', postLinkHrefValue);
+    var postThumbnailElem = postSummaryElem.find('.post-thumbnail');
+    if (post.thumbnail) {
+      postThumbnailElem.attr('src', config.homePath + post.thumbnail);
+      postLinkElem.addClass('with-thumbnail');
+    } else {
+      postThumbnailElem.remove();
+      postLinkElem.removeClass('with-thumbnail');
+    }
     postSummaryElem.find('.post-title').text(post.title);
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');

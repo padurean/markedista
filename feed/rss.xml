@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Sat, 23 Jun 2018 08:19:30 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 24 Jun 2018 19:13:22 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -18,13 +18,15 @@
         <category>Markdown</category>
         <atom:link href="https://padurean.github.io/markedista/feed/rss.xml" rel="self" type="application/rss+xml"/>
         <item>
-            <title><![CDATA[Sixth Post Title]]></title>
+            <title><![CDATA[Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title]]></title>
             <link>https://padurean.github.io/markedista/posts/6-sixth-post/</link>
             <guid>https://padurean.github.io/markedista/posts/6-sixth-post/</guid>
             <pubDate>Tue, 29 May 2018 14:00:00 GMT</pubDate>
-            <description><![CDATA[This is the 6th post description]]></description>
-            <content:encoded><![CDATA[This is the 6th post description]]></content:encoded>
+            <description><![CDATA[This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description]]></description>
+            <content:encoded><![CDATA[This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+            <enclosure url="https://padurean.github.io/markedista/images/markedista-logotype.png">
+            </enclosure>
         </item>
         <item>
             <title><![CDATA[Fifth Post Title]]></title>
@@ -40,8 +42,8 @@
             <link>https://padurean.github.io/markedista/posts/4-fourth-post/</link>
             <guid>https://padurean.github.io/markedista/posts/4-fourth-post/</guid>
             <pubDate>Tue, 29 May 2018 12:00:00 GMT</pubDate>
-            <description><![CDATA[This is the 4th post description]]></description>
-            <content:encoded><![CDATA[This is the 4th post description]]></content:encoded>
+            <description><![CDATA[This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description]]></description>
+            <content:encoded><![CDATA[This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
         </item>
         <item>

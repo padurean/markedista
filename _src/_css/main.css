@@ -60,7 +60,7 @@ body > footer .markedista-logotext {
   color: orangered;
 }
 .posts > article > p {
-  margin: .75em 0;
+  margin: .75em 0 0 0;
 }
 .post-date {
   display: block;
@@ -70,6 +70,21 @@ body > footer .markedista-logotext {
 }
 .post-summary-template-section {
   display: none;
+}
+.post-summary {
+  padding: 1em;
+  border: 2px solid aliceblue;
+  border-radius: 6px;
+}
+.post-summary .post-link {
+  display: inline-block;
+}
+.post-summary .post-thumbnail {
+  float: left;
+  width: 3.5em;
+  height: 3.5em;
+  margin-right: .75em;
+  border: 1px solid aliceblue;
 }
 .full-post {
   margin-bottom: 3em;
@@ -103,7 +118,13 @@ a.filtered-tag-link {
   padding-bottom: 1px;
 }
 .tags-container {
-  margin-top: .5em;
+  float: right;
+  margin: .75em 0 0 .75em;
+}
+.clear-floats {
+  clear: both;
+  height: 0;
+  line-height: 0;
 }
 .tags-filter-view {
   display: inline-block;
@@ -207,6 +228,47 @@ a.hide, a.btn.hide {
 @media (hover:none), (hover:on-demand) {
   .fb-comments-section {
     display: block;
+  }
+}
+/* Breakpoint: iPhone 5/SE */
+@media only screen and (min-width: 320px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 71%;
+  }
+}
+/* Breakpoint: Galaxy S5 */
+@media only screen and (min-width: 360px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 75%;
+  }
+}
+/* Breakpoint: iPhone 6/7/8 */
+@media only screen and (min-width: 375px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 75%;
+  }
+}
+/* Breakpoint: Pixel 2 (including XL) */
+@media only screen and (min-width: 411px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 79%;
+  }
+}
+/* Breakpoint: iPhone 6/7/8+ */
+@media only screen and (min-width: 414px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 79%;
+  }
+}
+/* Breakpoint: iPhone 5/SE (Landscape orientation) and above */
+@media only screen and (min-width: 568px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 85%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .post-summary .post-link.with-thumbnail {
+    max-width: 90%;
   }
 }
 /* fix close icon positioning for featherlight gallery on mobile devices */
