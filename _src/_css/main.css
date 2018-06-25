@@ -69,9 +69,8 @@ body > footer .markedista-logotext {
   display: none;
 }
 .post-summary {
-  padding: 1em;
-  border: 2px solid aliceblue;
-  border-radius: 6px;
+  padding: 0 0 1em 0;
+  border-bottom: 2px solid aliceblue;
 }
 .post-summary .post-thumbnail,
 .full-post .post-thumbnail {
