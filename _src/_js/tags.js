@@ -139,13 +139,10 @@ function renderFilteredPosts() {
     postLinkElem.attr('href', postLinkHrefValue);
     postSummaryElem.find('.post-read-more').attr('href', postLinkHrefValue);
     var postThumbnailElem = postSummaryElem.find('.post-thumbnail');
-    if (post.thumbnail) {
+    if (post.thumbnail)
       postThumbnailElem.attr('src', config.homePath + post.thumbnail);
-      postLinkElem.addClass('with-thumbnail');
-    } else {
+    else
       postThumbnailElem.remove();
-      postLinkElem.removeClass('with-thumbnail');
-    }
     postSummaryElem.find('.post-title').text(post.title);
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');

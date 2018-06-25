@@ -161,13 +161,10 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
   postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
 
   const postThumbnailElem = postSummaryFrag.querySelector('.post-thumbnail')
-  if (postMeta.thumbnail) {
+  if (postMeta.thumbnail)
     postThumbnailElem.setAttribute('src', `${config.baseUrl}${postMeta.thumbnail}`)
-    postLinkElem.classList.add("with-thumbnail")
-  } else {
+  else
     postThumbnailElem.parentNode.removeChild(postThumbnailElem)
-    postLinkElem.classList.remove("with-thumbnail")
-  }
 
   postSummaryFrag.querySelector('.post-title').textContent = postMeta.title
   const postDateElem = postSummaryFrag.querySelector('.post-date')
