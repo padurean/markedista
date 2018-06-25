@@ -100,6 +100,9 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.metaDescriptionElem.setAttribute('content', meta.description)
   elements.metaKeywordsElem.setAttribute('content', meta.tags.join(', '))
 
+  const canonicalUrl = `${config.baseUrl}${config.htmlOutputDirPath}/${meta.name}/`
+  elements.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
+  elements.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
   elements.socialMeta.ogTitleElem.setAttribute('content', meta.title)
   elements.socialMeta.twitterTitleElem.setAttribute('content', meta.title)
   elements.socialMeta.ogDescriptionElem.setAttribute('content', meta.description)
@@ -217,6 +220,12 @@ function generatePages() {
     const pageCompleted =
       postIndexInPage+1 === config.postsPerPage || i+1 === state.mdFileNameToMeta.size
     if (pageCompleted) {
+      let canonicalUrl = config.baseUrl
+      if (currPage > 1)
+        canonicalUrl += `${config.pagesDirPath}/${currPage}/`
+      elements.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
+      elements.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
+
       if (currPage === 1)
         disableBtn(elements.btnNewerElem)
       else
@@ -295,6 +304,10 @@ function generateTagsPageAndJson() {
   const allTagsJsonFileName = `${config.tagsJsonsDirPath}/all-tags.json`
   log.info(`Writing ${allTagsJsonFileName} ...`.info)
   fs.writeFileSync(allTagsJsonFileName, JSON.stringify(postsTagsAndCountersArr/*, null, 2*/))
+
+  const canonicalUrl = `${config.baseUrl}${config.tagsPageDirPath}/`
+  state.dom.elementsTagsPage.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
+  state.dom.elementsTagsPage.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
 
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
   const postSummaryTemplateElem = postSummaryFrag.querySelector('.post-summary')
@@ -401,6 +414,16 @@ function prepareSocialMetaElems(document, headElem, title, description, isArticl
   ogTypeElem.setAttribute('content', isArticle ? 'article' : 'website')
   headElem.append(ogTypeElem)
 
+  const canonicalUrlElem = document.createElement('link')
+  canonicalUrlElem.setAttribute('rel', 'canonical')
+  canonicalUrlElem.setAttribute('href', '')
+  headElem.append(canonicalUrlElem)
+
+  const ogUrlElem = document.createElement('meta')
+  ogUrlElem.setAttribute('property', 'og:url')
+  ogUrlElem.setAttribute('content', '')
+  headElem.append(ogUrlElem)
+
   const ogTitleElem = document.createElement('meta')
   ogTitleElem.setAttribute('property', 'og:title')
   ogTitleElem.setAttribute('content', title)
@@ -499,6 +522,8 @@ function selectElementsForPostPage(document, fbCommentsElem) {
     metaDescriptionElem: document.querySelector('meta[name="description"]'),
     metaKeywordsElem: document.querySelector('meta[name="keywords"]'),
     socialMeta: {
+      canonicalUrlElem: document.querySelector('link[rel="canonical"]'),
+      ogUrlElem: document.querySelector('meta[property="og:url"]'),
       ogTitleElem: document.querySelector('meta[property="og:title"]'),
       twitterTitleElem: document.querySelector('meta[name="twitter:title"]'),
       ogDescriptionElem: document.querySelector('meta[property="og:description"]'),
@@ -587,6 +612,10 @@ function prepareDom() {
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
     elementsMainPage: {
+      socialMeta: {
+        canonicalUrlElem: documentMainPage.querySelector('link[rel="canonical"]'),
+        ogUrlElem: documentMainPage.querySelector('meta[property="og:url"]')
+      },
       postsSectionElem: documentMainPage.querySelector('#posts'),
       btnOlderElem: documentMainPage.querySelector('#btn-older'),
       btnNewerElem: documentMainPage.querySelector('#btn-newer')
@@ -594,6 +623,10 @@ function prepareDom() {
 
     documentDomSecondaryPage: documentDomSecondaryPage,
     elementsSecondaryPage: {
+      socialMeta: {
+        canonicalUrlElem: documentSecondaryPage.querySelector('link[rel="canonical"]'),
+        ogUrlElem: documentSecondaryPage.querySelector('meta[property="og:url"]')
+      },
       postsSectionElem: documentSecondaryPage.querySelector('#posts'),
       btnOlderElem: documentSecondaryPage.querySelector('#btn-older'),
       btnNewerElem: documentSecondaryPage.querySelector('#btn-newer')
@@ -601,6 +634,10 @@ function prepareDom() {
 
     documentDomTagsPage: documentDomTagsPage,
     elementsTagsPage: {
+      socialMeta: {
+        canonicalUrlElem: documentTagsPage.querySelector('link[rel="canonical"]'),
+        ogUrlElem: documentTagsPage.querySelector('meta[property="og:url"]')
+      },
       postsSummaryTemplateSectionElem: documentTagsPage.querySelector('#post-summary-template-section'),
     },
 
