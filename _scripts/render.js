@@ -112,6 +112,14 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.socialMeta.ogImageSecureUrlElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.twitterImageElem.setAttribute('content', thumbnailUrl)
 
+  if (meta.thumbnail) {
+    elements.postThumbnailElem.setAttribute('src', `../../${meta.thumbnail}`)
+    elements.postThumbnailElem.classList.remove('hidden')
+  } else {
+    elements.postThumbnailElem.setAttribute('src', '')
+    elements.postThumbnailElem.classList.add('hidden')
+  }
+
   elements.pageTitleElem.textContent = meta.title
   elements.titleElem.textContent = meta.title
   const postDateStr = typeof meta.date === 'string' ?
@@ -502,6 +510,7 @@ function selectElementsForPostPage(document, fbCommentsElem) {
       ogImageSecureUrlElem: document.querySelector('meta[property="og:image:secure_url"]'),
       twitterImageElem: document.querySelector('meta[name="twitter:image"]')
     },
+    postThumbnailElem: document.querySelector('.post-thumbnail'),
     pageTitleElem: document.querySelector('title'),
     titleElem: document.querySelector('#post-title'),
     dateElem: document.querySelector('#post-date'),

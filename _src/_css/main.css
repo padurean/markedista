@@ -79,7 +79,8 @@ body > footer .markedista-logotext {
 .post-summary .post-link {
   display: inline-block;
 }
-.post-summary .post-thumbnail {
+.post-summary .post-thumbnail,
+.full-post .post-thumbnail {
   float: left;
   width: 3.5em;
   height: 3.5em;
