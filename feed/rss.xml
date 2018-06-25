@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Mon, 25 Jun 2018 08:12:04 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 25 Jun 2018 08:27:06 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -29,13 +29,15 @@
             </enclosure>
         </item>
         <item>
-            <title><![CDATA[Fifth Post Title]]></title>
+            <title><![CDATA[Fifth Post Title Fifth Post Title Fifth Post Title]]></title>
             <link>https://padurean.github.io/markedista/posts/5-fifth-post/</link>
             <guid>https://padurean.github.io/markedista/posts/5-fifth-post/</guid>
             <pubDate>Tue, 29 May 2018 13:00:00 GMT</pubDate>
             <description><![CDATA[This is the 5th post description]]></description>
             <content:encoded><![CDATA[This is the 5th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+            <enclosure url="https://padurean.github.io/markedista/photos/to-the-black-lodge.jpg">
+            </enclosure>
         </item>
         <item>
             <title><![CDATA[Fourth Post Title]]></title>
