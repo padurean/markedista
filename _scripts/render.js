@@ -95,7 +95,7 @@ function scanDir(path, logMsg, skip) {
   return filesNames  
 }
 
-function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
+function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   log.info(`${logPrefix} - Injecting metadata ...`.info)
   elements.metaDescriptionElem.setAttribute('content', meta.description)
   elements.metaKeywordsElem.setAttribute('content', meta.tags.join(', '))
@@ -114,6 +114,16 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, elements) {
   elements.socialMeta.ogImageElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.ogImageSecureUrlElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.twitterImageElem.setAttribute('content', thumbnailUrl)
+
+  const oldArticleTagElems = elements.headElem.querySelectorAll('meta[property="article:tag"]')
+  oldArticleTagElems.forEach(el => el.remove())
+  const faviconLinkElem = elements.headElem.querySelector('link[rel="shortcut icon"]')
+  for (const tag of meta.tags) {
+    const metaArticleTagElem = document.createElement('meta')
+    metaArticleTagElem.setAttribute('property', 'article:tag')
+    metaArticleTagElem.setAttribute('content', tag)
+    elements.headElem.insertBefore(metaArticleTagElem, faviconLinkElem)
+  }
 
   if (meta.thumbnail) {
     elements.postThumbnailElem.setAttribute('src', `../../${meta.thumbnail}`)
@@ -519,6 +529,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
 
 function selectElementsForPostPage(document, fbCommentsElem) {
   return {
+    headElem: document.querySelector('head'),
     metaDescriptionElem: document.querySelector('meta[name="description"]'),
     metaKeywordsElem: document.querySelector('meta[name="keywords"]'),
     socialMeta: {
@@ -666,6 +677,9 @@ function renderPost(mdFileName) {
     renderMarkdownAndUpdateDom(
       mdFileName,
       meta,
+      !meta.gallery ?
+        state.dom.documentDomPostPage.window.document :
+        state.dom.documentDomPostPageWithGallery.window.document,
       !meta.gallery ?
         state.dom.elementsPostPage :
         state.dom.elementsPostPageWithGallery
