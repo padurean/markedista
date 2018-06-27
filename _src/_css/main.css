@@ -214,10 +214,29 @@ a.hide, a.btn.hide {
   border-radius: 6px;
   padding: .25em .5em;
 }
+.subscribe-via-rss {
+  margin-right: 2em;
+}
 .subscribe-via-rss > img {
   width: 1em;
   height: 1em;
 }
+
+.social-icon-links {
+  margin-top: 1em;
+}
+.social-icon-links a {
+  border: solid 1px darkgrey;
+  border-radius: 3px;
+  padding: .15em .25em;
+  margin-right: .5em;
+}
+.social-icon-links a img {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
 /* custom css for "touch targets": */
 @media (hover:none), (hover:on-demand) {
   .fb-comments-section {
@@ -235,6 +254,13 @@ a.hide, a.btn.hide {
 }
 /* Breakpoint: Pixel 2 (including XL) */
 @media only screen and (min-width: 411px) {
+  .social-icon-links {
+    float: right;
+    margin-top: 0;
+  }
+  .social-icon-links a {
+    padding: .1em .25em;
+  }
 }
 /* Breakpoint: iPhone 6/7/8+ */
 @media only screen and (min-width: 414px) {

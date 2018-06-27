@@ -510,6 +510,21 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
 
   btnGoHomeElems.setAttribute('href', homePath+'/')
 
+  const footerElem = document.querySelector('footer')
+  const socialIconLinksElem = footerElem.querySelector('.social-icon-links')
+  const githubIconElem = socialIconLinksElem.querySelector('.github-icon-link')
+  const githubIconPath = githubIconElem.getAttribute('src')
+  githubIconElem.setAttribute('src', `${homePath}/${githubIconPath}`)
+  const twitterIconElem = socialIconLinksElem.querySelector('.twitter-icon-link')
+  const twitterIconPath = twitterIconElem.getAttribute('src')
+  twitterIconElem.setAttribute('src', `${homePath}/${twitterIconPath}`)
+  const linkedinIconElem = socialIconLinksElem.querySelector('.linkedin-icon-link')
+  const linkedinIconPath = linkedinIconElem.getAttribute('src')
+  linkedinIconElem.setAttribute('src', `${homePath}/${linkedinIconPath}`)
+  const facebookIconElem = socialIconLinksElem.querySelector('.facebook-icon-link')
+  const facebookIconPath = facebookIconElem.getAttribute('src')
+  facebookIconElem.setAttribute('src', `${homePath}/${facebookIconPath}`)
+
   const subscribeViaRss = 'Subscribe via RSS'
   const rssAnchorImgElem = document.createElement('img')
   rssAnchorImgElem.setAttribute('src', `${homePath}/${config.imagesDirPath}/rss.svg`)
@@ -521,8 +536,7 @@ function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPat
   rssAnchorElem.setAttribute('class', 'subscribe-via-rss')
   rssAnchorElem.setAttribute('title', subscribeViaRss)
   rssAnchorElem.append(rssAnchorImgElem)
-  const footerElem = document.querySelector('footer')
-  footerElem.append(rssAnchorElem)
+  footerElem.insertBefore(rssAnchorElem, socialIconLinksElem)
 
   return documentDom
 }
