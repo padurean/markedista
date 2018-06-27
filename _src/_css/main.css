@@ -258,9 +258,6 @@ a.hide, a.btn.hide {
     float: right;
     margin-top: 0;
   }
-  .social-icon-links a {
-    padding: .1em .25em;
-  }
 }
 /* Breakpoint: iPhone 6/7/8+ */
 @media only screen and (min-width: 414px) {
