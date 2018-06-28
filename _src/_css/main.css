@@ -226,14 +226,11 @@ a.hide, a.btn.hide {
   margin-top: 1em;
 }
 .social-icon-links a {
-  border: solid 1px darkgrey;
-  border-radius: 3px;
-  padding: .15em .25em;
   margin-right: .5em;
 }
 .social-icon-links a img {
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   vertical-align: middle;
 }
 
