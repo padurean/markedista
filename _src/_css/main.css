@@ -59,9 +59,21 @@ body > footer .markedista-logotext {
 .posts > article > p {
   margin: .75em 0 0 0;
 }
-.post-date {
-  display: block;
+.post-date-wrapper {
   margin-top: .5em;
+}
+.post-date-icon-wrapper {
+  display: inline-block;
+  width: .85em;
+  height: .85em;
+  line-height: .85em;
+  background-image: url('./images/calendar-alt.svg');
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: .85em;
+}
+.post-date {
+  display: inline-block;
   font-size: .85em;
   color: grey;
 }
