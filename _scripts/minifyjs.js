@@ -18,15 +18,18 @@ const enc = 'utf8'
 
 const inputFilesForIndexPage = [
   '_src/_js/_vendor/jquery-3.3.1.min.js',
+  '_src/_js/hamburger-init.js',
   '_src/_js/main.js'
 ]
 const inputFilesForTagsPage = [
   '_src/_js/_vendor/jquery-3.3.1.min.js',
+  '_src/_js/hamburger-init.js',
   '_src/_js/tags.js'
 ]
 const inputFilesForPostPage = [
   '_src/_js/_vendor/jquery-3.3.1.min.js',
   '_src/_js/_vendor/highlight/highlight.pack.js',
+  '_src/_js/hamburger-init.js',
   '_src/_js/post.js'
 ]
 const inputFilesForPostPageWithGallery = [
@@ -35,6 +38,7 @@ const inputFilesForPostPageWithGallery = [
   '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.min.js',
   '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.gallery.min.js',
   '_src/_js/_vendor/highlight/highlight.pack.js',
+  '_src/_js/hamburger-init.js',
   '_src/_js/post.js',
   '_src/_js/post-gallery-init.js'
 ]
@@ -43,14 +47,16 @@ const config = {
   forIndexPage: {
     input: {
       'file1.js': fs.readFileSync(inputFilesForIndexPage[0], enc),
-      'file2.js': fs.readFileSync(inputFilesForIndexPage[1], enc)
+      'file2.js': fs.readFileSync(inputFilesForIndexPage[1], enc),
+      'file3.js': fs.readFileSync(inputFilesForIndexPage[2], enc)
     },
     output: 'bundle-main.min.js'
   },
   forTagsPage: {
     input: {
       'file1.js': fs.readFileSync(inputFilesForTagsPage[0], enc),
-      'file2.js': fs.readFileSync(inputFilesForTagsPage[1], enc)
+      'file2.js': fs.readFileSync(inputFilesForTagsPage[1], enc),
+      'file3.js': fs.readFileSync(inputFilesForTagsPage[2], enc)
     },
     output: 'bundle-tags.min.js'
   },
@@ -58,7 +64,8 @@ const config = {
     input: {
       'file1.js': fs.readFileSync(inputFilesForPostPage[0], enc),
       'file2.js': fs.readFileSync(inputFilesForPostPage[1], enc),
-      'file3.js': fs.readFileSync(inputFilesForPostPage[2], enc)
+      'file3.js': fs.readFileSync(inputFilesForPostPage[2], enc),
+      'file4.js': fs.readFileSync(inputFilesForPostPage[3], enc)
     },
     output: 'bundle-post.min.js'
   },
@@ -70,7 +77,8 @@ const config = {
       'file4.js': fs.readFileSync(inputFilesForPostPageWithGallery[3], enc),
       'file5.js': fs.readFileSync(inputFilesForPostPageWithGallery[4], enc),
       'file6.js': fs.readFileSync(inputFilesForPostPageWithGallery[5], enc),
-      'file7.js': fs.readFileSync(inputFilesForPostPageWithGallery[6], enc)
+      'file7.js': fs.readFileSync(inputFilesForPostPageWithGallery[6], enc),
+      'file8.js': fs.readFileSync(inputFilesForPostPageWithGallery[7], enc)
     },
     output: 'bundle-post-with-gallery.min.js'
   }

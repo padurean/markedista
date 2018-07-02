@@ -19,12 +19,14 @@ const enc = 'utf8'
 const config = {
   forIndexPage: {
     input: [
+      '_src/_css/hamburgers.min.css',
       '_src/_css/main.css'
     ],
     output: 'bundle-main.min.css'
   },
   forPostPage: {
     input: [
+      '_src/_css/hamburgers.min.css',
       '_src/_js/_vendor/highlight/styles/atom-one-light.css',
       '_src/_css/main.css'
     ],
@@ -32,6 +34,7 @@ const config = {
   },
   forPostPageWithGallery: {
     input: [
+      '_src/_css/hamburgers.min.css',
       '_src/_js/_vendor/highlight/styles/atom-one-light.css',
       '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.min.css',
       '_src/_js/_vendor/featherlight-1.7.13/release/featherlight.gallery.min.css',

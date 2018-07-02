@@ -26,6 +26,75 @@ article h1, aside h1, nav h1, section h1
 body > header {
   margin: 0 0 3em 0;
 }
+body > header .btn-go-home {
+  font-size: 1.75em;
+}
+body > header .hamburger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  opacity: 1;
+}
+body > header .hamburger:hover {
+  opacity: 1;
+}
+body > header .hamburger .hamburger-box {
+  width: 2em;
+  height: 1.75em;
+}
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+  width: 2em;
+  height: .25em;
+  background-color: orangered;
+}
+body > header .nav-main {
+  display: block;
+  position: absolute;
+  top: 1.2em;
+  right: 3.1em;
+  z-index: 1;
+  min-width: 12em;
+  max-width: 80%;
+  background-color: orangered;
+  border-radius: 6px 0 6px 6px;
+  color: #fff;
+}
+body > header .nav-main ul {
+  margin: .5em 1em;
+  padding: 0;
+  font-size: 1.25em;
+  line-height: 1.75em;
+}
+body > header .nav-main ul > li {
+  display: block;
+  border-bottom: 1px solid darkorange;
+}
+body > header .nav-main a {
+  display: block;
+  color: #fff;
+}
+body > header .nav-main ul > li:last-child {
+  border: 0 none;
+}
+body > header .nav-main ul > li.social-icon-links-in-menu {
+  padding: .75em 0 .25em 0;
+  text-align: center;
+}
+body > header .nav-main ul > li.social-icon-links-in-menu a {
+  display: inline-block;
+  margin-right: .5em;
+}
+body > header .nav-main ul > li.social-icon-links-in-menu a:last-child {
+  margin-right: 0;
+}
+body > header .nav-main ul > li.social-icon-links-in-menu a img {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: middle;
+}
 body > footer {
   font-size: .9em;
   margin: 4em 0;
@@ -239,6 +308,9 @@ a.hide, a.btn.hide {
 }
 .social-icon-links a {
   margin-right: .5em;
+}
+.social-icon-links a:last-child {
+  margin-right: 0;
 }
 .social-icon-links a img {
   width: 1.5em;

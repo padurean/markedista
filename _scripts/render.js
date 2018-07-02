@@ -468,14 +468,22 @@ function prepareSocialMetaElems(document, headElem, title, description, isArticl
   headElem.append(twitterImageElem)
 }
 
-function prepareJsdom(headHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath, isArticle) {
+function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath, isArticle) {
   const documentDom = new JSDOM(layoutHtml)
   const document = documentDom.window.document
 
   const headElem = document.querySelector('head')
   const bodyElem = document.querySelector('body')
+  const headerElem = bodyElem.querySelector('header')
   headElem.append(JSDOM.fragment(headHtml))
+  headerElem.append(JSDOM.fragment(headerHtml))
   bodyElem.append(JSDOM.fragment(footerHtml))
+
+  headerElem.querySelector('.btn-go-home').setAttribute('href', `${homePath}/`)
+  const socialImgNodes = headerElem.querySelector('.social-icon-links-in-menu').querySelectorAll('img')
+  for (const imgNode of socialImgNodes) {
+    imgNode.setAttribute('src', `${homePath}/${imgNode.getAttribute('src')}`)
+  }
 
   const titleElem = document.querySelector('title')
   const title = titleElem.textContent
@@ -571,6 +579,7 @@ function prepareDom() {
   log.info(`Reading header and footer from ${config.templatesDirPath} folder ...`.info)
   
   const commonHeadHtml = fs.readFileSync(`${config.templatesDirPath}/common-head.tpl.html`, config.enc)
+  const commonHeaderHtml = fs.readFileSync(`${config.templatesDirPath}/common-header.tpl.html`, config.enc)
   const commonFooterHtml = fs.readFileSync(`${config.templatesDirPath}/common-footer.tpl.html`, config.enc)
   const postSummaryHtml = fs.readFileSync(`${config.templatesDirPath}/post-summary.tpl.html`, config.enc)
   
@@ -580,6 +589,7 @@ function prepareDom() {
   
   const documentDomMainPage = prepareJsdom(
     commonHeadHtml,
+    commonHeaderHtml,
     commonFooterHtml,
     layoutMainPageHtml,
     '.',
@@ -590,6 +600,7 @@ function prepareDom() {
 
   const documentDomSecondaryPage = prepareJsdom(
     commonHeadHtml,
+    commonHeaderHtml,
     commonFooterHtml,
     layoutMainPageHtml,
     '../..',
@@ -600,6 +611,7 @@ function prepareDom() {
 
   const documentDomTagsPage = prepareJsdom(
     commonHeadHtml,
+    commonHeaderHtml,
     commonFooterHtml,
     layoutTagsPageHtml,
     '..',
@@ -610,6 +622,7 @@ function prepareDom() {
   
   const documentDomPostPage = prepareJsdom(
     commonHeadHtml,
+    commonHeaderHtml,
     commonFooterHtml,
     layoutPostPageHtml,
     '../..',
@@ -623,6 +636,7 @@ function prepareDom() {
 
   const documentDomPostPageWithGallery = prepareJsdom(
     commonHeadHtml,
+    commonHeaderHtml,
     commonFooterHtml,
     layoutPostPageHtml,
     '../..',
