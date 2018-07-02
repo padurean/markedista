@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   font-size: 1rem;
-  margin: 2rem;
+  margin: .5rem 2rem;
   color: #333;
 }
 a {
@@ -351,7 +351,7 @@ a.hide, a.btn.hide {
 /* fix close icon positioning for featherlight gallery on mobile devices */
 @media only screen and (max-width: 1024px) {
   body {
-    margin: 1.25rem;
+    margin: .25rem 1.25rem;
   }
   .featherlight .featherlight-close-icon {
     top: 9px;
