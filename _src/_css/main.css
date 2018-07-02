@@ -27,7 +27,7 @@ body > header {
   margin: 0 0 3em 0;
 }
 body > header .btn-go-home {
-  font-size: 1.75em;
+  font-size: 2em;
 }
 body > header .hamburger {
   position: fixed;
@@ -63,7 +63,7 @@ body > header .nav-main {
   top: 0;
   right: 0;
   z-index: 1;
-  min-width: 12em;
+  min-width: 18em;
   max-width: 100%;
   background-color: orangered;
   border-radius: 0 0 0 6px;
@@ -131,6 +131,7 @@ body > footer .markedista-logotext {
 .post-title {
   margin: 0;
   color: orangered;
+  font-size: 1.6em;
 }
 .posts > article > p {
   margin: .75em 0 0 0;
@@ -354,6 +355,14 @@ a.hide, a.btn.hide {
 @media only screen and (min-width: 568px) {
 }
 @media only screen and (min-width: 1024px) {
+}
+/* Breakpoint: iPhone 6/7/8+ */
+@media only screen and (max-width: 414px) {
+  body > header .nav-main {
+    width: 100%;
+    border-radius: 0;
+    text-align: center;
+  }
 }
 /* fix close icon positioning for featherlight gallery on mobile devices */
 @media only screen and (max-width: 1024px) {
