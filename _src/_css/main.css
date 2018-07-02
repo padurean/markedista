@@ -30,14 +30,21 @@ body > header .btn-go-home {
   font-size: 1.75em;
 }
 body > header .hamburger {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 2;
   opacity: 1;
+  margin: 0;
+  padding: .25em .5em;
+  background-color: orangered;
+  border-radius: 0 0 0 6px;
 }
 body > header .hamburger:hover {
   opacity: 1;
+}
+body > header .hamburger.is-active {
+  background-color: transparent;
 }
 body > header .hamburger .hamburger-box {
   width: 2em;
@@ -48,22 +55,22 @@ body > header .hamburger .hamburger-box {
 .hamburger-inner:before {
   width: 2em;
   height: .25em;
-  background-color: orangered;
+  background-color: #fff;
 }
 body > header .nav-main {
   display: block;
-  position: absolute;
-  top: 1.2em;
-  right: 3.1em;
+  position: fixed;
+  top: 0;
+  right: 0;
   z-index: 1;
   min-width: 12em;
-  max-width: 80%;
+  max-width: 100%;
   background-color: orangered;
-  border-radius: 6px 0 6px 6px;
+  border-radius: 0 0 0 6px;
   color: #fff;
 }
 body > header .nav-main ul {
-  margin: .5em 1em;
+  margin: 1.5em 1em .5em 1em;
   padding: 0;
   font-size: 1.25em;
   line-height: 1.75em;
