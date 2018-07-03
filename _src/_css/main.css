@@ -197,8 +197,7 @@ a.btn.disabled {
   line-height: 1em;
 }
 a.filtered-tag-link {
-  border-bottom: 1px solid orangered;
-  padding-bottom: 1px;
+  background-color: yellow;
 }
 .tags-container {
   float: right;
