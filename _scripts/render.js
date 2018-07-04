@@ -368,7 +368,12 @@ function generateRssFeed() {
       author: [author]
     }
     if (postMeta.thumbnail)
-      feedItem.image = `${config.baseUrl}${postMeta.thumbnail}`
+      feedItem.thumbnail = {
+        url: `${config.baseUrl}${postMeta.thumbnail}` //,
+        // height: 240,
+        // width: 240,
+        // time: "12:05:01.123"
+      }
     feed.addItem(feedItem)
   }
   if (!fs.existsSync(config.rssFeedDirPath))

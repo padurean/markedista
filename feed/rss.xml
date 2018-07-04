@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Tue, 03 Jul 2018 10:45:49 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 04 Jul 2018 14:49:26 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -25,8 +25,8 @@
             <description><![CDATA[This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description]]></description>
             <content:encoded><![CDATA[This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <enclosure url="https://padurean.github.io/markedista/images/markedista-logotype.png">
-            </enclosure>
+            <media:thumbnail url="https://padurean.github.io/markedista/images/markedista-logotype.png">
+            </media:thumbnail>
         </item>
         <item>
             <title><![CDATA[Fifth Post Title Fifth Post Title Fifth Post Title]]></title>
@@ -36,8 +36,8 @@
             <description><![CDATA[This is the 5th post description]]></description>
             <content:encoded><![CDATA[This is the 5th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <enclosure url="https://padurean.github.io/markedista/photos/to-the-black-lodge.jpg">
-            </enclosure>
+            <media:thumbnail url="https://padurean.github.io/markedista/photos/to-the-black-lodge.jpg">
+            </media:thumbnail>
         </item>
         <item>
             <title><![CDATA[Fourth Post Title]]></title>
@@ -56,8 +56,8 @@
             <description><![CDATA[This is the 3rd post description]]></description>
             <content:encoded><![CDATA[This is the 3rd post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <enclosure url="https://padurean.github.io/markedista/images/default-thumbnail.png">
-            </enclosure>
+            <media:thumbnail url="https://padurean.github.io/markedista/images/default-thumbnail.png">
+            </media:thumbnail>
         </item>
         <item>
             <title><![CDATA[Second Post Title]]></title>
