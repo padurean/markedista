@@ -108,8 +108,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   elements.socialMeta.ogDescriptionElem.setAttribute('content', meta.description)
   elements.socialMeta.twitterDescriptionElem.setAttribute('content', meta.description)
 
-  const thumbnailUrl = meta.thumbnail ?
-    `${config.baseUrl}${meta.thumbnail}` :
+  const thumbnailUrl = meta.thumbnailUrl ||
     `${config.baseUrl}${config.imagesDirPath}/${config.logoImgFileName}`
   elements.socialMeta.ogImageElem.setAttribute('content', thumbnailUrl)
   elements.socialMeta.ogImageSecureUrlElem.setAttribute('content', thumbnailUrl)
@@ -126,7 +125,11 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   }
 
   if (meta.thumbnail) {
-    elements.postThumbnailElem.setAttribute('src', `../../${meta.thumbnail}`)
+    elements.postThumbnailElem.setAttribute(
+      'src',
+      meta.thumbnail.indexOf('http') === 0 ?
+        meta.thumbnail :
+        `../../${meta.thumbnail}`)
     elements.postThumbnailElem.classList.remove('hidden')
   } else {
     elements.postThumbnailElem.setAttribute('src', '')
@@ -174,8 +177,8 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
   postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
 
   const postThumbnailElem = postSummaryFrag.querySelector('.post-thumbnail')
-  if (postMeta.thumbnail)
-    postThumbnailElem.setAttribute('src', `${config.baseUrl}${postMeta.thumbnail}`)
+  if (postMeta.thumbnailUrl)
+    postThumbnailElem.setAttribute('src', postMeta.thumbnailUrl)
   else
     postThumbnailElem.parentNode.removeChild(postThumbnailElem)
 
@@ -367,9 +370,9 @@ function generateRssFeed() {
       // image: postMeta.image,
       author: [author]
     }
-    if (postMeta.thumbnail)
+    if (postMeta.thumbnailUrl)
       feedItem.thumbnail = {
-        url: `${config.baseUrl}${postMeta.thumbnail}` //,
+        url: postMeta.thumbnailUrl //,
         // height: 240,
         // width: 240,
         // time: "12:05:01.123"
@@ -403,7 +406,8 @@ const state = {
       tags: meta.tags,
       name: meta.name,
       gallery: meta.gallery,
-      thumbnail: meta.thumbnail
+      thumbnail: meta.thumbnail,
+      thumbnailUrl: meta.thumbnailUrl
     })
   },
   done: function() {
@@ -707,6 +711,9 @@ function renderPost(mdFileName) {
     state.invalidMetaCounter++
   } else {
     meta.name = mdFileName.substr(0, mdFileName.lastIndexOf('.'))
+    meta.thumbnailUrl = (!meta.thumbnail || meta.thumbnail.indexOf('http') === 0) ?
+      meta.thumbnail :
+      `${config.baseUrl}${meta.thumbnail}`
     renderMarkdownAndUpdateDom(
       mdFileName,
       meta,
@@ -746,6 +753,9 @@ function updateStateMetaFromRenderedFile(mdFileNameRendered) {
     state.invalidMetaCounter++
   } else {
     metaRendered.name = mdFileNameRendered.substr(0, mdFileNameRendered.lastIndexOf('.'))
+    metaRendered.thumbnailUrl = (!metaRendered.thumbnail || metaRendered.thumbnail.indexOf('http') === 0) ?
+      metaRendered.thumbnail :
+      `${config.baseUrl}${metaRendered.thumbnail}`
     state.updateMeta(mdFileNameRendered, metaRendered)
   }
 }

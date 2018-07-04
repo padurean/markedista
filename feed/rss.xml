@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Wed, 04 Jul 2018 14:49:26 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 04 Jul 2018 19:25:59 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -36,7 +36,7 @@
             <description><![CDATA[This is the 5th post description]]></description>
             <content:encoded><![CDATA[This is the 5th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <media:thumbnail url="https://padurean.github.io/markedista/photos/to-the-black-lodge.jpg">
+            <media:thumbnail url="https://farm1.staticflickr.com/888/41360886331_ee1b4a93b7_o.jpg">
             </media:thumbnail>
         </item>
         <item>
