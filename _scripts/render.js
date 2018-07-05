@@ -501,6 +501,44 @@ function prepareSocialMetaElems(document, headElem, title, description, isArticl
   headElem.append(twitterImageElem)
 }
 
+function prepareIcons(document, headElem, homePath) {
+  const faviconLinkElem = document.createElement('link')
+  faviconLinkElem.setAttribute('rel', 'shortcut icon')
+  faviconLinkElem.setAttribute('href', `${homePath}/favicon.ico`)
+  headElem.append(faviconLinkElem)
+
+  const appleIconElem = document.createElement('link')
+  appleIconElem.setAttribute('rel', 'apple-touch-icon')
+  appleIconElem.setAttribute('sizes', '180x180')
+  appleIconElem.setAttribute('href', `${homePath}/${config.imagesDirPath}/icon-180.png`)
+  headElem.append(appleIconElem)
+
+  const msIconSElem = document.createElement('meta')
+  msIconSElem.setAttribute('name', 'msapplication-square70x70logo')
+  msIconSElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-70-no-bg.png`)
+  headElem.append(msIconSElem)
+  
+  const msIconMElem = document.createElement('meta')
+  msIconMElem.setAttribute('name', 'msapplication-square150x150logo')
+  msIconMElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-150-no-bg.png`)
+  headElem.append(msIconMElem)
+  
+  const msIconLElem = document.createElement('meta')
+  msIconLElem.setAttribute('name', 'msapplication-square310x310logo')
+  msIconLElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-310-no-bg.png`)
+  headElem.append(msIconLElem)
+  
+  const msIconLRElem = document.createElement('meta')
+  msIconLRElem.setAttribute('name', 'msapplication-wide310x150logo')
+  msIconLRElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-310x150-no-bg.png`)
+  headElem.append(msIconLRElem)
+  
+  const msTileColorElem = document.createElement('meta')
+  msTileColorElem.setAttribute('name', 'msapplication-TileColor')
+  msTileColorElem.setAttribute('content', '#ffffff')
+  headElem.append(msTileColorElem)
+}
+
 function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cssPath, jsPath, isArticle) {
   const documentDom = new JSDOM(layoutHtml)
   const document = documentDom.window.document
@@ -526,10 +564,7 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
 
   prepareSocialMetaElems(document, headElem, title, description, isArticle)
 
-  const faviconLinkElem = document.createElement('link')
-  faviconLinkElem.setAttribute('rel', 'shortcut icon')
-  faviconLinkElem.setAttribute('href', `${homePath}/favicon.ico`)
-  headElem.append(faviconLinkElem)
+  prepareIcons(document, headElem, homePath)
 
   const feedUrl = `${config.baseUrl}${config.rssFeedDirPath}/${config.rssFileName}`
   const rssLinkElem = document.createElement('link')
