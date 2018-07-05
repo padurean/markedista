@@ -139,9 +139,12 @@ function renderFilteredPosts() {
     postLinkElem.attr('href', postLinkHrefValue);
     postSummaryElem.find('.post-read-more').attr('href', postLinkHrefValue);
     var postThumbnailElem = postSummaryElem.find('.post-thumbnail');
-    if (post.thumbnail)
-      postThumbnailElem.attr('src', config.homePath + post.thumbnail);
-    else
+    if (post.thumbnail) {
+      var thumbnailUrlOrPath = post.thumbnail.indexOf('http') === 0 ?
+        post.thumbnail :
+        config.homePath + post.thumbnail;
+      postThumbnailElem.attr('src', thumbnailUrlOrPath);
+    } else
       postThumbnailElem.remove();
     postSummaryElem.find('.post-title').text(post.title);
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
