@@ -143,6 +143,19 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
       meta.date.toISOString() // for YAML date is parsed as Date object
   elements.dateElem.setAttribute('datetime', postDateStr)
   elements.dateElem.textContent = postDateStr
+
+  const titleUrlSafe = encodeURIComponent('\n' + meta.title + '\n')
+  const tagsUrlSafe = encodeURIComponent(meta.tags.join(','))
+  const twitterShareUrl = 
+    `https://twitter.com/share?url=${canonicalUrl}&amp;text=${titleUrlSafe}&amp;hashtags=${tagsUrlSafe}`
+  const facebookShareUrl =
+    `http://www.facebook.com/sharer.php?u=${canonicalUrl}`
+  const linkedinShareUrl =
+    `http://www.linkedin.com/shareArticle?mini=true&amp;url=${canonicalUrl}`
+  elements.shareBtns.twitter.setAttribute('href', twitterShareUrl)
+  elements.shareBtns.facebook.setAttribute('href', facebookShareUrl)
+  elements.shareBtns.linkedin.setAttribute('href', linkedinShareUrl)
+
   const tagsLinksArr = meta.tags.map(tag =>
     `<a href="../../${config.tagsPageDirPath}/?tags=${tag}"><span class="grey-text">&num;</span>${tag}</a>`)
   elements.tagsElem.innerHTML = tagsLinksArr.join(' ')
@@ -579,6 +592,11 @@ function selectElementsForPostPage(document, fbCommentsElem) {
     titleElem: document.querySelector('#post-title'),
     dateElem: document.querySelector('#post-date'),
     bodyElem: document.querySelector('#post-body'),
+    shareBtns: {
+      twitter: document.querySelector('#btn-share-twitter'),
+      facebook: document.querySelector('#btn-share-facebook'),
+      linkedin: document.querySelector('#btn-share-linkedin')
+    },
     tagsElem: document.querySelector('#tags-container'),
     fbCommentsElem: fbCommentsElem
   }

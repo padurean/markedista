@@ -179,6 +179,29 @@ body > footer .markedista-logotext {
   /* percent relative to viewport height */
   max-height: 80vh;
 }
+.share-btns-container {
+  display: inline-block;
+  height: 1.5em;
+  margin-bottom: .75em;
+  border: 1px solid orangered;
+  border-radius: 3px;
+}
+.share-btns-container > img {
+  margin-right: .25em;
+  background-color: orangered;
+}
+.share-btns-container img {
+  width: 1em;
+  height: 1em;
+  padding: .25em;
+}
+.share-btns-container a {
+  display: inline-block;
+  margin-right: .25em;
+}
+.share-btns-container a:last-child {
+  margin-right: .5em;
+}
 .page-nav {
   margin-top: 3em;
 }
@@ -204,6 +227,9 @@ a.filtered-tag-link {
 .tags-container {
   float: right;
   margin: .75em 0 0 .75em;
+}
+.tags-container.on-full-post {
+  margin: .25em 0 0 .75em;
 }
 .clear-floats {
   clear: both;
