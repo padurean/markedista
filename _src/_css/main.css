@@ -197,7 +197,7 @@ body > footer .markedista-logotext {
 }
 .share-btns-container a {
   display: inline-block;
-  margin-right: .25em;
+  margin-right: .1em;
 }
 .share-btns-container a:last-child {
   margin-right: .5em;
