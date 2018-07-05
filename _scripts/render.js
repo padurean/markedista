@@ -51,6 +51,17 @@ const config = {
     facebook: 'vpadurean',
     github: 'padurean',
     linkedin: 'vpadure'
+  },
+  cssFiles: {
+    main: { name: 'bundle-main.min.css', version: 1 },
+    post: { name: 'bundle-post.min.css', version: 1 },
+    postWithGallery: { name: 'bundle-post-with-gallery.min.css', version: 1 }
+  },
+  jsFiles: {
+    main: { name: 'bundle-main.min.js', version: 1 },
+    tags: { name: 'bundle-tags.min.js', version: 1 },
+    post: { name: 'bundle-post.min.js', version: 1 },
+    postWithGallery: { name: 'bundle-post-with-gallery.min.js', version: 1 }
   }
 }
 
@@ -620,8 +631,8 @@ function prepareDom() {
     commonFooterHtml,
     layoutMainPageHtml,
     '.',
-    'bundle-main.min.css',
-    'bundle-main.min.js',
+    `${config.cssFiles.main.name}?${config.cssFiles.main.version}`,
+    `${config.jsFiles.main.name}?${config.jsFiles.main.version}`,
     false)
   const documentMainPage = documentDomMainPage.window.document
 
@@ -631,8 +642,8 @@ function prepareDom() {
     commonFooterHtml,
     layoutMainPageHtml,
     '../..',
-    '../../bundle-main.min.css',
-    '../../bundle-main.min.js',
+    `../../${config.cssFiles.main.name}?${config.cssFiles.main.version}`,
+    `../../${config.jsFiles.main.name}?${config.jsFiles.main.version}`,
     false)
   const documentSecondaryPage = documentDomSecondaryPage.window.document
 
@@ -642,8 +653,8 @@ function prepareDom() {
     commonFooterHtml,
     layoutTagsPageHtml,
     '..',
-    '../bundle-main.min.css',
-    '../bundle-tags.min.js',
+    `../${config.cssFiles.main.name}?${config.cssFiles.main.version}`,
+    `../${config.jsFiles.tags.name}?${config.jsFiles.tags.version}`,
     false)
   const documentTagsPage = documentDomTagsPage.window.document
   
@@ -653,8 +664,8 @@ function prepareDom() {
     commonFooterHtml,
     layoutPostPageHtml,
     '../..',
-    '../../bundle-post.min.css',
-    '../../bundle-post.min.js',
+    `../../${config.cssFiles.post.name}?${config.cssFiles.post.version}`,
+    `../../${config.jsFiles.post.name}?${config.jsFiles.post.version}`,
     true)
   const documentPostPage = documentDomPostPage.window.document
   const fbCommentsElem = documentPostPage.querySelector('.fb-comments')
@@ -667,8 +678,8 @@ function prepareDom() {
     commonFooterHtml,
     layoutPostPageHtml,
     '../..',
-    '../../bundle-post-with-gallery.min.css',
-    '../../bundle-post-with-gallery.min.js',
+    `../../${config.cssFiles.postWithGallery.name}?${config.cssFiles.postWithGallery.version}`,
+    `../../${config.jsFiles.postWithGallery.name}?${config.jsFiles.postWithGallery.version}`,
     true)
   const documentPostPageWithGallery = documentDomPostPageWithGallery.window.document
   const fbCommentsElemPostPageWithGallery = documentPostPageWithGallery.querySelector('.fb-comments')
