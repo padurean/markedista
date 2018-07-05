@@ -17,6 +17,39 @@ function highlightCodeBlocks() {
   });
 }
 
+function getShareWindowOptions() {
+  var width = window.innerWidth > 768 ?
+    window.innerWidth / 2 :
+    window.innerWidth - 20;
+  var height = window.innerHeight > 414 ?
+    window.innerHeight / 2 :
+    window.innerHeight - 20;
+  var left = (window.innerWidth - width) / 2;
+  var top = (window.innerHeight - height) / 2;
+
+  return [
+    'resizable,scrollbars,status',
+    'height=' + height,
+    'width=' + width,
+    'left=' + left,
+    'top=' + top,
+  ].join();
+}
+function prepareShareButtons() {
+  $('.share-btns-container > a').each(function(index) {
+    var thisJqElem = $(this);
+    thisJqElem.click(function(e) {
+      e.preventDefault();
+      var win = window.open(
+        thisJqElem.attr('href'),
+        thisJqElem.attr('title').replace(/\s+/g, ''),
+        getShareWindowOptions()
+      );
+      win.opener = null;
+    });
+  });
+}
+
 function enableOlderNewerBtns(navInfo) {
   var pathPrefixArr = state.locationPathNormalized.split('/');
   pathPrefixArr = pathPrefixArr.slice(0, pathPrefixArr.length-2);
@@ -59,4 +92,5 @@ $(function(){
           });
       }, 1000);
     });
+  prepareShareButtons();  
 });
