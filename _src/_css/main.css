@@ -174,7 +174,8 @@ body > footer .markedista-logotext {
 .full-post {
   margin-bottom: 3em;
 }
-.full-post .post-body img {
+.full-post .post-body img,
+.full-post .post-body iframe {
   max-width: 100%;
   /* percent relative to viewport height */
   max-height: 80vh;
