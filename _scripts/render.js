@@ -158,11 +158,11 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   const titleUrlSafe = encodeURIComponent('\n' + meta.title + '\n')
   const tagsUrlSafe = encodeURIComponent(meta.tags.join(','))
   const twitterShareUrl = 
-    `https://twitter.com/share?url=${canonicalUrl}&amp;text=${titleUrlSafe}&amp;hashtags=${tagsUrlSafe}`
+    `https://twitter.com/share?url=${canonicalUrl}&text=${titleUrlSafe}&hashtags=${tagsUrlSafe}`
   const facebookShareUrl =
     `https://www.facebook.com/sharer.php?u=${canonicalUrl}`
   const linkedinShareUrl =
-    `https://www.linkedin.com/shareArticle?mini=true&amp;url=${canonicalUrl}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=${canonicalUrl}`
   elements.shareBtns.twitter.setAttribute('href', twitterShareUrl)
   elements.shareBtns.facebook.setAttribute('href', facebookShareUrl)
   elements.shareBtns.linkedin.setAttribute('href', linkedinShareUrl)
