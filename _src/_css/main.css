@@ -36,9 +36,10 @@ body > header .hamburger {
   z-index: 2;
   opacity: 1;
   margin: 0;
-  padding: .25em .5em;
+  padding: .2em .35em .25em .45em;
   background-color: orangered;
-  border-radius: 0 0 0 6px;
+  /* background-color: rgba(255, 69, 0, .8); */
+  border-radius: 0 0 0 3px;
 }
 body > header .hamburger:hover {
   opacity: 1;
@@ -156,7 +157,8 @@ body > footer .markedista-logotext {
   font-size: .85em;
   color: grey;
 }
-.post-summary-template-section {
+.post-summary-template-section,
+.other-post-summary-template-section {
   display: none;
 }
 .post-summary {
@@ -170,6 +172,7 @@ body > footer .markedista-logotext {
   height: 3.5em;
   margin-right: .5em;
   border: 1px solid aliceblue;
+  border-radius: 3px;
 }
 .full-post {
   margin-bottom: 3em;
@@ -327,9 +330,58 @@ a.hide, a.btn.hide {
 .fb-comments-section {
   display: inline-block;
   margin-top: 4em;
+  min-width: 550px;
+  min-height: 183px;
   background-color: aliceblue;
+  background-image: url('./images/loading-comments.svg');
+  background-size: 10em;
+  background-repeat: no-repeat;
+  background-position: center 4.5em;
   border-radius: 6px;
   padding: .25em .5em;
+}
+.fb-comments-section iframe {
+  background-color: aliceblue;
+}
+.related-and-newer-posts {
+  float: right;
+  width: 50%;
+  margin-top: -3em;
+  font-size: .75em;
+}
+.related-posts,
+.newest-posts {
+  border: 2px solid aliceblue;
+  border-radius: 6px;
+}
+.newest-posts {
+  margin-top: 1.5em;
+}
+.newest-posts.no-related {
+  margin-top: 0;
+}
+.related-posts > header,
+.newest-posts > header {
+  padding: .75em;
+  font-size: 1.25em;
+  line-height: 1.25em;
+  background-color: aliceblue;
+}
+.related-and-newer-posts .post-summary {
+  margin: 1em;
+}
+.related-and-newer-posts .post-summary:last-child {
+  border: 0 none;
+  padding-bottom: 0;
+}
+.related-and-newer-posts .post-summary .post-date-icon-wrapper {
+  width: .95em;
+  height: .95em;
+  line-height: 1em;
+  background-size: .95em;
+}
+.related-and-newer-posts .post-summary .post-date {
+  font-size: .95em;
 }
 .subscribe-via-rss {
   margin-right: 2em;
@@ -358,6 +410,14 @@ a.hide, a.btn.hide {
 @media (hover:none), (hover:on-demand) {
   .fb-comments-section {
     display: block;
+    min-width: 90%;
+  }
+  .related-and-newer-posts {
+    float: none;
+    display: block;
+    width: auto;
+    margin-top: 1.5em;
+    margin-left: 0;
   }
 }
 /* Breakpoint: iPhone 5/SE */
@@ -400,5 +460,34 @@ a.hide, a.btn.hide {
   .featherlight .featherlight-close-icon {
     top: 9px;
     right: 10px;
+  }
+}
+@media 
+  (hover:none) and (min-width: 1024px),
+  (hover:on-demand) and (min-width: 1024px),
+  only screen and (max-width: 1220px) and (min-width: 1024px)  {
+  .related-posts,
+  .newest-posts {
+    width: 49%;
+  }
+  .related-posts {
+    float: left;
+  }
+  .newest-posts {
+    float: right;
+    margin-top: 0;
+  }
+  .newest-posts.no-related {
+    width: auto;
+    float: none;
+  }
+}
+@media only screen and (max-width: 1220px) {
+  .related-and-newer-posts {
+    float: none;
+    display: block;
+    width: auto;
+    margin-top: 1.5em;
+    margin-left: 0;
   }
 }

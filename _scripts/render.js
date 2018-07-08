@@ -170,6 +170,8 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   const tagsLinksArr = meta.tags.map(tag =>
     `<a href="../../${config.tagsPageDirPath}/?tags=${tag}"><span class="grey-text">&num;</span>${tag}</a>`)
   elements.tagsElem.innerHTML = tagsLinksArr.join(' ')
+  elements.tagsInputElem.setAttribute('value', meta.tags.join(','))
+  elements.postIdInputElem.setAttribute('value', meta.name)
   log.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
   elements.bodyElem.innerHTML = marked(meta.__content)
   const siteUrlForFbComments = !meta.gallery ?
@@ -319,6 +321,9 @@ function generateTagsPageAndJson() {
   del.sync([config.tagsJsonsDirPath])
   fs.mkdirSync(config.tagsJsonsDirPath)
   const postMetasPerTag = new Map()
+  const latestPostsArr = []
+  const MAX_LATEST_POSTS = 10
+  let latestsPostsCounter = 0;
   for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
     for (const tag of postMeta.tags) {
       let tagMetasArr = postMetasPerTag.get(tag)
@@ -326,6 +331,11 @@ function generateTagsPageAndJson() {
         tagMetasArr = []
       tagMetasArr.push(postMeta)
       postMetasPerTag.set(tag, tagMetasArr)
+    }
+
+    if (latestsPostsCounter < MAX_LATEST_POSTS) {
+      latestPostsArr.push(postMeta)
+      latestsPostsCounter++;
     }
   }
 
@@ -342,13 +352,16 @@ function generateTagsPageAndJson() {
   log.info(`Writing ${allTagsJsonFileName} ...`.info)
   fs.writeFileSync(allTagsJsonFileName, JSON.stringify(postsTagsAndCountersArr/*, null, 2*/))
 
+  const latestPostsJsonFileName = `${config.tagsJsonsDirPath}/latest-posts.json`
+  log.info(`Writing ${latestPostsJsonFileName} ...`.info)
+  fs.writeFileSync(latestPostsJsonFileName, JSON.stringify(latestPostsArr/*, null, 2*/))
+
   const canonicalUrl = `${config.baseUrl}${config.tagsPageDirPath}/`
   state.dom.elementsTagsPage.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
   state.dom.elementsTagsPage.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
 
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
-  const postSummaryTemplateElem = postSummaryFrag.querySelector('.post-summary')
-  state.dom.elementsTagsPage.postsSummaryTemplateSectionElem.append(postSummaryFrag)
+  state.dom.elementsTagsPage.postSummaryTemplateSectionElem.append(postSummaryFrag)
 
   del.sync([config.tagsPageDirPath])
   fs.mkdirSync(config.tagsPageDirPath)
@@ -644,6 +657,8 @@ function selectElementsForPostPage(document, fbCommentsElem) {
       linkedin: document.querySelector('#btn-share-linkedin')
     },
     tagsElem: document.querySelector('#tags-container'),
+    tagsInputElem: document.querySelector('#tags-input'),
+    postIdInputElem: document.querySelector('#post-id-input'),
     fbCommentsElem: fbCommentsElem
   }
 }
@@ -706,6 +721,7 @@ function prepareDom() {
   const fbCommentsElem = documentPostPage.querySelector('.fb-comments')
   let siteUrlForFbComments = fbCommentsElem.getAttribute('data-href')
   siteUrlForFbComments += (siteUrlForFbComments.endsWith('/') ? '' : '/')
+  documentPostPage.querySelector('#other-post-summary-template-section').append(JSDOM.fragment(postSummaryHtml))
 
   const documentDomPostPageWithGallery = prepareJsdom(
     commonHeadHtml,
@@ -720,6 +736,7 @@ function prepareDom() {
   const fbCommentsElemPostPageWithGallery = documentPostPageWithGallery.querySelector('.fb-comments')
   let siteUrlForFbCommentsPostPageWithGallery = fbCommentsElemPostPageWithGallery.getAttribute('data-href')
   siteUrlForFbCommentsPostPageWithGallery += (siteUrlForFbCommentsPostPageWithGallery.endsWith('/') ? '' : '/')
+  documentPostPageWithGallery.querySelector('#other-post-summary-template-section').append(JSDOM.fragment(postSummaryHtml))
   
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
@@ -750,7 +767,7 @@ function prepareDom() {
         canonicalUrlElem: documentTagsPage.querySelector('link[rel="canonical"]'),
         ogUrlElem: documentTagsPage.querySelector('meta[property="og:url"]')
       },
-      postsSummaryTemplateSectionElem: documentTagsPage.querySelector('#post-summary-template-section'),
+      postSummaryTemplateSectionElem: documentTagsPage.querySelector('#post-summary-template-section'),
     },
 
     postSummaryHtml: postSummaryHtml,

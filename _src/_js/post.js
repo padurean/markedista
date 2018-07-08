@@ -1,3 +1,6 @@
+var config = {
+  homePath: '../../'
+};
 var state = {
   pageNavSectionElem: null,
   btnNewerPostElem: null,
@@ -65,6 +68,153 @@ function enableOlderNewerBtns(navInfo) {
   state.pageNavSectionElem.removeClass('invisible');
 }
 
+function renderRelatedOrNewestPosts(posts, containerJqElem, postSummaryBluePrint) {
+  var postsSummariesElements = [];
+  for (var iPost = 0; iPost < posts.length; iPost++) {
+    var post = posts[iPost];
+    var postSummaryElem = postSummaryBluePrint.clone();
+    var postLinkElem = postSummaryElem.find('.post-link');
+    var postLinkHrefValue = '../' + post.name + '/';
+    postLinkElem.attr('href', postLinkHrefValue);
+    var postThumbnailElem = postSummaryElem.find('.post-thumbnail');
+    if (post.thumbnail) {
+      var thumbnailUrlOrPath = post.thumbnail.indexOf('http') === 0 ?
+        post.thumbnail :
+        config.homePath + post.thumbnail;
+      postThumbnailElem.attr('src', thumbnailUrlOrPath);
+    } else
+      postThumbnailElem.remove();
+    postSummaryElem.find('.post-title').text(post.title);
+    var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
+    var postDateElem = postSummaryElem.find('.post-date');
+    postDateElem.attr('datetime', postDateStr);
+    postDateElem.text(new Date(postDateStr).toLocaleString());
+    postsSummariesElements.push(postSummaryElem);
+  }
+  containerJqElem.append(postsSummariesElements);
+}
+
+function renderRelatedAndNewestPosts(relatedPosts, newestPosts) {
+  var postSummaryBluePrint =
+    $('#other-post-summary-template-section').find('.post-summary');
+  postSummaryBluePrint.find('.post-description').remove();
+  postSummaryBluePrint.find('.post-read-more').remove();
+  postSummaryBluePrint.find('.tags-container').remove();
+
+  var containerRelated = $('#related-posts');
+  var containerNewest = $('#newest-posts');
+  if (relatedPosts.length > 0) {
+    renderRelatedOrNewestPosts(relatedPosts, containerRelated, postSummaryBluePrint);
+    containerRelated.slideDown();
+  } else {
+    containerRelated.remove();
+    if (newestPosts.length > 0) {
+      containerNewest.addClass('no-related');
+    }
+  }
+  if (newestPosts.length > 0) {
+    renderRelatedOrNewestPosts(newestPosts, containerNewest, postSummaryBluePrint);
+    containerNewest.slideDown();
+  } else
+    containerNewest.remove();
+}
+
+var MAX_RELATED_POSTS = 5;
+var MAX_NEWEST_POSTS = 5; // not more than 10 (this value can be altered in render.js)
+function fetchAndRenderRelatedAndNewestPosts() {
+  var ajaxRequestsForTags = [];
+  var tags = $('#tags-input').attr('value').split(',');
+  for (var i = 0; i < tags.length; i++) {
+    var postMetasForCurrTagUrl = '../tags/'+tags[i]+'.json';
+    ajaxRequestsForTags.push($.get(postMetasForCurrTagUrl));
+  }
+  
+  $.when.apply(null, ajaxRequestsForTags)
+    .done(function() {
+      var responses = ajaxRequestsForTags.length > 1 ? arguments : [arguments];
+      var skipPostsNames = [ $('#post-id-input').attr('value') ];
+      var relatedPostsPerTag = [];
+      var nbRelatedPostsAvailable = 0;
+      for (var iArg = 0; iArg < responses.length; iArg++) {
+        var postsArr = responses[iArg][0];
+        if (postsArr.length === 1 && $.inArray(postsArr[0].name, skipPostsNames) >= 0)
+          continue;
+        relatedPostsPerTag.push([]);
+        for (var iPost = 0; iPost < postsArr.length; iPost++) {
+          var post = postsArr[iPost];
+          if ($.inArray(post.name, skipPostsNames) >= 0)
+            continue;
+          relatedPostsPerTag[relatedPostsPerTag.length-1].push(post);
+          nbRelatedPostsAvailable++;
+          skipPostsNames.push(post.name);
+          // no need to gather more related posts for a tag than the maximum specified for all tags combined
+          if (relatedPostsPerTag[relatedPostsPerTag.length-1].length === MAX_RELATED_POSTS)
+            break; 
+        }
+      }
+      relatedPostsPerTag.sort(function(a, b) {
+        if (a.length == 0 && b.length == 0)
+          return 0;
+        else if (a.length > 0 && b.length == 0)
+          return 1;
+        else if (a.length == 0 && b.length > 0)
+          return -1;
+        else
+          return (new Date(b[0].date).getTime() - new Date(a[0].date).getTime());
+      });
+
+      var relatedPosts = [];
+      var relatedPostsCounter = 0;
+      var iTag = 0;
+      var iRelatedPostAbs = 0;
+      var iRelatedPost = 0;
+      // "safety break" to prevent endless looping in case some logic error "sneaked in":
+      var MAX_CYCLES = 100;
+      var cycle = 0;
+      // take the 1st post for each tag, then the 2nd post for each tag and so on
+      // this way the finally-picked related posts will be from more diverse tags
+      // (not all of them for a single tag if there were related posts for other tags)
+      while (
+        cycle < MAX_CYCLES &&
+        relatedPostsCounter < MAX_RELATED_POSTS &&
+        iTag < relatedPostsPerTag.length &&
+        iRelatedPostAbs < nbRelatedPostsAvailable
+      ) {
+        cycle++;
+        var relatedPostsForCurrTag = relatedPostsPerTag[iTag];
+        if (iRelatedPost < relatedPostsForCurrTag.length) {
+          relatedPosts.push(relatedPostsForCurrTag[iRelatedPost]);
+          relatedPostsCounter++;
+          iRelatedPostAbs++;
+        }
+        iTag++;
+        if (iTag === relatedPostsPerTag.length) {
+          iTag = 0;
+          iRelatedPost++;
+        }
+      }
+      if (cycle === MAX_CYCLES && console && console.log)
+        console.log('Probably infinite loop: cycle = MAX_CYCLES = ' + cycle);
+      relatedPosts.sort(function(a, b) {
+        return (new Date(b.date).getTime() - new Date(a.date).getTime());
+      });
+      $.get('../tags/latest-posts.json', function(latestPosts) {
+        renderRelatedAndNewestPosts(
+          relatedPosts,
+          latestPosts.length > MAX_NEWEST_POSTS ? latestPosts.slice(0, MAX_NEWEST_POSTS) : latestsPosts
+        );
+      });
+    })
+    .fail(function() {
+      $.get('../tags/latest-posts.json', function(latestPosts) {
+        renderRelatedAndNewestPosts(
+          [],
+          latestPosts.length > MAX_NEWEST_POSTS ? latestPosts.slice(0, MAX_NEWEST_POSTS) : latestsPosts
+        );
+      });
+    });
+}
+
 $(function(){
   renderPostDate();
   setTimeout(highlightCodeBlocks, 0);
@@ -93,4 +243,5 @@ $(function(){
       }, 1000);
     });
   prepareShareButtons();  
+  fetchAndRenderRelatedAndNewestPosts();
 });
