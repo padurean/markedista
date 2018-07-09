@@ -30,7 +30,7 @@
     "loglevel": "^1.6.1",
     "marked": "^0.4.0",
     "pfeed": "^1.1.6",
-    "uglify-js": "^3.4.3",
+    "uglify-js": "^3.4.4",
     "yaml-front-matter": "^4.0.0"
   }
 }
