@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Sun, 08 Jul 2018 19:05:59 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 10 Jul 2018 18:02:48 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -45,7 +45,7 @@
             <description><![CDATA[This is the 5th post description]]></description>
             <content:encoded><![CDATA[This is the 5th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <media:thumbnail url="https://farm1.staticflickr.com/888/41360886331_ee1b4a93b7_o.jpg">
+            <media:thumbnail url="https://padurean.github.io/markedista/images/eye.svg">
             </media:thumbnail>
         </item>
         <item>
