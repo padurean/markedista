@@ -366,9 +366,10 @@ a.hide, a.btn.hide {
 .related-posts > header,
 .newest-posts > header {
   padding: .75em;
-  font-size: 1.25em;
-  line-height: 1.25em;
+  font-size: 1.3em;
+  line-height: 1.3em;
   background-color: aliceblue;
+  color: dimgrey;
 }
 .related-and-newer-posts .post-summary {
   margin: 1em;
