@@ -575,6 +575,7 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
   const description = descriptionElem.getAttribute('content')
   const btnGoHomeElems = document.querySelector('.btn-go-home')
   const homePageLinkElems = document.querySelector('.home-page-link')
+  const aboutPageLinkElems = document.querySelector('.about-page-link')
 
   prepareSocialMetaElems(document, headElem, title, description, isArticle)
 
@@ -598,8 +599,9 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
   jsLinkElem.setAttribute('src', jsPath)
   bodyElem.append(jsLinkElem)
 
-  btnGoHomeElems.setAttribute('href', homePath+'/')
-  homePageLinkElems.setAttribute('href', homePath+'/')
+  btnGoHomeElems.setAttribute('href', `${homePath}/`)
+  homePageLinkElems.setAttribute('href', `${homePath}/`)
+  aboutPageLinkElems.setAttribute('href', `${homePath}/about/`)
 
   const footerElem = document.querySelector('footer')
   const socialIconLinksElem = footerElem.querySelector('.social-icon-links')
