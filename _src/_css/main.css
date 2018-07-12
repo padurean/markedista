@@ -186,6 +186,9 @@ body > footer .markedista-logotext {
   /* percent relative to viewport height */
   max-height: 80vh;
 }
+.full-post .post-body img.smaller {
+  max-height: 40vh;
+}
 .share-btns-container {
   display: inline-block;
   height: 1.5em;
