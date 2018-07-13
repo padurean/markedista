@@ -471,6 +471,12 @@ a.hide, a.btn.hide {
     top: 9px;
     right: 10px;
   }
+  .post-date-wrapper {
+    margin-top: .4em;
+  }
+  .related-and-newer-posts .post-summary .post-date-wrapper {
+    margin-top: .3em;
+  }
 }
 @media 
   (hover:none) and (min-width: 1024px),
