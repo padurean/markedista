@@ -192,7 +192,7 @@ function enableBtn(btnElem, hrefValue) {
   btnElem.classList.remove('disabled')
 }
 
-function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
+function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePath) {
   const postDateStr = typeof postMeta.date === 'string' ?
     postMeta.date : // for JSON frontmatter date is just a string
     postMeta.date.toISOString() // for YAML date is parsed as Date object
@@ -203,9 +203,12 @@ function postMetaToSummaryHtml(postMeta, postHtmlFilePath, tagsPagePath) {
   postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
 
   const postThumbnailElem = postSummaryFrag.querySelector('.post-thumbnail')
-  if (postMeta.thumbnailUrl)
-    postThumbnailElem.setAttribute('src', postMeta.thumbnailUrl)
-  else
+  if (postMeta.thumbnail) {
+    const thumbnailUrlOrPath = postMeta.thumbnail.indexOf('http') === 0 ?
+      postMeta.thumbnail :
+      `${homePath}/${postMeta.thumbnail}`
+    postThumbnailElem.setAttribute('src', thumbnailUrlOrPath)
+  } else
     postThumbnailElem.parentNode.removeChild(postThumbnailElem)
 
   postSummaryFrag.querySelector('.post-title').textContent = postMeta.title
@@ -239,21 +242,23 @@ function generatePages() {
   fs.mkdirSync(config.pagesDirPath)
   for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
     const currPage = Math.floor(i / config.postsPerPage) + 1
-    const { elements, documentDom, postPath, tagsPagePath } = currPage === 1 ?
+    const { elements, documentDom, homePath, postPath, tagsPagePath } = currPage === 1 ?
       {
         elements: state.dom.elementsMainPage,
         documentDom: state.dom.documentDomMainPage,
+        homePath: '.',
         postPath: `${config.htmlOutputDirPath}/${postMeta.name}/`,
         tagsPagePath: `${config.tagsPageDirPath}`
       } :
       {
         elements: state.dom.elementsSecondaryPage,
         documentDom: state.dom.documentDomSecondaryPage,
+        homePath: '../..',
         postPath: `../../${config.htmlOutputDirPath}/${postMeta.name}/`,
         tagsPagePath: `../../${config.tagsPageDirPath}`
       }
 
-    const postSummaryFrag = postMetaToSummaryHtml(postMeta, postPath, tagsPagePath)
+    const postSummaryFrag = postMetaToSummaryHtml(postMeta, homePath, postPath, tagsPagePath)
     elements.postsSectionElem.append(postSummaryFrag)
 
     const pageCompleted =
