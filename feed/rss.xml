@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Sun, 15 Jul 2018 18:28:28 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 15 Jul 2018 19:46:03 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -25,7 +25,7 @@
             <description><![CDATA[Minimalist tutorial on getting started with Haskell]]></description>
             <content:encoded><![CDATA[Minimalist tutorial on getting started with Haskell]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
-            <media:thumbnail url="https://padurean.github.io/markedista/images/haskell-logo.svg">
+            <media:thumbnail url="https://padurean.github.io/markedista/images/haskell-logo.png">
             </media:thumbnail>
         </item>
         <item>

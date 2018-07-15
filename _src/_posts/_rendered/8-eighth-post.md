@@ -3,7 +3,7 @@ date: 2018-07-13T19:03:00+03:00
 title: Learning Haskell
 description: Minimalist tutorial on getting started with Haskell
 tags: [ haskell, tutorial ]
-thumbnail: images/haskell-logo.svg
+thumbnail: images/haskell-logo.png
 ---
 
 ## 0. On Functional Programming
