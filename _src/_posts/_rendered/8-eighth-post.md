@@ -14,9 +14,17 @@ thumbnail: images/haskell-logo.svg
 
 A Function is a mapping between a domain (i.e. a set of inputs) and a codomain (i.e. a set of outputs which maps **each** element of the input set to **exactly one** element of the output set.
 
-# 1. Development Environment Setup for Haskell
+# 1. H1 Development Environment Setup for Haskell
 
-## 1.0 Haskell Tooling
+## 1.0 H2 Haskell Tooling
+
+### 1.0 H3 Haskell Tooling
+
+#### 1.0 H4 Haskell Tooling
+
+##### 1.0 H5 Haskell Tooling
+
+###### 1.0 H6 Haskell Tooling
 
 Tools for Haskell development description goes here
 
