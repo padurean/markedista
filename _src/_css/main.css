@@ -220,11 +220,15 @@ body > footer .markedista-logotext {
   padding-top: .5em;
 }
 .full-post .post-body > h1 {
-  color: #404040;
+  margin-top: 1.25em;
   padding-bottom: .25em;
   border-bottom: 2px solid aliceblue;
+  color: #404040;
 }
 .full-post .post-body > h2 {
+  margin-top: 1.25em;
+  padding-bottom: .25em;
+  border-bottom: 2px solid aliceblue;
   color: #484848;
 }
 .full-post .post-body img,
