@@ -119,9 +119,25 @@ function renderRelatedAndNewestPosts(relatedPosts, newestPosts) {
     containerNewest.remove();
 }
 
+function fetchLatestPostsAndRender(thisPostName, relatedPosts) {
+  $.get('../tags/latest-posts.json', function(latestPosts) {
+    var posts = [];
+    for (var i = 0, c = 0; c < MAX_NEWEST_POSTS && i < latestPosts.length; i++) {
+      var post = latestPosts[i];
+      if (post.name === thisPostName)
+        continue;
+      posts.push(post);
+      c++;
+    }
+    renderRelatedAndNewestPosts(relatedPosts, posts);
+  });
+}
+
 var MAX_RELATED_POSTS = 5;
 var MAX_NEWEST_POSTS = 5; // not more than 10 (this value can be altered in render.js)
 function fetchAndRenderRelatedAndNewestPosts() {
+  var thisPostName = $('#post-id-input').attr('value');
+
   var ajaxRequestsForTags = [];
   var tags = $('#tags-input').attr('value').split(',');
   for (var i = 0; i < tags.length; i++) {
@@ -132,7 +148,7 @@ function fetchAndRenderRelatedAndNewestPosts() {
   $.when.apply(null, ajaxRequestsForTags)
     .done(function() {
       var responses = ajaxRequestsForTags.length > 1 ? arguments : [arguments];
-      var skipPostsNames = [ $('#post-id-input').attr('value') ];
+      var skipPostsNames = [ thisPostName ];
       var relatedPostsPerTag = [];
       var nbRelatedPostsAvailable = 0;
       for (var iArg = 0; iArg < responses.length; iArg++) {
@@ -198,20 +214,10 @@ function fetchAndRenderRelatedAndNewestPosts() {
       relatedPosts.sort(function(a, b) {
         return (new Date(b.date).getTime() - new Date(a.date).getTime());
       });
-      $.get('../tags/latest-posts.json', function(latestPosts) {
-        renderRelatedAndNewestPosts(
-          relatedPosts,
-          latestPosts.length > MAX_NEWEST_POSTS ? latestPosts.slice(0, MAX_NEWEST_POSTS) : latestsPosts
-        );
-      });
+      fetchLatestPostsAndRender(thisPostName, relatedPosts);
     })
     .fail(function() {
-      $.get('../tags/latest-posts.json', function(latestPosts) {
-        renderRelatedAndNewestPosts(
-          [],
-          latestPosts.length > MAX_NEWEST_POSTS ? latestPosts.slice(0, MAX_NEWEST_POSTS) : latestsPosts
-        );
-      });
+      fetchLatestPostsAndRender(thisPostName, relatedPosts);
     });
 }
 
