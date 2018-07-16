@@ -3,6 +3,11 @@ body {
   font-size: 1rem;
   margin: 1rem 2rem;
   color: #303030;
+
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: none;
 }
 a {
   text-decoration: none;
