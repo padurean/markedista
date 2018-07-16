@@ -6,9 +6,12 @@
   "tags": [ "tag1", "tag2" ]
 }
 ---
+
 # 1st POST **hello world** of mark down!
 
 ## heading level 2
+
+Some content
 
 ### heading level 3
 
