@@ -182,6 +182,7 @@ body > footer .markedista-logotext {
 }
 .posts > article > p {
   margin: .75em 0 0 0;
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 .post-date-wrapper {
   margin-top: .5em;
