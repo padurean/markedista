@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   font-size: 1rem;
   margin: 1rem 2rem;
-  color: #303030;
+  color: #262626;
 
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: none;
@@ -57,7 +57,7 @@ h5 {
 }
 h6 {
   font-size: .85em;
-  color: dimgrey;
+  color: #595959;
 }
 .post-body p {
   margin-top: 0;
@@ -223,18 +223,19 @@ body > footer .markedista-logotext {
 }
 .full-post .post-body {
   padding-top: .5em;
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 .full-post .post-body > h1 {
   margin-top: 1.5em;
   padding-bottom: .25em;
   border-bottom: 2px solid aliceblue;
-  color: #595959;
+  color: #4d4d4d;
 }
 .full-post .post-body > h2 {
   margin-top: 1.5em;
   padding-bottom: .25em;
   border-bottom: 2px solid aliceblue;
-  color: #4d4d4d;
+  color: #404040;
 }
 .full-post .post-body img,
 .full-post .post-body iframe {
@@ -428,7 +429,7 @@ a.hide, a.btn.hide {
   font-size: 1.3em;
   line-height: 1.3em;
   background-color: aliceblue;
-  color: dimgrey;
+  color: #666666;
 }
 .related-and-newer-posts .post-summary {
   margin: 1em;
