@@ -202,6 +202,12 @@ body > footer .markedista-logotext {
   font-size: .85em;
   color: grey;
 }
+.post-cover {
+  width: 100%;
+  height: auto;
+  margin-top: 1.25em;
+  border-radius: 6px;
+}
 .post-summary-template-section,
 .other-post-summary-template-section {
   display: none;
