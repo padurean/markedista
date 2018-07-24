@@ -147,6 +147,18 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
     elements.postThumbnailElem.classList.add('hidden')
   }
 
+  if (meta.cover) {
+    elements.postCoverElem.setAttribute(
+      'src',
+      meta.cover.indexOf('http') === 0 ?
+        meta.cover :
+        `../../${meta.cover}`)
+    elements.postCoverElem.classList.remove('hidden')
+  } else {
+    elements.postCoverElem.setAttribute('src', '')
+    elements.postCoverElem.classList.add('hidden')
+  }
+
   elements.pageTitleElem.textContent = meta.title
   elements.titleElem.textContent = meta.title
   const postDateStr = typeof meta.date === 'string' ?
@@ -210,6 +222,15 @@ function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePat
     postThumbnailElem.setAttribute('src', thumbnailUrlOrPath)
   } else
     postThumbnailElem.parentNode.removeChild(postThumbnailElem)
+
+  const postCoverElem = postSummaryFrag.querySelector('.post-cover')
+  if (postMeta.cover) {
+    const coverUrlOrPath = postMeta.cover.indexOf('http') === 0 ?
+      postMeta.cover :
+      `${homePath}/${postMeta.cover}`
+    postCoverElem.setAttribute('src', coverUrlOrPath)
+  } else
+    postCoverElem.parentNode.removeChild(postCoverElem)
 
   postSummaryFrag.querySelector('.post-title').textContent = postMeta.title
   const postDateElem = postSummaryFrag.querySelector('.post-date')
@@ -449,7 +470,9 @@ const state = {
       name: meta.name,
       gallery: meta.gallery,
       thumbnail: meta.thumbnail,
-      thumbnailUrl: meta.thumbnailUrl
+      thumbnailUrl: meta.thumbnailUrl,
+      cover: meta.cover,
+      coverUrl: meta.coverUrl
     })
   },
   done: function() {
@@ -656,6 +679,7 @@ function selectElementsForPostPage(document, fbCommentsElem) {
       twitterImageElem: document.querySelector('meta[name="twitter:image"]')
     },
     postThumbnailElem: document.querySelector('.post-thumbnail'),
+    postCoverElem: document.querySelector('.post-cover'),
     pageTitleElem: document.querySelector('title'),
     titleElem: document.querySelector('#post-title'),
     dateElem: document.querySelector('#post-date'),
@@ -804,6 +828,9 @@ function renderPost(mdFileName) {
     meta.thumbnailUrl = (!meta.thumbnail || meta.thumbnail.indexOf('http') === 0) ?
       meta.thumbnail :
       `${config.baseUrl}${meta.thumbnail}`
+    meta.coverUrl = (!meta.cover || meta.cover.indexOf('http') === 0) ?
+      meta.cover :
+      `${config.baseUrl}${meta.cover}`
     renderMarkdownAndUpdateDom(
       mdFileName,
       meta,
@@ -846,6 +873,9 @@ function updateStateMetaFromRenderedFile(mdFileNameRendered) {
     metaRendered.thumbnailUrl = (!metaRendered.thumbnail || metaRendered.thumbnail.indexOf('http') === 0) ?
       metaRendered.thumbnail :
       `${config.baseUrl}${metaRendered.thumbnail}`
+    metaRendered.coverUrl = (!metaRendered.cover || metaRendered.cover.indexOf('http') === 0) ?
+      metaRendered.cover :
+      `${config.baseUrl}${metaRendered.cover}`
     state.updateMeta(mdFileNameRendered, metaRendered)
   }
 }

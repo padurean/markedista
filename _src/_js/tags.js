@@ -138,6 +138,7 @@ function renderFilteredPosts() {
     var postLinkHrefValue = config.htmlOutputDirPath + post.name + '/';
     postLinkElem.attr('href', postLinkHrefValue);
     postSummaryElem.find('.post-read-more').attr('href', postLinkHrefValue);
+    
     var postThumbnailElem = postSummaryElem.find('.post-thumbnail');
     if (post.thumbnail) {
       var thumbnailUrlOrPath = post.thumbnail.indexOf('http') === 0 ?
@@ -146,6 +147,16 @@ function renderFilteredPosts() {
       postThumbnailElem.attr('src', thumbnailUrlOrPath);
     } else
       postThumbnailElem.remove();
+
+    var postCoverElem = postSummaryElem.find('.post-cover');
+    if (post.cover) {
+      var coverUrlOrPath = post.cover.indexOf('http') === 0 ?
+        post.cover :
+        config.homePath + post.cover;
+      postCoverElem.attr('src', coverUrlOrPath);
+    } else
+      postCoverElem.remove();
+
     postSummaryElem.find('.post-title').text(post.title);
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');

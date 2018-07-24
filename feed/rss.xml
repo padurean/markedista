@@ -4,7 +4,7 @@
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Fri, 20 Jul 2018 17:07:09 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 24 Jul 2018 08:33:36 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -17,6 +17,15 @@
         <category>Static Blog Generator</category>
         <category>Markdown</category>
         <atom:link href="https://padurean.github.io/markedista/feed/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[Eighth Post Title]]></title>
+            <link>https://padurean.github.io/markedista/posts/8-eighth-post/</link>
+            <guid>https://padurean.github.io/markedista/posts/8-eighth-post/</guid>
+            <pubDate>Mon, 23 Jul 2018 15:32:00 GMT</pubDate>
+            <description><![CDATA[This is the 8th post description]]></description>
+            <content:encoded><![CDATA[This is the 8th post description]]></content:encoded>
+            <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+        </item>
         <item>
             <title><![CDATA[Seventh Post Title]]></title>
             <link>https://padurean.github.io/markedista/posts/7-seventh-post/</link>
