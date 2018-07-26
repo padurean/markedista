@@ -277,7 +277,7 @@ body > footer .markedista-logotext {
   margin-right: .5em;
 }
 .page-nav {
-  margin-top: 3em;
+  margin-top: 2.75em;
 }
 a.btn {
   display: inline-block;
@@ -291,9 +291,44 @@ a.btn.disabled {
   border-color: grey;
   cursor: not-allowed;
 }
+a.btn.hidden {
+  display: none;
+}
+/* TODO OGG: remove if not used anymore */
 .btn-arrow-icon {
   font-size: 1.25em;
   line-height: 1em;
+}
+a.btn.goto-page {
+  line-height: 1.2em;
+  color: orangered;
+  border-radius: 0;
+  border: 1px solid orangered;
+  margin-right: 0;
+  margin-top: .25em;
+  padding: .25em .5em;
+  text-align: center;
+}
+a.btn.goto-page.older {
+  border-right: 0 none;
+}
+a.btn.goto-page.newer {
+  border-left: 0 none;
+}
+a.btn.goto-page.older.final {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+a.btn.goto-page.newer.final {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+a.btn.goto-page.gap {
+  padding: .25em;
+}
+a.btn.goto-page.current {
+  color: #fff;
+  background-color: orangered;
 }
 a.filtered-tag-link {
   background-color: yellow;
@@ -517,6 +552,12 @@ a.hide, a.btn.hide {
 @media only screen and (min-width: 568px) {
 }
 @media only screen and (min-width: 1024px) {
+}
+/* Breakpoint: iPhone 5/SE */
+@media only screen and (max-width: 320px) {
+  .page-nav {
+    font-size: .85em;
+  }
 }
 /* Breakpoint: iPhone 6/7/8+ */
 @media only screen and (max-width: 414px) {

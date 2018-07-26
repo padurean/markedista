@@ -243,6 +243,117 @@ function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePat
   return postSummaryFrag
 }
 
+function preparePageNavigation(currPage, nbPages, paginationBtnElems, pageNavElem) {
+  if (nbPages <= 1) {
+    pageNavElem.classList.add('invisible')
+    return
+  }
+  pageNavElem.classList.remove('invisible')
+
+  const btnsOlder = [
+    paginationBtnElems.btnOlder1,
+    paginationBtnElems.btnOlder2,
+    paginationBtnElems.btnOlder3,
+    paginationBtnElems.btnOlder4,
+    paginationBtnElems.btnOlder5,
+    paginationBtnElems.btnOlder6,
+    paginationBtnElems.btnOlder7,
+    paginationBtnElems.btnOlder8,
+    paginationBtnElems.btnOlder9
+  ]
+  const btnsNewer = [
+    paginationBtnElems.btnNewer1,
+    paginationBtnElems.btnNewer2,
+    paginationBtnElems.btnNewer3,
+    paginationBtnElems.btnNewer4,
+    paginationBtnElems.btnNewer5,
+    paginationBtnElems.btnNewer6,
+    paginationBtnElems.btnNewer7,
+    paginationBtnElems.btnNewer8,
+    paginationBtnElems.btnNewer9
+  ]
+  if (btnsNewer.length !== btnsOlder.length)
+    log.error(`Number of pagination buttons has to be the same`.error)
+  const maxNbBtns = btnsNewer.length
+
+  for (const btnOlder of btnsOlder) { 
+    btnOlder.classList.add('hidden')
+  }
+  for (const btnNewer of btnsNewer) {
+    btnNewer.classList.add('hidden')
+  }
+
+  paginationBtnElems.btnCurr.innerHTML = currPage
+  let nbOlder = 0
+  let nbNewer = 0
+  if (currPage === nbPages) {
+    paginationBtnElems.btnLast.classList.add('hidden')
+    paginationBtnElems.btnFirst.classList.remove('hidden')
+    paginationBtnElems.btnFirst.setAttribute('href', '../../')
+    paginationBtnElems.btnFirst.innerHTML = 1
+    paginationBtnElems.btnCurr.classList.add('older', 'final')
+    nbNewer = maxNbBtns > nbPages ? nbPages - 2 : maxNbBtns
+  } else if (currPage === 1) {
+    paginationBtnElems.btnLast.classList.remove('hidden')
+    paginationBtnElems.btnLast.setAttribute('href', `../../${config.pagesDirPath}/${nbPages}/`)
+    paginationBtnElems.btnLast.innerHTML = nbPages
+    paginationBtnElems.btnFirst.classList.add('hidden')
+    paginationBtnElems.btnCurr.classList.add('newer', 'final')
+    nbOlder = maxNbBtns > nbPages ? nbPages - 2 : maxNbBtns
+  } else {
+    paginationBtnElems.btnLast.classList.remove('hidden')
+    paginationBtnElems.btnLast.setAttribute('href', `../../${config.pagesDirPath}/${nbPages}/`)
+    paginationBtnElems.btnLast.innerHTML = nbPages
+    paginationBtnElems.btnFirst.classList.remove('hidden')
+    paginationBtnElems.btnFirst.setAttribute('href', '../../')
+    paginationBtnElems.btnFirst.innerHTML = 1
+
+    nbNewer = currPage - 2
+    nbOlder = nbPages - 1 - currPage
+    if (nbNewer + nbOlder > maxNbBtns) {
+      const maxNbBtnsHalf = Math.floor(maxNbBtns / 2)
+      const maxNbBtnsEven = maxNbBtnsHalf * 2
+      if (nbNewer > maxNbBtnsHalf && nbOlder < maxNbBtnsHalf) {
+        nbNewer = maxNbBtnsEven - nbOlder
+      } else if (nbNewer < maxNbBtnsHalf && nbOlder > maxNbBtnsHalf) {
+        nbOlder = maxNbBtnsEven - nbNewer
+      } else {
+        nbNewer = maxNbBtnsHalf
+        nbOlder = maxNbBtnsHalf
+      }
+    }
+  }
+
+  for (let i = 0; i < nbNewer; i++) {
+    const p = currPage - i - 1
+    const pPath = `../../${config.pagesDirPath}/${p}/`
+    const b = btnsNewer[i]
+    b.classList.remove('hidden')
+    b.setAttribute('href', pPath)
+    if (i === nbNewer-1 && p > 2) {
+      b.innerHTML = '...'
+      b.classList.add('gap')
+    } else {
+      b.innerHTML = p
+      b.classList.remove('gap')
+    }
+  }
+  for (let j = 0; j < nbOlder; j++) {
+    const p = currPage + j + 1
+    const pPath = `../../${config.pagesDirPath}/${p}/`
+    const b = btnsOlder[j]
+    b.classList.remove('hidden')
+    b.setAttribute('href', pPath)
+    if (j === nbOlder-1 && p < nbPages-1) {
+      b.innerHTML = '...'
+      b.classList.add('gap')
+    } else {
+      b.innerHTML = p
+      b.classList.remove('gap')
+    }
+  }
+}
+
 function generatePages() {
   if (state.mdFileNameToMeta.size === 0)
     return
@@ -255,7 +366,6 @@ function generatePages() {
     new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
   }
 
-  const postsForCurrPageFragsArr = []
   let postIndexInPage = 0
   let i = 0
 
@@ -291,19 +401,7 @@ function generatePages() {
       elements.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
       elements.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
 
-      if (currPage === 1)
-        disableBtn(elements.btnNewerElem)
-      else
-        enableBtn(
-          elements.btnNewerElem,
-          currPage === 2 ? '../../' : `../../${config.pagesDirPath}/${currPage - 1}/`)
-      
-      if (currPage === nbPages)
-        disableBtn(elements.btnOlderElem)
-      else
-        enableBtn(
-          elements.btnOlderElem,
-          `${currPage > 1 ? '../../' : ''}${config.pagesDirPath}/${currPage + 1}/`)
+      preparePageNavigation(currPage, nbPages, elements.paginationBtnElems, elements.pageNavElem)
       
       let currPagePath = 'index.html'
       if (currPage > 1) {
@@ -326,7 +424,7 @@ function generatePostsNavInfoJson() {
   log.info(`Generating ${config.postNavJsonFileName} in each post folder ...`.info)
   const metaArr = [...state.mdFileNameToMeta.values()].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime())
-  for (var i = 0; i < metaArr.length; i++) {
+  for (let i = 0; i < metaArr.length; i++) {
     const postNavInfo = {
       'olderPost': (i < metaArr.length-1 ?
         `${metaArr[i+1].name}` :
@@ -662,6 +760,40 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
   return documentDom
 }
 
+function selectElementsForPage(doc) {
+  return{
+    socialMeta: {
+      canonicalUrlElem: doc.querySelector('link[rel="canonical"]'),
+      ogUrlElem: doc.querySelector('meta[property="og:url"]')
+    },
+    postsSectionElem: doc.querySelector('#posts'),
+    pageNavElem: doc.querySelector('#page-nav'),
+    paginationBtnElems: {
+      btnLast: doc.querySelector('#btn-last-page'),
+      btnOlder9: doc.querySelector('#btn-older-page-9'),
+      btnOlder8: doc.querySelector('#btn-older-page-8'),
+      btnOlder7: doc.querySelector('#btn-older-page-7'),
+      btnOlder6: doc.querySelector('#btn-older-page-6'),
+      btnOlder5: doc.querySelector('#btn-older-page-5'),
+      btnOlder4: doc.querySelector('#btn-older-page-4'),
+      btnOlder3: doc.querySelector('#btn-older-page-3'),
+      btnOlder2: doc.querySelector('#btn-older-page-2'),
+      btnOlder1: doc.querySelector('#btn-older-page-1'),
+      btnCurr: doc.querySelector('#btn-current-page'),
+      btnNewer1: doc.querySelector('#btn-newer-page-1'),
+      btnNewer2: doc.querySelector('#btn-newer-page-2'),
+      btnNewer3: doc.querySelector('#btn-newer-page-3'),
+      btnNewer4: doc.querySelector('#btn-newer-page-4'),
+      btnNewer5: doc.querySelector('#btn-newer-page-5'),
+      btnNewer6: doc.querySelector('#btn-newer-page-6'),
+      btnNewer7: doc.querySelector('#btn-newer-page-7'),
+      btnNewer8: doc.querySelector('#btn-newer-page-8'),
+      btnNewer9: doc.querySelector('#btn-newer-page-9'),
+      btnFirst: doc.querySelector('#btn-first-page')
+    }
+  }
+}
+
 function selectElementsForPostPage(document, fbCommentsElem) {
   return {
     headElem: document.querySelector('head'),
@@ -773,26 +905,10 @@ function prepareDom() {
   
   state.dom = { 
     documentDomMainPage: documentDomMainPage,
-    elementsMainPage: {
-      socialMeta: {
-        canonicalUrlElem: documentMainPage.querySelector('link[rel="canonical"]'),
-        ogUrlElem: documentMainPage.querySelector('meta[property="og:url"]')
-      },
-      postsSectionElem: documentMainPage.querySelector('#posts'),
-      btnOlderElem: documentMainPage.querySelector('#btn-older'),
-      btnNewerElem: documentMainPage.querySelector('#btn-newer')
-    },
+    elementsMainPage: selectElementsForPage(documentMainPage),
 
     documentDomSecondaryPage: documentDomSecondaryPage,
-    elementsSecondaryPage: {
-      socialMeta: {
-        canonicalUrlElem: documentSecondaryPage.querySelector('link[rel="canonical"]'),
-        ogUrlElem: documentSecondaryPage.querySelector('meta[property="og:url"]')
-      },
-      postsSectionElem: documentSecondaryPage.querySelector('#posts'),
-      btnOlderElem: documentSecondaryPage.querySelector('#btn-older'),
-      btnNewerElem: documentSecondaryPage.querySelector('#btn-newer')
-    },
+    elementsSecondaryPage: selectElementsForPage(documentSecondaryPage),
 
     documentDomTagsPage: documentDomTagsPage,
     elementsTagsPage: {
