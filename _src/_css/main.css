@@ -279,6 +279,9 @@ body > footer .markedista-logotext {
 .page-nav {
   margin-top: 2.75em;
 }
+.page-nav a.btn {
+  margin-top: .25em;
+}
 a.btn {
   display: inline-block;
   border: solid 1px orangered;
@@ -330,7 +333,6 @@ a.btn.goto-page {
   border-radius: 0;
   border: 1px solid orangered;
   margin-right: 0;
-  margin-top: .25em;
   padding: .25em .5em;
   text-align: center;
 }
