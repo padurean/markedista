@@ -60,10 +60,16 @@ function enableOlderNewerBtns(navInfo) {
   if (navInfo.newerPost) {
     state.btnNewerPostElem.attr('href', pathPrefix + navInfo.newerPost + '/');
     state.btnNewerPostElem.removeClass('disabled');
+  } else {
+    state.btnNewerPostElem.addClass('disabled');
+    state.btnNewerPostElem.click(function(e) { e.preventDefault(); });
   }
   if (navInfo.olderPost) {
     state.btnOlderPostElem.attr('href', pathPrefix + navInfo.olderPost + '/');
     state.btnOlderPostElem.removeClass('disabled');
+  } else {
+    state.btnOlderPostElem.addClass('disabled');
+    state.btnOlderPostElem.click(function(e) { e.preventDefault(); });
   }
   state.pageNavSectionElem.removeClass('invisible');
 }

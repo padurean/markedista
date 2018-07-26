@@ -287,17 +287,42 @@ a.btn {
   margin-right: 1em;
 }
 a.btn.disabled {
-  color: grey;
-  border-color: grey;
+  color: silver;
+  border-color: silver;
   cursor: not-allowed;
 }
 a.btn.hidden {
   display: none;
 }
-/* TODO OGG: remove if not used anymore */
-.btn-arrow-icon {
-  font-size: 1.25em;
-  line-height: 1em;
+a.btn.with-icon {
+  padding: .4em .75em .25em .75em;
+  line-height: 1.75em;
+}
+a.btn.with-icon.left {
+  padding: 0 .75em 0 0;
+}
+a.btn.with-icon.right {
+  padding: 0 0 0 .75em;
+}
+a.btn.with-icon .arrow-icon {
+  display: inline-block;
+  width: 1.75em;
+  height: 1.75em;
+  background-size: .65em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: orangered;
+}
+a.btn.with-icon.disabled .arrow-icon {
+  background-color: silver;
+}
+a.btn.with-icon.left .arrow-icon {
+  background-image: url('./images/angle-left-solid.svg');
+  margin-right: .35em;
+}
+a.btn.with-icon.right .arrow-icon {
+  background-image: url('./images/angle-right-solid.svg');
+  margin-left: .35em;
 }
 a.btn.goto-page {
   line-height: 1.2em;
