@@ -243,7 +243,7 @@ function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePat
   return postSummaryFrag
 }
 
-function preparePageNavigation(currPage, nbPages, paginationBtnElems, pageNavElem) {
+function preparePageNavigation(homePath, currPage, nbPages, paginationBtnElems, pageNavElem) {
   if (nbPages <= 1) {
     pageNavElem.classList.add('invisible')
     return
@@ -289,23 +289,23 @@ function preparePageNavigation(currPage, nbPages, paginationBtnElems, pageNavEle
   if (currPage === nbPages) {
     paginationBtnElems.btnLast.classList.add('hidden')
     paginationBtnElems.btnFirst.classList.remove('hidden')
-    paginationBtnElems.btnFirst.setAttribute('href', '../../')
+    paginationBtnElems.btnFirst.setAttribute('href', `${homePath}/`)
     paginationBtnElems.btnFirst.innerHTML = 1
     paginationBtnElems.btnCurr.classList.add('older', 'final')
     nbNewer = maxNbBtns > nbPages ? nbPages - 2 : maxNbBtns
   } else if (currPage === 1) {
     paginationBtnElems.btnLast.classList.remove('hidden')
-    paginationBtnElems.btnLast.setAttribute('href', `../../${config.pagesDirPath}/${nbPages}/`)
+    paginationBtnElems.btnLast.setAttribute('href', `${homePath}/${config.pagesDirPath}/${nbPages}/`)
     paginationBtnElems.btnLast.innerHTML = nbPages
     paginationBtnElems.btnFirst.classList.add('hidden')
     paginationBtnElems.btnCurr.classList.add('newer', 'final')
     nbOlder = maxNbBtns > nbPages ? nbPages - 2 : maxNbBtns
   } else {
     paginationBtnElems.btnLast.classList.remove('hidden')
-    paginationBtnElems.btnLast.setAttribute('href', `../../${config.pagesDirPath}/${nbPages}/`)
+    paginationBtnElems.btnLast.setAttribute('href', `${homePath}/${config.pagesDirPath}/${nbPages}/`)
     paginationBtnElems.btnLast.innerHTML = nbPages
     paginationBtnElems.btnFirst.classList.remove('hidden')
-    paginationBtnElems.btnFirst.setAttribute('href', '../../')
+    paginationBtnElems.btnFirst.setAttribute('href', `${homePath}/`)
     paginationBtnElems.btnFirst.innerHTML = 1
 
     nbNewer = currPage - 2
@@ -326,7 +326,7 @@ function preparePageNavigation(currPage, nbPages, paginationBtnElems, pageNavEle
 
   for (let i = 0; i < nbNewer; i++) {
     const p = currPage - i - 1
-    const pPath = `../../${config.pagesDirPath}/${p}/`
+    const pPath = `${homePath}/${config.pagesDirPath}/${p}/`
     const b = btnsNewer[i]
     b.classList.remove('hidden')
     b.setAttribute('href', pPath)
@@ -340,7 +340,7 @@ function preparePageNavigation(currPage, nbPages, paginationBtnElems, pageNavEle
   }
   for (let j = 0; j < nbOlder; j++) {
     const p = currPage + j + 1
-    const pPath = `../../${config.pagesDirPath}/${p}/`
+    const pPath = `${homePath}/${config.pagesDirPath}/${p}/`
     const b = btnsOlder[j]
     b.classList.remove('hidden')
     b.setAttribute('href', pPath)
@@ -401,7 +401,7 @@ function generatePages() {
       elements.socialMeta.canonicalUrlElem.setAttribute('href', canonicalUrl)
       elements.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
 
-      preparePageNavigation(currPage, nbPages, elements.paginationBtnElems, elements.pageNavElem)
+      preparePageNavigation(homePath, currPage, nbPages, elements.paginationBtnElems, elements.pageNavElem)
       
       let currPagePath = 'index.html'
       if (currPage > 1) {
