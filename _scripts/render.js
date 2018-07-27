@@ -210,8 +210,9 @@ function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePat
     postMeta.date.toISOString() // for YAML date is parsed as Date object
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
 
-  const postLinkElem = postSummaryFrag.querySelector('.post-link')
-  postLinkElem.setAttribute('href', postHtmlFilePath)
+  postSummaryFrag.querySelectorAll('.post-link').forEach(function(postLinkElem) {
+    postLinkElem.setAttribute('href', postHtmlFilePath)
+  });
   postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
 
   const postThumbnailElem = postSummaryFrag.querySelector('.post-thumbnail')
