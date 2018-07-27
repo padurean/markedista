@@ -337,18 +337,18 @@ a.btn.goto-page {
   text-align: center;
 }
 a.btn.goto-page.older {
-  border-right: 0 none;
-}
-a.btn.goto-page.newer {
   border-left: 0 none;
 }
-a.btn.goto-page.older.final {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+a.btn.goto-page.newer {
+  border-right: 0 none;
 }
-a.btn.goto-page.newer.final {
+a.btn.goto-page.older.final {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+a.btn.goto-page.newer.final {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 a.btn.goto-page.gap {
   padding: .25em;
