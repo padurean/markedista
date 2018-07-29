@@ -41,15 +41,25 @@ function getShareWindowOptions() {
 function prepareShareButtons() {
   $('.share-btns-container > a').each(function(index) {
     var thisJqElem = $(this);
-    thisJqElem.click(function(e) {
-      e.preventDefault();
-      var win = window.open(
-        thisJqElem.attr('href'),
-        thisJqElem.attr('title').replace(/\s+/g, ''),
-        getShareWindowOptions()
-      );
-      win.opener = null;
-    });
+    if (thisJqElem.attr('id') !== 'btn-share-copy-link') {
+      thisJqElem.click(function(e) {
+        e.preventDefault();
+        var win = window.open(
+          thisJqElem.attr('href'),
+          thisJqElem.attr('title').replace(/\s+/g, ''),
+          getShareWindowOptions()
+        );
+        win.opener = null;
+      });
+    } else {
+      thisJqElem.click(function(e) { e.preventDefault(); });
+    }
+  });
+  var clipboard = new ClipboardJS('#btn-share-copy-link', {
+    text: function() { return window.location.href; }
+  });
+  clipboard.on('success', function(e) {
+    $("#copy-link-tooltip").show().delay(2000).fadeOut();
   });
 }
 

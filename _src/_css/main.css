@@ -272,8 +272,13 @@ body > footer .markedista-logotext {
   border: 1px solid orangered;
   border-radius: 3px;
 }
-.share-btns-container a:last-child {
-  margin-right: .5em;
+.share-btns-container .copy-link-tooltip {
+  position: relative;
+  font-size: .6em;
+  top: -3em;
+  left: -4.1em;
+  color: orangered;
+  text-transform: uppercase;
 }
 .page-nav {
   margin-top: 2.75em;
