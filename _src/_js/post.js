@@ -113,6 +113,7 @@ function renderRelatedOrNewestPosts(posts, containerJqElem, postSummaryBluePrint
 function renderRelatedAndNewestPosts(relatedPosts, newestPosts) {
   var postSummaryBluePrint =
     $('#other-post-summary-template-section').find('.post-summary');
+  postSummaryBluePrint.find('.post-cover').remove();
   postSummaryBluePrint.find('.post-description').remove();
   postSummaryBluePrint.find('.post-read-more').remove();
   postSummaryBluePrint.find('.tags-container').remove();
