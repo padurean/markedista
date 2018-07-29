@@ -253,9 +253,7 @@ body > footer .markedista-logotext {
 .share-btns-container {
   display: inline-block;
   height: 1.5em;
-  margin-bottom: .75em;
-  border: 1px solid orangered;
-  border-radius: 3px;
+  margin-bottom: 1em;
 }
 .share-btns-container > img {
   margin-right: .25em;
@@ -268,7 +266,11 @@ body > footer .markedista-logotext {
 }
 .share-btns-container a {
   display: inline-block;
-  margin-right: .1em;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: .5em;
+  border: 1px solid orangered;
+  border-radius: 3px;
 }
 .share-btns-container a:last-child {
   margin-right: .5em;
