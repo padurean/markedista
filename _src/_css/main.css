@@ -206,6 +206,7 @@ body > footer .markedista-logotext {
   margin: 0 1em 0 .5em;
   vertical-align: middle;
   color: grey;
+  font-style: oblique;
 }
 .post-cover {
   width: 100%;
