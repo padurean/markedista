@@ -12,6 +12,9 @@ function renderPostDate() {
   var postDateJqElem = $('#post-date');
   var postDateISOStr = postDateJqElem.attr('datetime');
   postDateJqElem.text(new Date(postDateISOStr).toLocaleString());
+  postDateJqElem.parent().animate( { opacity: 1 }, 1000 );
+  // OR:
+  // postDateJqElem.parent().removeClass('invisible');
 }
 
 function highlightCodeBlocks() {
@@ -105,6 +108,7 @@ function renderRelatedOrNewestPosts(posts, containerJqElem, postSummaryBluePrint
     var postDateElem = postSummaryElem.find('.post-date');
     postDateElem.attr('datetime', postDateStr);
     postDateElem.text(new Date(postDateStr).toLocaleString());
+    postDateElem.parent().removeClass('invisible');
     postsSummariesElements.push(postSummaryElem);
   }
   containerJqElem.append(postsSummariesElements);

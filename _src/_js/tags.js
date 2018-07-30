@@ -162,6 +162,7 @@ function renderFilteredPosts() {
     var postDateElem = postSummaryElem.find('.post-date');
     postDateElem.attr('datetime', postDateStr);
     postDateElem.text(new Date(postDateStr).toLocaleString());
+    postDateElem.parent().removeClass('invisible');
     postSummaryElem.find('.post-description').text(post.description);
     var tagsHtmlArr = [];
     for (var iTag = 0; iTag < post.tags.length; iTag++) {
