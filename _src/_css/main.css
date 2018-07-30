@@ -276,7 +276,7 @@ body > footer .markedista-logotext {
 .share-btns-container .copy-link-tooltip {
   position: relative;
   font-size: .6em;
-  top: -3em;
+  top: -3.1em;
   left: -4.1em;
   color: orangered;
   text-transform: uppercase;
@@ -445,7 +445,7 @@ a.btn-all-tags {
 }
 .tags-section {
   border-top: 2px solid aliceblue;
-  padding-top: 1em;
+  padding-top: 1.25em;
 }
 svg {
   fill: orangered;
