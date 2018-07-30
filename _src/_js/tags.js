@@ -161,7 +161,9 @@ function renderFilteredPosts() {
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');
     postDateElem.attr('datetime', postDateStr);
-    postDateElem.text(new Date(postDateStr).toLocaleString());
+    var postMoment = moment(postDateStr);
+    postDateElem.text(postMoment.toDate().toLocaleDateString());
+    postDateElem.parent().find('.post-ago').text(postMoment.fromNow());
     postDateElem.parent().removeClass('invisible');
     postSummaryElem.find('.post-description').text(post.description);
     var tagsHtmlArr = [];

@@ -198,6 +198,14 @@ body > footer .markedista-logotext {
   display: inline-block;
   font-size: .85em;
   color: grey;
+  letter-spacing: .1em;
+}
+.post-ago {
+  display: inline-block;
+  font-size: .85em;
+  margin: 0 1em 0 .5em;
+  vertical-align: middle;
+  color: grey;
 }
 .post-cover {
   width: 100%;
@@ -523,6 +531,10 @@ a.hide, a.btn.hide {
 }
 .related-and-newer-posts .post-summary .post-date {
   font-size: .95em;
+}
+.related-and-newer-posts .post-summary .post-ago {
+  font-size: .95em;
+  line-height: 1em;
 }
 .subscribe-via-rss {
   margin-right: 2em;

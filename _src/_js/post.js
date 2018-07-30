@@ -11,7 +11,9 @@ var state = {
 function renderPostDate() {
   var postDateJqElem = $('#post-date');
   var postDateISOStr = postDateJqElem.attr('datetime');
-  postDateJqElem.text(new Date(postDateISOStr).toLocaleString());
+  var postMoment = moment(postDateISOStr);
+  postDateJqElem.text(postMoment.toDate().toLocaleDateString());
+  postDateJqElem.parent().find('.post-ago').text(postMoment.fromNow());
   postDateJqElem.parent().animate( { opacity: 1 }, 1000 );
   // OR:
   // postDateJqElem.parent().removeClass('invisible');
@@ -107,7 +109,9 @@ function renderRelatedOrNewestPosts(posts, containerJqElem, postSummaryBluePrint
     var postDateStr = (typeof post.date === 'string' ? post.date : post.date.toISOString());
     var postDateElem = postSummaryElem.find('.post-date');
     postDateElem.attr('datetime', postDateStr);
-    postDateElem.text(new Date(postDateStr).toLocaleString());
+    var postMoment = moment(postDateStr);
+    postDateElem.text(postMoment.toDate().toLocaleDateString());
+    postDateElem.parent().find('.post-ago').text(postMoment.fromNow());
     postDateElem.parent().removeClass('invisible');
     postsSummariesElements.push(postSummaryElem);
   }
