@@ -255,6 +255,7 @@ body > footer .markedista-logotext {
   max-width: 100%;
   /* percent relative to viewport height */
   max-height: 80vh;
+  border-radius: 6px;
 }
 .full-post .post-body img.smaller {
   max-height: 40vh;
