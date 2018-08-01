@@ -12,4 +12,4 @@ thumbnail: images/eye.svg
 For example YouTube videos can be embedded directly - just by copy-pasting the
 embeddd code that YouTube itself provides:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x0RV0kgdqJU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe class="embedded-video" width="560" height="315" src="https://www.youtube.com/embed/x0RV0kgdqJU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

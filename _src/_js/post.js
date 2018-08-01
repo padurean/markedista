@@ -246,6 +246,14 @@ function fetchAndRenderRelatedAndNewestPosts() {
     });
 }
 
+function setEmbeddedVideoHeight() {
+  $('iframe.embedded-video').each(function(index) {
+    var elem = $(this);
+    var height = Math.round(elem.width() * 9/16);
+    elem.attr('height', height);
+  });
+}
+
 $(function(){
   renderPostDate();
   setTimeout(highlightCodeBlocks, 0);
@@ -273,6 +281,10 @@ $(function(){
           });
       }, 1000);
     });
-  prepareShareButtons();  
+  prepareShareButtons();
+  setEmbeddedVideoHeight();
+  $(window).on("orientationchange", function(event) {
+    setEmbeddedVideoHeight();
+  });
   fetchAndRenderRelatedAndNewestPosts();
 });
