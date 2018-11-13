@@ -389,9 +389,11 @@ a.filtered-tag-link {
 }
 .tags-filter-view {
   display: inline-block;
-  border-radius: 6px;
+  max-height: 7em;
+  overflow-y: auto;
   padding: .5em 0 .5em .75em;
   margin-bottom: .5em;
+  border-radius: 6px;
   background-color: aliceblue;
 }
 .tags-filter-view a.btn {
