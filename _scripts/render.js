@@ -731,6 +731,10 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
   aboutPageLinkElems.setAttribute('href', `${homePath}/about/`)
 
   const footerElem = document.querySelector('footer')
+  const footerBtnGoHomeElems = footerElem.querySelector('.btn-go-home')
+  if (footerBtnGoHomeElems) {
+    footerBtnGoHomeElems.setAttribute('href', `${homePath}/`)
+  }
   const socialIconLinksElem = footerElem.querySelector('.social-icon-links')
   const githubIconElem = socialIconLinksElem.querySelector('.github-icon-link')
   const githubIconPath = githubIconElem.getAttribute('src')
