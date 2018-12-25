@@ -545,7 +545,11 @@ function generateRssFeed() {
     fs.mkdirSync(config.rssFeedDirPath)
   const feedFilePath = `${config.rssFeedDirPath}/${config.rssFileName}`
   log.info(`Writing ${feedFilePath} ...`.info)
-  fs.writeFileSync(feedFilePath, feed.rss2())
+  let rss2 = feed.rss2()
+  rss2 = rss2.replace(
+    'xmlns:atom="http://www.w3.org/2005/Atom"',
+    'xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"')
+  fs.writeFileSync(feedFilePath, rss2)
 }
 
 function computeTotalDuration(startedAt) {
