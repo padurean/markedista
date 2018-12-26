@@ -435,6 +435,15 @@ a.btn-all-tags {
   display: inline-block;
   margin: 0 0 .5em .75em;
 }
+a.btn-clear-tags {
+  display: inline-block;
+  margin: 0 0 .5em .75em;
+  background-image: url('./images/delete.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: .75em;
+  padding-left: 1em;
+}
 .posts-count {
   margin-top: 1.5em;
   font-style: italic;

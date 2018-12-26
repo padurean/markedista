@@ -12,6 +12,7 @@ var state = {
   postSummaryTemplateSectionElem: null,
   postsSectionElem: null,
   btnAllTagsElem: null,
+  btnClearTagsElem: null,
   postsCountElem: null
 };
 
@@ -120,6 +121,7 @@ function renderFilterView() {
     tagsBtnsHtmlArr.push(tagToBtnHtml(tag, isFilteredTag));
   }
   state.filterViewElem.html(tagsBtnsHtmlArr.join(''));
+  state.btnClearTagsElem.removeClass('invisible');
 }
 
 function renderFilteredPosts() {
@@ -304,6 +306,7 @@ $(function() {
     state.postsSectionElem = $('#posts');
     state.btnAllTagsElem = $('#btn-all-tags');
     state.btnAllTagsElem.click(allTagsClb);
+    state.btnClearTagsElem = $('#btn-clear-tags');
     state.postsCountElem = $('#posts-count');
     showOrHideAllTags();
     fetchAndRenderPostsForTags();
