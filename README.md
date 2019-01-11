@@ -6,7 +6,7 @@ Static site generator based on [npm](https://www.npmjs.com/),
 for more details)
 
 ## demo
-https://padurean.github.io/markedista
+https://padurean.github.io/markedista/
 
 ## usage
 - add some markdown post(s) in the *_src/_posts/_to-render* folder
