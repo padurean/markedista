@@ -297,6 +297,7 @@ function allTagsClb(event) {
 }
 
 $(function() {
+  document.addEventListener("touchstart", function(){}, true);
   var tags = getTagsFromQueryParams();
   if (tags.length > 0) {
     state.tags = tags;

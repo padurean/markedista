@@ -255,6 +255,7 @@ function setEmbeddedVideoHeight() {
 }
 
 $(function(){
+  document.addEventListener("touchstart", function(){}, true);
   renderPostDate();
   setTimeout(highlightCodeBlocks, 0);
   $('#year-placeholder').text(new Date().getFullYear());

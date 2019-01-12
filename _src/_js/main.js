@@ -1,4 +1,5 @@
 $(function(){
+  document.addEventListener("touchstart", function(){}, true);
   $('.post-date').each(function(index) {
     var postDateJqElem = $(this);
     var postMoment = moment(postDateJqElem.attr('datetime'));
