@@ -443,8 +443,8 @@ a.btn-clear-tags {
   background-image: url('./images/delete.svg');
   background-repeat: no-repeat;
   background-position: left center;
-  background-size: .75em;
-  padding-left: 1em;
+  background-size: .725em;
+  padding-left: .9em;
 }
 .posts-count {
   margin-top: 1.5em;
