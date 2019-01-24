@@ -574,6 +574,32 @@ a.hide, a.btn.hide {
   vertical-align: middle;
 }
 
+.featherlight .featherlight-content {
+  padding: 0;
+  border-bottom: 0 none;
+}
+.featherlight .featherlight-close-icon {
+  line-height: 19px;
+  width: 19px;
+  font-size: 1em;
+}
+.featherlight-next {
+  top: 0;
+  right: 0;
+  left: 85%;
+  opacity: .75;
+}
+.featherlight-previous {
+  top: 0;
+  left: 0;
+  right: 85%;
+  opacity: .75;
+}
+.featherlight-next:hover,
+.featherlight-previous:hover {
+  background: rgba(0,0,0,0);
+}
+
 /* custom css for "touch targets": */
 @media (hover:none), (hover:on-demand) {
   .fb-comments-section {
@@ -642,7 +668,6 @@ a.hide, a.btn.hide {
     float: none;
   }
 }
-/* fix close icon positioning for featherlight gallery on mobile devices */
 @media only screen and (max-width: 1024px) {
   body {
     margin: .5rem 1rem;
@@ -654,9 +679,10 @@ a.hide, a.btn.hide {
   body > header .nav-main {
     right: 1rem;
   }
+  /* fix close icon positioning for featherlight gallery on mobile devices */
   .featherlight .featherlight-close-icon {
-    top: 9px;
-    right: 10px;
+    top: -2px;
+    right: 0;
   }
   .post-date-wrapper {
     margin-top: .4em;
