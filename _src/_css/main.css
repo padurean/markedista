@@ -578,6 +578,9 @@ a.hide, a.btn.hide {
   padding: 0;
   border-bottom: 0 none;
 }
+.featherlight:last-of-type {
+  background: rgba(0,0,0,.9);
+}
 .featherlight .featherlight-close-icon {
   line-height: 19px;
   width: 19px;
