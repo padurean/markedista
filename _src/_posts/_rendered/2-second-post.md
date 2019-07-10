@@ -69,6 +69,7 @@ Content Cell  | Content Cell
 | Phone     |   $12 |
 | Pipe      |    $1 |
 
+![Foggy Road](../../photos/foggy-road.jpg "Foggy Road")
 
 code
 ---
