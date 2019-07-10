@@ -579,12 +579,13 @@ a.hide, a.btn.hide {
   border-bottom: 0 none;
 }
 .featherlight:last-of-type {
-  background: rgba(0,0,0,.9);
+  background: rgba(0,0,0,.925);
 }
 .featherlight .featherlight-close-icon {
   line-height: 19px;
   width: 19px;
   font-size: 1em;
+  background: rgba(255,255,255,.15);
 }
 .featherlight-next {
   top: 0;
@@ -651,7 +652,7 @@ a.hide, a.btn.hide {
     margin-left: 0;
   }
 }
-@media 
+@media
   (hover:none) and (min-width: 1024px),
   (hover:on-demand) and (min-width: 1024px),
   only screen and (max-width: 1220px) and (min-width: 1024px)  {
