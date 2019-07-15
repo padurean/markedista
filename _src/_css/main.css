@@ -577,6 +577,7 @@ a.hide, a.btn.hide {
 .featherlight .featherlight-content {
   padding: 0;
   border-bottom: 0 none;
+  background-color: #000;
 }
 .featherlight:last-of-type {
   background: rgba(0,0,0,.925);
