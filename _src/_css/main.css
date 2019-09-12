@@ -69,6 +69,19 @@ hr {
   border-style: solid;
   border-color: aliceblue;
 }
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: transparent;
+}
+.scroll-progress-bar {
+  height: .25em;
+  background-color: rgba(255,69,0,.75);
+  width: 0%;
+}
 body > header {
   margin: 0 0 3em 0;
 }

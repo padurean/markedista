@@ -169,7 +169,7 @@ function fetchAndRenderRelatedAndNewestPosts() {
     var postMetasForCurrTagUrl = '../tags/'+tags[i]+'.json';
     ajaxRequestsForTags.push($.get(postMetasForCurrTagUrl));
   }
-  
+
   $.when.apply(null, ajaxRequestsForTags)
     .done(function() {
       var responses = ajaxRequestsForTags.length > 1 ? arguments : [arguments];
@@ -190,7 +190,7 @@ function fetchAndRenderRelatedAndNewestPosts() {
           skipPostsNames.push(post.name);
           // no need to gather more related posts for a tag than the maximum specified for all tags combined
           if (relatedPostsPerTag[relatedPostsPerTag.length-1].length === MAX_RELATED_POSTS)
-            break; 
+            break;
         }
       }
       relatedPostsPerTag.sort(function(a, b) {
@@ -254,10 +254,22 @@ function setEmbeddedVideoHeight() {
   });
 }
 
+function registerPageScrollListener() {
+  var scrollProgressBarElem = $('#scroll-progress-bar')[0];
+  window.onscroll = function() { updateScrollProgressBar() };
+  function updateScrollProgressBar() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    scrollProgressBarElem.style.width = scrolled + "%";
+  }
+}
+
 $(function(){
   document.addEventListener("touchstart", function(){}, true);
   renderPostDate();
   setTimeout(highlightCodeBlocks, 0);
+  registerPageScrollListener();
   $('#year-placeholder').text(new Date().getFullYear());
   state.pageNavSectionElem = $('#page-nav');
   state.btnNewerPostElem = $('#btn-newer-post');
