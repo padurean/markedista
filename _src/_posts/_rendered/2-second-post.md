@@ -184,19 +184,6 @@ http://mukaer.com
 
 ![Factory Clouds](../../photos/factory-and-clouds.jpg "Factory Clouds")
 
-strikethrough
--------------
-
-* source
-
-```
-this is ~~good~~ bad
-```
-
-* result
-
-this is ~~good~~ bad
-
 
 Task Lists
 ---------
@@ -218,44 +205,40 @@ Task Lists
 - [ ] this is an incomplete item
 
 
-
-superscript
-----------
-
+emphasis: bold, italic and strikethrough
+--------------------------
 * source
 
 ```
-this is the 2^(nd) time
+This is __bold__, **also bold**
+This is _italic_, *also italic*
+Combined emphasis with **bold and _italic_**.
+This is ~~strikethrough~~
 ```
 
 * result
 
+This is __bold__, **also bold**
 
-this is the 2^(nd) time
+This is _italic_, *also italic*
 
+Combined emphasis with **bold and _italic_**.
 
-underline
----------
-* source
-
-```
-This is _underlined_ but this is still *italic*
-```
-
-* result
-
-This is _underlined_ but this is still *italic*
+This is ~~strikethrough~~
 
 
-highlight
---------
+superscript and superscript
+---------------------------
 
 * source
 
 ```
-This is ==highlighted==
+superscript: 2<sup>nd</sup>
+subscript: log<sub>5</sub>n
 ```
 
 * result
 
-This is ==highlighted==
+superscript: 2<sup>nd</sup>
+
+subscript: log<sub>5</sub>n
