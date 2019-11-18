@@ -125,8 +125,10 @@ body > header .nav-main {
   max-height: 100%;
   overflow-y: auto;
   background-color: orangered;
+  background: linear-gradient(#ff4500, #9198e5);
   border-radius: 0 0 6px 6px;
   color: #fff;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 body > header .nav-main ul {
   margin: .75em 1em;
@@ -719,14 +721,14 @@ a.hide, a.btn.hide {
   body > header .nav-main {
     width: 100%;
     right: 0;
-    background: transparent;
+    /* background: transparent; */
     text-align: center;
   }
   body > header .nav-main ul {
     margin: 0 1rem;
     padding: .75em 1em;
     border-radius: 0 0 6px 6px;
-    background-color: orangered;
+    /* background-color: orangered; */
   }
 }
 /* Breakpoint: iPhone 5/SE */
