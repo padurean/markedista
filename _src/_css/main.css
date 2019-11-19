@@ -191,8 +191,7 @@ body > footer .markedista-logotext {
 }
 .post-title {
   margin: 0;
-  color: #6e78dd;
-  text-shadow: 0 1px 1px #cfcbc9;
+  color: #5a64d8;
   font-size: 1.6em;
 }
 .posts > article > p {
@@ -674,6 +673,10 @@ a.hide, a.btn.hide {
 @media only screen and (min-width: 568px) {
 }
 @media only screen and (min-width: 1024px) {
+  .post-title {
+    color: #6e78dd;
+    text-shadow: 0 1px 1px #cfcbc9;
+  }
 }
 
 @media only screen and (max-width: 1220px) {
