@@ -396,9 +396,6 @@ a.btn.goto-page.current {
   background-color: #5a64d8;
   box-shadow: 0 -1px 1px #cfcbc9;
 }
-a.filtered-tag-link {
-  background-color: yellow;
-}
 .tags-container {
   float: right;
   margin: .75em 0 0 .75em;
@@ -408,6 +405,11 @@ a.filtered-tag-link {
 }
 .tags-container a {
   color: #5a64d8;
+}
+.tags-container a.filtered-tag-link,
+a.filtered-tag-link {
+  background-color: yellow;
+  color: orangered;
 }
 .clear-floats {
   clear: both;
