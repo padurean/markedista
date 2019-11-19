@@ -374,6 +374,13 @@ a.btn.goto-page {
   text-align: center;
   box-shadow: 0 1px 1px #cfcbc9;
 }
+a.btn.goto-page:hover {
+  box-shadow: 0 -1px 1px #cfcbc9;
+}
+a.btn.goto-page:active {
+  color: #fff;
+  background-color: #5a64d8;
+}
 a.btn.goto-page.older {
   border-left: 0 none;
 }
