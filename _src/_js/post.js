@@ -255,14 +255,24 @@ function setEmbeddedVideoHeight() {
 }
 
 function registerPageScrollListener() {
-  var scrollProgressBarElem = $('#scroll-progress-bar')[0];
-  window.onscroll = function() { updateScrollProgressBar() };
-  function updateScrollProgressBar() {
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (winScroll / height) * 100;
-    scrollProgressBarElem.style.width = scrolled + "%";
-  }
+  var scrollProgressBarElem = $('#scroll-progress-bar');
+  var articleElem = $('#post-body');
+  $(window).scroll(function() {
+    // calculate the percentage the user has scrolled down the page
+    var scrollWin = $(window).scrollTop();
+    var articleHeight = articleElem.outerHeight(true);
+    var articleOffsetTop = articleElem.offset().top;
+    // var windowWidth = $(window).width();
+    if (scrollWin >= articleOffsetTop) {
+      if(scrollWin <= (articleOffsetTop + articleHeight)){
+        scrollProgressBarElem.css('width', ((scrollWin - articleOffsetTop) / articleHeight) * 100 + "%");
+      } else {
+        scrollProgressBarElem.css('width',"100%");
+      }
+    } else {
+      scrollProgressBarElem.css('width',"0px");
+    }
+  });
 }
 
 $(function(){
