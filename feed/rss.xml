@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
         <title>Markedista</title>
         <link>https://padurean.github.io/markedista/</link>
         <description>Static Blog Generator based on npm, marked and jsdom</description>
-        <lastBuildDate>Tue, 29 Oct 2019 15:31:27 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 14 Jan 2020 12:03:52 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Markedista</generator>
         <image>
@@ -12,7 +12,7 @@
             <url>https://padurean.github.io/markedista/images/markedista-logotype.png</url>
             <link>https://padurean.github.io/markedista/</link>
         </image>
-        <copyright>2019, Valentin Padurean</copyright>
+        <copyright>2020, Valentin Padurean</copyright>
         <category>Tech</category>
         <category>Static Blog Generator</category>
         <category>Markdown</category>
@@ -45,6 +45,9 @@
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
             <media:thumbnail url="https://padurean.github.io/markedista/images/markedista-logotype.png">
             </media:thumbnail>
+            <media:title type="plain">Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title Sixth Post Title</media:title>
+            <media:description type="plain">This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description This is the 6th post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
         <item>
             <title><![CDATA[Fifth Post Title Fifth Post Title Fifth Post Title]]></title>
@@ -56,6 +59,9 @@
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
             <media:thumbnail url="https://padurean.github.io/markedista/images/eye.svg">
             </media:thumbnail>
+            <media:title type="plain">Fifth Post Title Fifth Post Title Fifth Post Title</media:title>
+            <media:description type="plain">This is the 5th post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
         <item>
             <title><![CDATA[Fourth Post Title]]></title>
@@ -65,6 +71,9 @@
             <description><![CDATA[This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description]]></description>
             <content:encoded><![CDATA[This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+            <media:title type="plain">Fourth Post Title</media:title>
+            <media:description type="plain">This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description This is the 4th post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
         <item>
             <title><![CDATA[Third Post Title]]></title>
@@ -76,6 +85,9 @@
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
             <media:thumbnail url="https://padurean.github.io/markedista/images/default-thumbnail.png">
             </media:thumbnail>
+            <media:title type="plain">Third Post Title</media:title>
+            <media:description type="plain">This is the 3rd post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
         <item>
             <title><![CDATA[Second Post Title]]></title>
@@ -85,6 +97,9 @@
             <description><![CDATA[This is the 2nd post description]]></description>
             <content:encoded><![CDATA[This is the 2nd post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+            <media:title type="plain">Second Post Title</media:title>
+            <media:description type="plain">This is the 2nd post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
         <item>
             <title><![CDATA[First Post Title]]></title>
@@ -94,6 +109,9 @@
             <description><![CDATA[This is the 1st post description]]></description>
             <content:encoded><![CDATA[This is the 1st post description]]></content:encoded>
             <author>padureanvalentin@yahoo.com (Valentin Padurean)</author>
+            <media:title type="plain">First Post Title</media:title>
+            <media:description type="plain">This is the 1st post description</media:description>
+            <media:rating>nonadult</media:rating>
         </item>
     </channel>
 </rss>

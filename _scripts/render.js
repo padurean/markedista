@@ -103,7 +103,7 @@ function scanDir(path, logMsg, skip) {
     log.info(`${filesNames.length} ${logMsg} found`.info)
   } else
     log.warn(`No ${logMsg} found`.warn)
-  return filesNames  
+  return filesNames
 }
 
 function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
@@ -169,7 +169,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
 
   const titleUrlSafe = encodeURIComponent('\n' + meta.title + '\n')
   const tagsUrlSafe = encodeURIComponent(meta.tags.join(','))
-  const twitterShareUrl = 
+  const twitterShareUrl =
     `https://twitter.com/share?url=${canonicalUrl}&text=${titleUrlSafe}&hashtags=${tagsUrlSafe}`
   const facebookShareUrl =
     `https://www.facebook.com/sharer.php?u=${canonicalUrl}`
@@ -277,7 +277,7 @@ function preparePageNavigation(homePath, currPage, nbPages, paginationBtnElems, 
     log.error(`Number of pagination buttons has to be the same`.error)
   const maxNbBtns = btnsNewer.length
 
-  for (const btnOlder of btnsOlder) { 
+  for (const btnOlder of btnsOlder) {
     btnOlder.classList.add('hidden')
   }
   for (const btnNewer of btnsNewer) {
@@ -358,10 +358,10 @@ function preparePageNavigation(homePath, currPage, nbPages, paginationBtnElems, 
 function generatePages() {
   if (state.mdFileNameToMeta.size === 0)
     return
-  
+
   const nbPages = Math.ceil(state.mdFileNameToMeta.size / config.postsPerPage)
   log.info(`Rendering ${nbPages} pages ...`.info)
-  
+
   state.mdFileNameToMeta[Symbol.iterator] = function* () {
     yield* [...this.entries()].sort((a, b) =>
     new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
@@ -403,7 +403,7 @@ function generatePages() {
       elements.socialMeta.ogUrlElem.setAttribute('content', canonicalUrl)
 
       preparePageNavigation(homePath, currPage, nbPages, elements.paginationBtnElems, elements.pageNavElem)
-      
+
       let currPagePath = 'index.html'
       if (currPage > 1) {
         const currPageDir = `${config.pagesDirPath}/${currPage}`
@@ -430,7 +430,7 @@ function generatePostsNavInfoJson() {
       'olderPost': (i < metaArr.length-1 ?
         `${metaArr[i+1].name}` :
         null),
-      'newerPost': (i > 0 ? 
+      'newerPost': (i > 0 ?
         `${metaArr[i-1].name}` :
         null)
     }
@@ -546,9 +546,6 @@ function generateRssFeed() {
   const feedFilePath = `${config.rssFeedDirPath}/${config.rssFileName}`
   log.info(`Writing ${feedFilePath} ...`.info)
   let rss2 = feed.rss2()
-  rss2 = rss2.replace(
-    'xmlns:atom="http://www.w3.org/2005/Atom"',
-    'xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"')
   fs.writeFileSync(feedFilePath, rss2)
 }
 
@@ -661,22 +658,22 @@ function prepareIcons(document, headElem, homePath) {
   msIconSElem.setAttribute('name', 'msapplication-square70x70logo')
   msIconSElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-70-no-bg.png`)
   headElem.append(msIconSElem)
-  
+
   const msIconMElem = document.createElement('meta')
   msIconMElem.setAttribute('name', 'msapplication-square150x150logo')
   msIconMElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-150-no-bg.png`)
   headElem.append(msIconMElem)
-  
+
   const msIconLElem = document.createElement('meta')
   msIconLElem.setAttribute('name', 'msapplication-square310x310logo')
   msIconLElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-310-no-bg.png`)
   headElem.append(msIconLElem)
-  
+
   const msIconLRElem = document.createElement('meta')
   msIconLRElem.setAttribute('name', 'msapplication-wide310x150logo')
   msIconLRElem.setAttribute('content', `${homePath}/${config.imagesDirPath}/icon-310x150-no-bg.png`)
   headElem.append(msIconLRElem)
-  
+
   const msTileColorElem = document.createElement('meta')
   msTileColorElem.setAttribute('name', 'msapplication-TileColor')
   msTileColorElem.setAttribute('content', '#ffffff')
@@ -839,16 +836,16 @@ function selectElementsForPostPage(document, fbCommentsElem) {
 
 function prepareDom() {
   log.info(`Reading header and footer from ${config.templatesDirPath} folder ...`.info)
-  
+
   const commonHeadHtml = fs.readFileSync(`${config.templatesDirPath}/common-head.tpl.html`, config.enc)
   const commonHeaderHtml = fs.readFileSync(`${config.templatesDirPath}/common-header.tpl.html`, config.enc)
   const commonFooterHtml = fs.readFileSync(`${config.templatesDirPath}/common-footer.tpl.html`, config.enc)
   const postSummaryHtml = fs.readFileSync(`${config.templatesDirPath}/post-summary.tpl.html`, config.enc)
-  
+
   const layoutMainPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-main-page.tpl.html`, config.enc)
   const layoutTagsPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-tags-page.tpl.html`, config.enc)
   const layoutPostPageHtml = fs.readFileSync(`${config.templatesDirPath}/layout-post-page.tpl.html`, config.enc)
-  
+
   const documentDomMainPage = prepareJsdom(
     commonHeadHtml,
     commonHeaderHtml,
@@ -881,7 +878,7 @@ function prepareDom() {
     `../${config.jsFiles.tags.name}?${config.jsFiles.tags.version}`,
     false)
   const documentTagsPage = documentDomTagsPage.window.document
-  
+
   const documentDomPostPage = prepareJsdom(
     commonHeadHtml,
     commonHeaderHtml,
@@ -911,8 +908,8 @@ function prepareDom() {
   let siteUrlForFbCommentsPostPageWithGallery = fbCommentsElemPostPageWithGallery.getAttribute('data-href')
   siteUrlForFbCommentsPostPageWithGallery += (siteUrlForFbCommentsPostPageWithGallery.endsWith('/') ? '' : '/')
   documentPostPageWithGallery.querySelector('#other-post-summary-template-section').append(JSDOM.fragment(postSummaryHtml))
-  
-  state.dom = { 
+
+  state.dom = {
     documentDomMainPage: documentDomMainPage,
     elementsMainPage: selectElementsForPage(documentMainPage),
 
@@ -929,7 +926,7 @@ function prepareDom() {
     },
 
     postSummaryHtml: postSummaryHtml,
-    
+
     documentDomPostPage: documentDomPostPage,
     siteUrlForFbComments: siteUrlForFbComments,
     elementsPostPage: selectElementsForPostPage(documentPostPage, fbCommentsElem),
@@ -1007,7 +1004,7 @@ function updateStateMetaFromRenderedFile(mdFileNameRendered) {
 
 function scanAndLogUnlinkedPosts() {
   const postsNames = new Map(
-    [...state.mdFileNameToMeta].map(([mdFileName, v]) => 
+    [...state.mdFileNameToMeta].map(([mdFileName, v]) =>
       [mdFileName.substr(0, mdFileName.lastIndexOf('.')), 0])
   )
   let tagsJsonsDirName = config.tagsJsonsDirPath.split('/')
@@ -1029,7 +1026,7 @@ function finish(startedAt) {
   generateRssFeed()
   scanAndLogUnlinkedPosts()
   const took = computeTotalDuration(startedAt)
-  
+
   const nbMeta = state.mdFileNameToMeta.size
   const nbInvalidMeta = state.invalidMetaCounter
   const nbToRender = state.mdFilesNames.length
