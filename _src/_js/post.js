@@ -257,17 +257,20 @@ function setEmbeddedVideoHeight() {
 function registerPageScrollListener() {
   var scrollProgressBarElem = $('#scroll-progress-bar');
   var articleElem = $('#post-body');
-  $(window).scroll(function() {
+  var windowJq = $(window);
+  windowJq.scroll(function() {
     // calculate the percentage the user has scrolled down the page
-    var scrollWin = $(window).scrollTop();
-    var articleHeight = articleElem.outerHeight(true);
+    var scrollWin = windowJq.scrollTop();
+    var articleHeight = articleElem.outerHeight(false) - windowJq.height();
+    if (articleHeight <= 0) return;
     var articleOffsetTop = articleElem.offset().top;
-    // var windowWidth = $(window).width();
     if (scrollWin >= articleOffsetTop) {
       if(scrollWin <= (articleOffsetTop + articleHeight)){
         scrollProgressBarElem.css('width', ((scrollWin - articleOffsetTop) / articleHeight) * 100 + "%");
+        scrollProgressBarElem.removeClass('complete');
       } else {
         scrollProgressBarElem.css('width',"100%");
+        scrollProgressBarElem.addClass('complete');
       }
     } else {
       scrollProgressBarElem.css('width',"0px");

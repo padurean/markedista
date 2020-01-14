@@ -78,9 +78,12 @@ hr {
   background-color: transparent;
 }
 .scroll-progress-bar {
-  height: 3px;
+  height: 2px;
   background-color: rgba(255,69,0,.75);
   width: 0%;
+}
+.scroll-progress-bar.complete {
+  background-color: rgba(110, 120, 221,.75);
 }
 body > header {
   margin: 0 0 3em 0;
