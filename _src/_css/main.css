@@ -30,6 +30,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
+th {
+  font-weight: 550;
+}
+
 .full-post .post-body > h1,
 .full-post .post-body > h2,
 .full-post .post-body > h3,
