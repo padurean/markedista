@@ -112,6 +112,11 @@ body > header .hamburger .hamburger-box {
 .hamburger-inner:before {
   width: 2em;
   height: .25em;
+  background-color: #6e78dd;
+}
+.hamburger--spring-r.is-active .hamburger-inner,
+.hamburger--spring-r.is-active .hamburger-inner:after,
+.hamburger--spring-r.is-active .hamburger-inner:before {
   background-color: orangered;
 }
 body > header .nav-main {
