@@ -29,6 +29,7 @@
     "jsdom": "^16.0.0",
     "loglevel": "^1.6.6",
     "marked": "^0.8.0",
+    "node-sass": "^4.13.0",
     "pfeed": "^1.1.11",
     "uglify-js": "^3.7.5",
     "yaml-front-matter": "^4.1.0"

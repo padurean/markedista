@@ -1,4 +1,5 @@
 const fs = require('fs')
+const sass = require('node-sass')
 var CleanCSS = require('clean-css')
 const colors = require('colors')
 colors.setTheme({
@@ -46,14 +47,25 @@ const config = {
 
 const cleanCSS = new CleanCSS({ compatibility: 'ie7', rebase: false })
 
+function compileScss(input, output) {
+  const compiled = sass.renderSync({file: input})
+  console.info('to:\n  %s'.info, output)
+  fs.writeFileSync(output, compiled.css, enc)
+}
+
 function minifyToFile(input, output) {
   const minified = cleanCSS.minify(input).styles
   console.info('to:\n  %s'.info, output)
   fs.writeFileSync(output, minified, enc)
 }
 
+const inputScssFile = '_src/_css/main.scss'
+const outputCssFile = '_src/_css/main.css'
+console.info('Compiling SCSS:\n  %s'.info, inputScssFile)
+compileScss(inputScssFile, outputCssFile)
+
 console.info(
-  'Minifying CSS files for index page:\n  %s'.info,
+  '\nMinifying CSS files for index page:\n  %s'.info,
   config.forIndexPage.input.join('\n  '))
 minifyToFile(config.forIndexPage.input, config.forIndexPage.output)
 
