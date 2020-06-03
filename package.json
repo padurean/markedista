@@ -26,12 +26,12 @@
     "colors": "^1.4.0",
     "del": "^5.1.0",
     "html-minifier": "^4.0.0",
-    "jsdom": "^16.2.1",
-    "loglevel": "^1.6.7",
-    "marked": "^0.8.2",
-    "node-sass": "^4.13.1",
+    "jsdom": "^16.2.2",
+    "loglevel": "^1.6.8",
+    "marked": "^1.1.0",
+    "node-sass": "^4.14.1",
     "pfeed": "^1.1.11",
-    "uglify-js": "^3.8.0",
+    "uglify-js": "^3.9.4",
     "yaml-front-matter": "^4.1.0"
   }
 }
