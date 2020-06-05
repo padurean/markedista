@@ -20,6 +20,8 @@ function renderPostDate() {
 }
 
 function highlightCodeBlocks() {
+  // disable lang auto-detection first
+  hljs.configure({languages: []});
   $('pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
