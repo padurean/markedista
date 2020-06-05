@@ -254,6 +254,11 @@ function setEmbeddedVideoHeight() {
   });
 }
 
+function customizeContent() {
+  $('li:has(p > input[type="checkbox"])').addClass('todo-item');
+  $('li:has(p > input[type="checkbox"][checked])').addClass('done');
+}
+
 function registerPageScrollListener() {
   var scrollProgressBarElem = $('#scroll-progress-bar');
   var articleElem = $('#post-body');
@@ -312,5 +317,6 @@ $(function(){
   $(window).on("orientationchange", function(event) {
     setEmbeddedVideoHeight();
   });
+  customizeContent();
   fetchAndRenderRelatedAndNewestPosts();
 });

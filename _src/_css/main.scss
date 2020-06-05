@@ -74,12 +74,20 @@ h6 {
   color: #595959;
 }
 .post-body p {
-  margin-top: 0;
+  margin-top: .33em;
   margin-bottom: .66em;
 }
 hr {
   border-style: solid;
   border-color: $mainColorLightest;
+}
+li.todo-item {
+  list-style-type: none;
+  margin-left: -1.5em;
+  color: MediumVioletRed;
+}
+li.todo-item.done {
+  color: initial;
 }
 .scroll-progress-container {
   position: fixed;
