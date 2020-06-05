@@ -75,6 +75,18 @@ li.todo-item {
 li.todo-item.done {
   color: initial; }
 
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 1em; }
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa; }
+
+th, td {
+  border: 1px solid #dfe2e5;
+  padding: .5em 1em; }
+
 .scroll-progress-container {
   position: fixed;
   top: 0;
