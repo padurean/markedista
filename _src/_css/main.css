@@ -97,11 +97,12 @@ th, td {
 
 .scroll-progress-bar {
   height: 2px;
-  background-color: rgba(255, 69, 0, 0.75);
+  background: rgba(110, 120, 221, 0.75);
+  background: linear-gradient(90deg, rgba(110, 120, 221, 0.75) 0%, rgba(110, 120, 221, 0.75) 65%, rgba(255, 69, 0, 0.75) 100%);
   width: 0%; }
 
 .scroll-progress-bar.complete {
-  background-color: rgba(110, 120, 221, 0.75); }
+  background: rgba(110, 120, 221, 0.75); }
 
 body > header {
   margin: 0 0 3em 0; }
