@@ -19,7 +19,46 @@ end
   "Hello world "
 end</code></pre><ul><li>other ruby example</li></ul><pre><code class="language-ruby">get '/' do
   "Hello world "
-end</code></pre><ul><li>some scala example:</li></ul><pre><code class="language-scala">trait TSDBWriter
+end</code></pre><ul><li>some Go example:</li></ul><pre><code class="language-go">package sort_test
+
+import (
+    "fmt"
+    "sort"
+)
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+func (p Person) String() string {
+    return fmt.Sprintf("%s: %d", p.Name, p.Age)
+}
+
+// ByAge implements sort.Interface for []Person based on
+// the Age field.
+type ByAge []Person
+
+func (a ByAge) Len() int           { return len(a) }
+func (a ByAge) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByAge) Less(i, j int) bool { return a[i].Age &lt; a[j].Age }
+
+func Example() {
+    people := []Person{
+        {"Bob", 31},
+        {"John", 42},
+        {"Michael", 17},
+        {"Jenny", 26},
+    }
+
+    fmt.Println(people)
+    sort.Sort(ByAge(people))
+    fmt.Println(people)
+
+    // Output:
+    // [Bob: 31 John: 42 Michael: 17 Jenny: 26]
+    // [Michael: 17 Jenny: 26 Bob: 31 John: 42]
+}</code></pre><ul><li>some Scala example:</li></ul><pre><code class="language-scala">trait TSDBWriter
   protected implicit val scheduler: Scheduler
   protected val metrics = Metrics.openTSDBMetrics
 
