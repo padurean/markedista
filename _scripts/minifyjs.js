@@ -1,5 +1,5 @@
 const fs = require('fs')
-var uglifyjs = require("uglify-js")
+var uglifyjs = require("uglify-es")
 const colors = require('colors')
 colors.setTheme({
   silly: 'rainbow',
@@ -97,9 +97,14 @@ const config = {
 }
 
 function minifyToFile(input, output) {
-  const minified = uglifyjs.minify(input).code
+  const minifyResult = uglifyjs.minify(input)
+  if (minifyResult.error) {
+    console.error('error: minify failed: %s', minifyResult.error)
+    return
+  }
+  const minified = minifyResult.code
   console.info('to:\n  %s'.info, output)
-  fs.writeFileSync(output, minified, enc)  
+  fs.writeFileSync(output, minified, enc)
 }
 
 console.info(
@@ -121,5 +126,5 @@ console.info(
   '\nMinifying JS files for post page with gallery:\n  %s'.info,
   inputFilesForPostPageWithGallery.join('\n  '))
 minifyToFile(config.forPostPageWithGallery.input, config.forPostPageWithGallery.output)
-  
+
 console.info('\nDONE.'.info)
