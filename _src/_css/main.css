@@ -96,7 +96,7 @@ th, td {
   background-color: transparent; }
 
 .scroll-progress-bar {
-  height: 2px;
+  height: 3px;
   background: rgba(110, 120, 221, 0.75);
   background: linear-gradient(90deg, rgba(110, 120, 221, 0.75) 0%, rgba(110, 120, 221, 0.75) 65%, rgba(255, 69, 0, 0.75) 100%);
   width: 0%; }
