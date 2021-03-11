@@ -2,24 +2,32 @@
  =============
 
  This is head 2
- --------------</code></pre><ul><li>result</li></ul><h1 id="this-is-head1">This is head1</h1><h2 id="this-is-head-2">This is head 2</h2><h2 id="table-php-markdown-style">table (PHP-Markdown style)</h2><ul><li>source</li></ul><pre><code>First Header  | Second Header
+ --------------
+</code></pre><ul><li>result</li></ul><h1 id="this-is-head1">This is head1</h1><h2 id="this-is-head-2">This is head 2</h2><h2 id="table-php-markdown-style">table (PHP-Markdown style)</h2><ul><li>source</li></ul><pre><code>First Header  | Second Header
 ------------- | -------------
 Content Cell  | Content Cell
-Content Cell  | Content Cell</code></pre><ul><li>result</li></ul><table><thead><tr><th>First Header</th><th>Second Header</th></tr></thead><tbody><tr><td>Content Cell</td><td>Content Cell</td></tr><tr><td>Content Cell</td><td>Content Cell</td></tr></tbody></table><ul><li>source</li></ul><pre><code>| Item      | Value |
+Content Cell  | Content Cell
+</code></pre><ul><li>result</li></ul><table><thead><tr><th>First Header</th><th>Second Header</th></tr></thead><tbody><tr><td>Content Cell</td><td>Content Cell</td></tr><tr><td>Content Cell</td><td>Content Cell</td></tr></tbody></table><ul><li>source</li></ul><pre><code>| Item      | Value |
 | --------- | -----:|
 | Computer  | $1600 |
 | Phone     |   $12 |
-| Pipe      |    $1 |</code></pre><ul><li>result</li></ul><table><thead><tr><th>Item</th><th align="right">Value</th></tr></thead><tbody><tr><td>Computer</td><td align="right">$1600</td></tr><tr><td>Phone</td><td align="right">$12</td></tr><tr><td>Pipe</td><td align="right">$1</td></tr></tbody></table><p><img src="../../photos/foggy-road.jpg" alt="Foggy Road" title="Foggy Road"></p><h2 id="code">code</h2><ul><li>source</li></ul><pre><code>```
+| Pipe      |    $1 |
+</code></pre><ul><li>result</li></ul><table><thead><tr><th>Item</th><th align="right">Value</th></tr></thead><tbody><tr><td>Computer</td><td align="right">$1600</td></tr><tr><td>Phone</td><td align="right">$12</td></tr><tr><td>Pipe</td><td align="right">$1</td></tr></tbody></table><p><img src="../../photos/foggy-road.jpg" alt="Foggy Road" title="Foggy Road"></p><h2 id="code">code</h2><ul><li>source</li></ul><pre><code>```
 this is code block
-```</code></pre><ul><li>result</li></ul><pre><code>this is code block</code></pre><ul><li>source</li></ul><pre><code>```ruby
+```
+</code></pre><ul><li>result</li></ul><pre><code>this is code block
+</code></pre><ul><li>source</li></ul><pre><code>```ruby
 get '/' do
   "Hello world "
 end
-```</code></pre><ul><li>result</li></ul><pre><code class="language-ruby">get '/' do
+```
+</code></pre><ul><li>result</li></ul><pre><code class="language-ruby">get '/' do
   "Hello world "
-end</code></pre><ul><li>other ruby example</li></ul><pre><code class="language-ruby">get '/' do
+end
+</code></pre><ul><li>other ruby example</li></ul><pre><code class="language-ruby">get '/' do
   "Hello world "
-end</code></pre><ul><li>some scala example:</li></ul><pre><code class="language-scala">trait TSDBWriter
+end
+</code></pre><ul><li>some scala example:</li></ul><pre><code class="language-scala">trait TSDBWriter
   protected implicit val scheduler: Scheduler
   protected val metrics = Metrics.openTSDBMetrics
 
@@ -38,7 +46,8 @@ end</code></pre><ul><li>some scala example:</li></ul><pre><code class="language-
 
     publishMessages(List(dp))
 
-  case class SomeCaseClass(attr1: String, attr2: Double)</code></pre><p><img src="../../photos/to-the-black-lodge.jpg" alt="To the Black Lodge" title="To the Black Lodge"></p><ul><li>some javascript examples:</li></ul><pre><code class="language-javascript">const fs = require('fs')
+  case class SomeCaseClass(attr1: String, attr2: Double)
+</code></pre><p><img src="../../photos/to-the-black-lodge.jpg" alt="To the Black Lodge" title="To the Black Lodge"></p><ul><li>some javascript examples:</li></ul><pre><code class="language-javascript">const fs = require('fs')
 const {promisify} = require('util')
 const marked = require('marked')
 const frontmatter = require('yaml-front-matter')
@@ -57,14 +66,19 @@ colors.setTheme({
   warn: 'yellow',
   debug: 'blue',
   error: 'red'
-})</code></pre><h2 id="autolink">autolink</h2><ul><li>source</li></ul><pre><code>http://mukaer.com</code></pre><ul><li>result</li></ul><p><a href="http://mukaer.com">http://mukaer.com</a></p><p><img src="../../photos/factory-and-clouds.jpg" alt="Factory Clouds" title="Factory Clouds"></p><h2 id="task-lists">Task Lists</h2><ul><li>source</li></ul><pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
+})
+</code></pre><h2 id="autolink">autolink</h2><ul><li>source</li></ul><pre><code>http://mukaer.com
+</code></pre><ul><li>result</li></ul><p><a href="http://mukaer.com">http://mukaer.com</a></p><p><img src="../../photos/factory-and-clouds.jpg" alt="Factory Clouds" title="Factory Clouds"></p><h2 id="task-lists">Task Lists</h2><ul><li>source</li></ul><pre><code>- [x] @mentions, #refs, [links](), **formatting**, and &lt;del&gt;tags&lt;/del&gt; supported
 - [x] list syntax required (any unordered or ordered list supported)
 - [x] this is a complete item
-- [ ] this is an incomplete item</code></pre><ul><li>result</li></ul><ul><li><input checked="" disabled="" type="checkbox"> @mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</li><li><input checked="" disabled="" type="checkbox"> list syntax required (any unordered or ordered list supported)</li><li><input checked="" disabled="" type="checkbox"> this is a complete item</li><li><input disabled="" type="checkbox"> this is an incomplete item</li></ul><h2 id="emphasis-bold-italic-and-strikethrough">emphasis: bold, italic and strikethrough</h2><ul><li>source</li></ul><pre><code>This is __bold__, **also bold**
+- [ ] this is an incomplete item
+</code></pre><ul><li>result</li></ul><ul><li><input checked="" disabled="" type="checkbox"> @mentions, #refs, <a href="">links</a>, <strong>formatting</strong>, and <del>tags</del> supported</li><li><input checked="" disabled="" type="checkbox"> list syntax required (any unordered or ordered list supported)</li><li><input checked="" disabled="" type="checkbox"> this is a complete item</li><li><input disabled="" type="checkbox"> this is an incomplete item</li></ul><h2 id="emphasis-bold-italic-and-strikethrough">emphasis: bold, italic and strikethrough</h2><ul><li>source</li></ul><pre><code>This is __bold__, **also bold**
 This is _italic_, *also italic*
 Combined emphasis with **bold and _italic_**.
-This is ~~strikethrough~~</code></pre><ul><li>result</li></ul><p>This is <strong>bold</strong>, <strong>also bold</strong></p><p>This is <em>italic</em>, <em>also italic</em></p><p>Combined emphasis with <strong>bold and <em>italic</em></strong>.</p><p>This is <del>strikethrough</del></p><h2 id="superscript-and-superscript">superscript and superscript</h2><ul><li>source</li></ul><pre><code>superscript: 2&lt;sup&gt;nd&lt;/sup&gt;
-subscript: log&lt;sub&gt;5&lt;/sub&gt;n</code></pre><ul><li>result</li></ul><p>superscript: 2<sup>nd</sup></p><p>subscript: log<sub>5</sub>n</p></section></article><section id="tags-section" class="tags-section"><div id="share-btns-container" class="share-btns-container"><a id="btn-share-twitter" href="https://twitter.com/share?url=https://padurean.github.io/markedista/posts/2-second-post/&amp;text=%0ASecond%20Post%20Title%0A&amp;hashtags=tag2%2Ctag3%2Ctag4%2Ctag5%2Ctag6" target="_blank" title="Share on Twitter"><img src="../../images/share-twitter.svg" alt="Twitter"> </a><a id="btn-share-facebook" href="https://www.facebook.com/sharer.php?u=https://padurean.github.io/markedista/posts/2-second-post/" target="_blank" title="Share on Facebook"><img src="../../images/share-facebook.svg" alt="Facebook"> </a><a id="btn-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://padurean.github.io/markedista/posts/2-second-post/" target="_blank" title="Share on LinkedIn"><img src="../../images/share-linkedin.svg" alt="LinkedIn"> </a><a id="btn-share-copy-link" href="" target="_blank" title="Copy link to clipboard"><img src="../../images/share-link.svg" alt="Copy Link"> </a><span id="copy-link-tooltip" class="copy-link-tooltip" style="display: none;">copied</span></div><div id="tags-container" class="tags-container on-full-post"><a href="../../tags/?tags=tag2"><span class="grey-text">#</span>tag2</a> <a href="../../tags/?tags=tag3"><span class="grey-text">#</span>tag3</a> <a href="../../tags/?tags=tag4"><span class="grey-text">#</span>tag4</a> <a href="../../tags/?tags=tag5"><span class="grey-text">#</span>tag5</a> <a href="../../tags/?tags=tag6"><span class="grey-text">#</span>tag6</a></div><div class="clear-floats">&nbsp;</div></section><section id="page-nav" class="page-nav invisible"><a id="btn-older-post" class="btn with-icon left disabled" href="#"><span class="arrow-icon">&nbsp;</span> Older</a> <a id="btn-newer-post" class="btn with-icon right disabled" href="#">Newer <span class="arrow-icon">&nbsp;</span></a></section><section id="fb-comments-section" class="fb-comments-section"><div class="fb-comments" data-href="https://padurean.github.io/markedista/posts/2-second-post/" data-numposts="10"></div><div id="fb-root"></div><script>(function(d, s, id) {
+This is ~~strikethrough~~
+</code></pre><ul><li>result</li></ul><p>This is <strong>bold</strong>, <strong>also bold</strong></p><p>This is <em>italic</em>, <em>also italic</em></p><p>Combined emphasis with <strong>bold and <em>italic</em></strong>.</p><p>This is <del>strikethrough</del></p><h2 id="superscript-and-superscript">superscript and superscript</h2><ul><li>source</li></ul><pre><code>superscript: 2&lt;sup&gt;nd&lt;/sup&gt;
+subscript: log&lt;sub&gt;5&lt;/sub&gt;n
+</code></pre><ul><li>result</li></ul><p>superscript: 2<sup>nd</sup></p><p>subscript: log<sub>5</sub>n</p></section></article><section id="tags-section" class="tags-section"><div id="share-btns-container" class="share-btns-container"><a id="btn-share-twitter" href="https://twitter.com/share?url=https://padurean.github.io/markedista/posts/2-second-post/&amp;text=%0ASecond%20Post%20Title%0A&amp;hashtags=tag2%2Ctag3%2Ctag4%2Ctag5%2Ctag6" target="_blank" title="Share on Twitter"><img src="../../images/share-twitter.svg" alt="Twitter"> </a><a id="btn-share-facebook" href="https://www.facebook.com/sharer.php?u=https://padurean.github.io/markedista/posts/2-second-post/" target="_blank" title="Share on Facebook"><img src="../../images/share-facebook.svg" alt="Facebook"> </a><a id="btn-share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://padurean.github.io/markedista/posts/2-second-post/" target="_blank" title="Share on LinkedIn"><img src="../../images/share-linkedin.svg" alt="LinkedIn"> </a><a id="btn-share-copy-link" href="" target="_blank" title="Copy link to clipboard"><img src="../../images/share-link.svg" alt="Copy Link"> </a><span id="copy-link-tooltip" class="copy-link-tooltip" style="display: none;">copied</span></div><div id="tags-container" class="tags-container on-full-post"><a href="../../tags/?tags=tag2"><span class="grey-text">#</span>tag2</a> <a href="../../tags/?tags=tag3"><span class="grey-text">#</span>tag3</a> <a href="../../tags/?tags=tag4"><span class="grey-text">#</span>tag4</a> <a href="../../tags/?tags=tag5"><span class="grey-text">#</span>tag5</a> <a href="../../tags/?tags=tag6"><span class="grey-text">#</span>tag6</a></div><div class="clear-floats">&nbsp;</div></section><section id="page-nav" class="page-nav invisible"><a id="btn-older-post" class="btn with-icon left disabled" href="#"><span class="arrow-icon">&nbsp;</span> Older</a> <a id="btn-newer-post" class="btn with-icon right disabled" href="#">Newer <span class="arrow-icon">&nbsp;</span></a></section><section id="fb-comments-section" class="fb-comments-section"><div class="fb-comments" data-href="https://padurean.github.io/markedista/posts/2-second-post/" data-numposts="10"></div><div id="fb-root"></div><script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
