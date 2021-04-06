@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/padurean/markedista#readme",
   "devDependencies": {
-    "clean-css": "^5.1.1",
+    "clean-css": "^5.1.2",
     "colors": "^1.4.0",
     "del": "^6.0.0",
     "html-minifier": "^4.0.0",
-    "jsdom": "^16.5.0",
+    "jsdom": "^16.5.2",
     "loglevel": "^1.7.0",
     "marked": "^2.0.1",
     "node-sass": "^5.0.0",
