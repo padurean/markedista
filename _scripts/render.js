@@ -185,7 +185,7 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   elements.tagsInputElem.setAttribute('value', meta.tags.join(','))
   elements.postIdInputElem.setAttribute('value', meta.name)
   log.info(`${logPrefix} - Rendering markdown and injecting HTML ...`.info)
-  elements.bodyElem.innerHTML = marked(meta.__content)
+  elements.bodyElem.innerHTML = marked.parse(meta.__content)
   const siteUrlForFbComments = !meta.gallery ?
     state.dom.siteUrlForFbComments :
     state.dom.siteUrlForFbCommentsPostPageWithGallery
