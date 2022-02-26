@@ -1,7 +1,16 @@
 const fs = require('fs')
 const log = require('loglevel')
 log.setLevel(log.levels.WARN/*DEBUG*/)
+
 const marked = require('marked')
+const renderer = {
+  // override checkbox rendering
+  checkbox(checked) {
+    return `<input type="checkbox" ${checked ? 'checked' : ''}>`;
+  }
+};
+marked.use({ renderer });
+
 const frontmatter = require('yaml-front-matter')
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom
@@ -34,11 +43,11 @@ const config = {
   rssFeedDirPath: 'feed',
   rssFileName: 'rss.xml',
   // channel categories used when generating the site feed xml
-  siteCategories: [ 'Tech', 'Static Blog Generator', 'Markdown' ],
+  siteCategories: ['Tech', 'Static Blog Generator', 'Markdown'],
   imagesDirPath: 'images',
   logoImgFileName: 'markedista-logotype.png',
   enc: 'utf8',
-  ignoreFiles: [ '.gitkeep' ],
+  ignoreFiles: ['.gitkeep'],
   postsPerPage: 3,
   minifyHtmlOpts: {
     removeComments: true,
@@ -97,7 +106,7 @@ function scanDir(path, logMsg, skip) {
   log.info(`Scanning ${path} for ${logMsg} ...`.info)
   const filesNames = fs.readdirSync(path).filter(
     f => config.ignoreFiles.indexOf(f) < 0 &&
-    (skip ? !skip.has(f) : true)
+      (skip ? !skip.has(f) : true)
   )
   if (filesNames.length > 0) {
     log.info(`${filesNames.length} ${logMsg} found`.info)
@@ -162,8 +171,8 @@ function renderMarkdownAndUpdateDom(logPrefix, meta, document, elements) {
   elements.pageTitleElem.textContent = meta.title
   elements.titleElem.textContent = meta.title
   const postDateStr = typeof meta.date === 'string' ?
-      meta.date : // for JSON frontmatter date is just a string
-      meta.date.toISOString() // for YAML date is parsed as Date object
+    meta.date : // for JSON frontmatter date is just a string
+    meta.date.toISOString() // for YAML date is parsed as Date object
   elements.dateElem.setAttribute('datetime', postDateStr)
   elements.dateElem.textContent = postDateStr
 
@@ -210,7 +219,7 @@ function postMetaToSummaryHtml(postMeta, homePath, postHtmlFilePath, tagsPagePat
     postMeta.date.toISOString() // for YAML date is parsed as Date object
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
 
-  postSummaryFrag.querySelectorAll('.post-link').forEach(function(postLinkElem) {
+  postSummaryFrag.querySelectorAll('.post-link').forEach(function (postLinkElem) {
     postLinkElem.setAttribute('href', postHtmlFilePath)
   });
   postSummaryFrag.querySelector('.post-read-more').setAttribute('href', postHtmlFilePath)
@@ -331,7 +340,7 @@ function preparePageNavigation(homePath, currPage, nbPages, paginationBtnElems, 
     const b = btnsNewer[i]
     b.classList.remove('hidden')
     b.setAttribute('href', pPath)
-    if (i === nbNewer-1 && p > 2) {
+    if (i === nbNewer - 1 && p > 2) {
       b.innerHTML = '...'
       b.classList.add('gap')
     } else {
@@ -345,7 +354,7 @@ function preparePageNavigation(homePath, currPage, nbPages, paginationBtnElems, 
     const b = btnsOlder[j]
     b.classList.remove('hidden')
     b.setAttribute('href', pPath)
-    if (j === nbOlder-1 && p < nbPages-1) {
+    if (j === nbOlder - 1 && p < nbPages - 1) {
       b.innerHTML = '...'
       b.classList.add('gap')
     } else {
@@ -364,7 +373,7 @@ function generatePages() {
 
   state.mdFileNameToMeta[Symbol.iterator] = function* () {
     yield* [...this.entries()].sort((a, b) =>
-    new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
+      new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
   }
 
   let postIndexInPage = 0
@@ -394,7 +403,7 @@ function generatePages() {
     elements.postsSectionElem.append(postSummaryFrag)
 
     const pageCompleted =
-      postIndexInPage+1 === config.postsPerPage || i+1 === state.mdFileNameToMeta.size
+      postIndexInPage + 1 === config.postsPerPage || i + 1 === state.mdFileNameToMeta.size
     if (pageCompleted) {
       let canonicalUrl = config.baseUrl
       if (currPage > 1)
@@ -427,15 +436,15 @@ function generatePostsNavInfoJson() {
     new Date(b.date).getTime() - new Date(a.date).getTime())
   for (let i = 0; i < metaArr.length; i++) {
     const postNavInfo = {
-      'olderPost': (i < metaArr.length-1 ?
-        `${metaArr[i+1].name}` :
+      'olderPost': (i < metaArr.length - 1 ?
+        `${metaArr[i + 1].name}` :
         null),
       'newerPost': (i > 0 ?
-        `${metaArr[i-1].name}` :
+        `${metaArr[i - 1].name}` :
         null)
     }
     const postNavFilePath =
-    `${config.htmlOutputDirPath}/${metaArr[i].name}/${config.postNavJsonFileName}`
+      `${config.htmlOutputDirPath}/${metaArr[i].name}/${config.postNavJsonFileName}`
     log.info(`Writing ${postNavFilePath} ...`.info)
     fs.writeFileSync(postNavFilePath, JSON.stringify(postNavInfo/*, null, 2*/))
   }
@@ -551,8 +560,8 @@ function generateRssFeed() {
 
 function computeTotalDuration(startedAt) {
   const took = process.hrtime(startedAt)
-  const tookMs = Math.round(took[1]/1000000)
-  return `${took[0]>0?took[0]+'s ':''}${tookMs}ms`
+  const tookMs = Math.round(took[1] / 1000000)
+  return `${took[0] > 0 ? took[0] + 's ' : ''}${tookMs}ms`
 }
 
 const state = {
@@ -561,7 +570,7 @@ const state = {
   mdFilesNames: [],
   mdFilesNamesRendered: [],
   dom: {},
-  updateMeta: function(mdFileName, meta) {
+  updateMeta: function (mdFileName, meta) {
     this.mdFileNameToMeta.set(mdFileName, {
       title: meta.title,
       date: meta.date,
@@ -575,7 +584,7 @@ const state = {
       coverUrl: meta.coverUrl
     })
   },
-  done: function() {
+  done: function () {
     const nbProcessed = this.mdFileNameToMeta.size + this.invalidMetaCounter
     const nbTotal = this.mdFilesNames.length + this.mdFilesNamesRendered.length
     return nbProcessed === nbTotal
@@ -767,7 +776,7 @@ function prepareJsdom(headHtml, headerHtml, footerHtml, layoutHtml, homePath, cs
 }
 
 function selectElementsForPage(doc) {
-  return{
+  return {
     socialMeta: {
       canonicalUrlElem: doc.querySelector('link[rel="canonical"]'),
       ogUrlElem: doc.querySelector('meta[property="og:url"]')
@@ -1081,12 +1090,12 @@ const render = () => {
 
 function createBenchmarkMds(sourceMdFilePath, nbCopies) {
   const sourceMdFilePathArr = sourceMdFilePath.split('/')
-  const sourceMdFileName = sourceMdFilePathArr[sourceMdFilePathArr.length-1]
+  const sourceMdFileName = sourceMdFilePathArr[sourceMdFilePathArr.length - 1]
   const lastIndexOfDot = sourceMdFileName.lastIndexOf('.')
   const sourceMdFileNameNoExt = sourceMdFileName.substr(0, lastIndexOfDot)
   const sourceMd = fs.readFileSync(sourceMdFilePath, config.enc)
   for (let i = 0; i < nbCopies; i++) {
-    const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${i+1}.md`
+    const newSourceMdFilePath = `${config.toRenderDirPath}/${sourceMdFileNameNoExt}-${i + 1}.md`
     fs.writeFileSync(newSourceMdFilePath, sourceMd)
   }
 }

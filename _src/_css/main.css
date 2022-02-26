@@ -75,6 +75,10 @@ li.todo-item {
 li.todo-item.done {
   color: initial; }
 
+li.todo-item > input[type="checkbox"] {
+  height: 1.25em;
+  margin-right: .75em; }
+
 table {
   border-spacing: 0;
   border-collapse: collapse;
