@@ -16,12 +16,6 @@ https://padurean.github.io/markedista/
 - run `npm run render` => html files will be generated in the *posts* folder, rendered markdown
 files will be moved to the *_src/_rendered* folder
 - deploy the root folder to any static host
-- to serve with live reload during development:
-  - install the [LiveReload](http://livereload.com/extensions/) browser extension
-  - `npm i -g lr serve` to install [livery](https://github.com/shannonmoeller/livery) and
-    [serve](https://github.com/zeit/serve) globally
-  - then run `lr | serve`
-  - **NOTE**: `npm run render` will have to be run in another terminal session
 
 ## update dependencies
 
