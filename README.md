@@ -17,6 +17,9 @@ https://padurean.github.io/markedista/
 files will be moved to the *_src/_rendered* folder
 - deploy the root folder to any static host
 
+- run `npm run minifycss` to minify css (in case there were some changes in any (s)css file(s))
+- run `npm run minifyjs` to minify js (in case there were some changes in any js file(s))
+
 ## update dependencies
 
 - use `npm outdated` to discover dependencies that are out of date
