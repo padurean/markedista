@@ -1,5 +1,6 @@
 {
   "name": "markedista",
+  "type": "module",
   "version": "0.0.1",
   "description": "Static site generator based on npm, marked, jsdom and yaml-front-matter",
   "main": "_scripts/render.js",
@@ -24,12 +25,12 @@
   "devDependencies": {
     "clean-css": "^5.2.4",
     "colors": "^1.4.0",
-    "del": "^6.0.0",
+    "del": "^7.0.0",
     "html-minifier": "^4.0.0",
-    "jsdom": "^19.0.0",
+    "jsdom": "^21.1.0",
     "loglevel": "^1.8.0",
     "marked": "^4.0.12",
-    "node-sass": "^7.0.1",
+    "node-sass": "^8.0.0",
     "pfeed": "^1.1.11",
     "uglify-es": "^3.3.9",
     "yaml-front-matter": "^4.1.1"

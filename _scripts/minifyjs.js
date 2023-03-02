@@ -1,6 +1,6 @@
-const fs = require('fs')
-var uglifyjs = require("uglify-es")
-const colors = require('colors')
+import { default as fs } from 'fs'
+import { default as uglifyjs } from 'uglify-es'
+import { default as colors } from 'colors'
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',

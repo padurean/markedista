@@ -1,7 +1,7 @@
-const fs = require('fs')
-const sass = require('node-sass')
-var CleanCSS = require('clean-css')
-const colors = require('colors')
+import { default as fs } from 'fs'
+import { default as sass } from 'node-sass'
+import { default as CleanCSS } from 'clean-css'
+import { default as colors } from 'colors'
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',

@@ -1,8 +1,8 @@
-const fs = require('fs')
-const log = require('loglevel')
+import { default as fs } from 'fs'
+import { default as log } from'loglevel'
 log.setLevel(log.levels.WARN/*DEBUG*/)
 
-const marked = require('marked')
+import { marked } from 'marked'
 const renderer = {
   // override checkbox rendering
   checkbox(checked) {
@@ -11,13 +11,13 @@ const renderer = {
 };
 marked.use({ renderer });
 
-const frontmatter = require('yaml-front-matter')
-const jsdom = require('jsdom')
+import { default as frontmatter } from 'yaml-front-matter'
+import { default as jsdom } from 'jsdom'
 const { JSDOM } = jsdom
-const minify = require('html-minifier').minify
-const del = require('del')
-const Feed = require('pfeed')
-const colors = require('colors')
+import { minify } from 'html-minifier'
+import { deleteSync as del } from 'del'
+import { default as Feed } from 'pfeed'
+import { default as colors } from 'colors'
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -379,7 +379,7 @@ function generatePages() {
   let postIndexInPage = 0
   let i = 0
 
-  del.sync([config.pagesDirPath])
+  del([config.pagesDirPath])
   fs.mkdirSync(config.pagesDirPath)
   for (const [mdFileName, postMeta] of state.mdFileNameToMeta) {
     const currPage = Math.floor(i / config.postsPerPage) + 1
@@ -452,7 +452,7 @@ function generatePostsNavInfoJson() {
 
 function generateTagsPageAndJson() {
   log.info(`Generating tags json files in ${config.tagsJsonsDirPath} ...`.info)
-  del.sync([config.tagsJsonsDirPath])
+  del([config.tagsJsonsDirPath])
   fs.mkdirSync(config.tagsJsonsDirPath)
   const postMetasPerTag = new Map()
   const latestPostsArr = []
@@ -497,7 +497,7 @@ function generateTagsPageAndJson() {
   const postSummaryFrag = JSDOM.fragment(state.dom.postSummaryHtml)
   state.dom.elementsTagsPage.postSummaryTemplateSectionElem.append(postSummaryFrag)
 
-  del.sync([config.tagsPageDirPath])
+  del([config.tagsPageDirPath])
   fs.mkdirSync(config.tagsPageDirPath)
   const tagsPageFileName = `${config.tagsPageDirPath}/index.html`
   log.info(`Writing ${tagsPageFileName} ...`.info)
