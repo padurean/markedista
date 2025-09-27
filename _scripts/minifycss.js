@@ -1,5 +1,5 @@
 import { default as fs } from 'fs'
-import { default as sass } from 'node-sass'
+import * as sass from 'sass'
 import { default as CleanCSS } from 'clean-css'
 import { default as colors } from 'colors'
 colors.setTheme({
@@ -48,7 +48,7 @@ const config = {
 const cleanCSS = new CleanCSS({ compatibility: 'ie7', rebase: false })
 
 function compileScss(input, output) {
-  const compiled = sass.renderSync({file: input})
+  const compiled = sass.compile(input)
   console.info('to:\n  %s'.info, output)
   fs.writeFileSync(output, compiled.css, enc)
 }
